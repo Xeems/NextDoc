@@ -23,7 +23,7 @@ export const createTeamDocument = async () => {
     return null
 }
 
-export const getUserTeams = async (username: string) => {
+export const getUserTeamsByUsername = async (username: string) => {
     const res = await prisma.team.findMany({
         where: {
             userTeams: {
@@ -31,6 +31,20 @@ export const getUserTeams = async (username: string) => {
                     user: {
                         username,
                     },
+                },
+            },
+        },
+    })
+    //console.log(username, res)
+    return res
+}
+
+export const getUserTeamsByUserId = async (userId: string) => {
+    const res = await prisma.team.findMany({
+        where: {
+            userTeams: {
+                every: {
+                    userId,
                 },
             },
         },

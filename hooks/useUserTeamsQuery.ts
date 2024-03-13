@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 export const useUserTeamsQuery = (useranme: string) => {
     return useQuery({
         queryKey: ['teams', useranme],
+        enabled: !!useranme,
         queryFn: async () => {
             const res = await getUserTeamsAction(useranme)
             if (res.error || !res.data || !res)
