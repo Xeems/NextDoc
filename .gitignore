@@ -28,11 +28,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
-<<<<<<< HEAD
-*.env
-=======
 .env.local
->>>>>>> 96edc50 (Ваше сообщение коммита)
 
 # vercel
 .vercel
@@ -42,10 +38,4 @@ yarn-error.log*
 next-env.d.ts
 
 .eslintrc.js
-<<<<<<< HEAD
 
-/Doci
-
-/Docifi
-=======
->>>>>>> 96edc50 (Ваше сообщение коммита)
