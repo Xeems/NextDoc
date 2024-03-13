@@ -19,36 +19,8 @@ export const authOptions: NextAuthOptions = {
                 }
             },
         }),
-        // CredentialsProvider({
-        //     name: 'Credentials',
-        //     credentials: {
-        //         email: { type: 'email' },
-        //         password: { type: 'password' },
-        //     },
-
-        //     async authorize(credentials): Promise<any> {
-        //         const { email, password } = credentials as any
-        //         const user = await prisma.user.findFirst({
-        //             where: {
-        //                 email: email,
-        //                 password: password,
-        //             },
-        //         })
-        //         if (user) {
-        //             const { password, ...res } = user
-        //             console.log(user)
-        //             return res
-        //         }
-        //         return null
-        //     },
-        // }),
     ],
     callbacks: {
-        // redirect: ( { url, baseUrl}) {
-        //     // Получаем имя пользователя из объекта сессии
-        //     const username = session.user.name
-        // },
-
         session: async ({ session, user, token }) => {
             if (session?.user) {
                 session.user.id = user.id
