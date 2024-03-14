@@ -11,8 +11,6 @@ export const getUserTeamsAction = async (username: string) => {
     ///to-do server side user validation
     const user = await getUserBySessionToken(sessionToken!)
 
-    console.log(sessionToken, user)
-
     try {
         const res = await getUserTeamsByUsername(username)
         if (!res) throw new Error('user teams db query failed')

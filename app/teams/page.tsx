@@ -12,7 +12,7 @@ export default function teamsPage() {
         session.data?.user.username,
     )
     return (
-        <div className=" h-full w-full p-10">
+        <div className=" flex h-full w-full items-center p-10">
             <TeamsList teams={teams} />
             <CreateTeamModal />
         </div>

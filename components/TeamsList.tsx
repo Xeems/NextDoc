@@ -2,7 +2,8 @@ import { CircleDashedIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
-import { Card, CardHeader } from './shadCn/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from './shadCn/ui/card'
+import { Button } from './shadCn/ui/button'
 
 type Props = {
     teams: TeamType[] | undefined
@@ -47,20 +48,30 @@ export function TeamsListItemPopUp({ team }: { team: TeamType }) {
 
 export function TeamsListItemCard({ team }: { team: TeamType }) {
     return (
-        <Link className="my-2" href={`/teams/${team.name}`}>
-            <Card>
-                <CardHeader>
-                    <span>{team.name}</span>
-                    <Avatar className="h-5 w-5 bg-background">
+        <Link className="" href={`/teams/${team.name}`}>
+            <Card className="my-2 max-w-[300px]">
+                <CardHeader className="flex flex-row items-center justify-between">
+                    <span className="text-xl font-semibold">{team.name}</span>
+                    <Avatar className="size-10 bg-background">
                         <AvatarImage
                             src={team.imageLink}
                             className="bg-transparent"
                         />
-                        <AvatarFallback>
-                            <CircleDashedIcon className="bg-transparen h-5 w-5 text-blue-600" />
-                        </AvatarFallback>
+                        <AvatarFallback></AvatarFallback>
                     </Avatar>
                 </CardHeader>
+                {team.description && (
+                    <CardContent>
+                        <p className="text-muted-foreground">
+                            {team.description}123
+                        </p>
+                    </CardContent>
+                )}
+                <CardFooter className="p-5">
+                    <Button variant={'outline'} size={'sm'}>
+                        Visit
+                    </Button>
+                </CardFooter>
             </Card>
         </Link>
     )
