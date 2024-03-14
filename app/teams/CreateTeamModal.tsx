@@ -86,7 +86,7 @@ export function CreateTeamModal() {
                                     <FormControl>
                                         <Input
                                             className="bg-background-accent"
-                                            placeholder="Enter document name"
+                                            placeholder="Enter team name"
                                             {...field}
                                         />
                                     </FormControl>

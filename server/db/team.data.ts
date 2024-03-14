@@ -7,6 +7,7 @@ export const createTeam = async (data: newTeamServerType) => {
     const res = await prisma.team.create({
         data: {
             name: data.name,
+
             userTeams: {
                 create: {
                     userId: data.userId,
@@ -16,11 +17,6 @@ export const createTeam = async (data: newTeamServerType) => {
         },
     })
     return res
-}
-
-export const createTeamDocument = async () => {
-    //const res = await prisma.team.create({})
-    return null
 }
 
 export const getUserTeamsByUsername = async (username: string) => {
