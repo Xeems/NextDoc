@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import TeamsList from '@/components/TeamsListPopup'
+import TeamsList from '@/components/TeamsList'
 import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
 import { CreateTeamModal } from './CreateTeamModal'
 
