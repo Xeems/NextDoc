@@ -2,6 +2,22 @@
 
 import { prisma } from '@/lib/prisma'
 
+export const getUserBySessionToken = async (sessionToken: string) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            sessions: {
+                some: {
+                    sessionToken,
+                    expires: {
+                        gte: new Date(),
+                    },
+                },
+            },
+        },
+    })
+    return user
+}
+
 export const getUserByUsername = async (username: string) => {
     const user = await prisma.user.findFirst({
         where: {

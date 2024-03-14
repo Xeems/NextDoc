@@ -6,7 +6,7 @@ import { ChevronsUpDownIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import TeamsList from './TeamsListPopup'
+import TeamsList from './TeamsList'
 import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from './shadCn/ui/popover'
 import { Separator } from './shadCn/ui/separator'
@@ -44,7 +44,7 @@ export default function PageHeader({ spaceName }: { spaceName: string }) {
                         <div className="text-sm text-muted-foreground">
                             Teams
                         </div>
-                        <TeamsList teams={teams} />
+                        <TeamsList variant="popup" teams={teams} />
                         <CreateTeamModal />
                     </PopoverContent>
                 </Popover>
