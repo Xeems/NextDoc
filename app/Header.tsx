@@ -18,7 +18,7 @@ function Header() {
                             <div className="flex gap-x-2">
                                 <Link
                                     className="px-1 text-end font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
-                                    href={`/teams/${session.data?.user.username}`}>
+                                    href={`/users/${session.data?.user.username}`}>
                                     Dashboard
                                 </Link>
                                 <Link

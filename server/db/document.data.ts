@@ -21,10 +21,7 @@ export const createDocument = async (data: NewDocumentWithCreatorType) => {
 export const getUserDocuments = async (name: string) => {
     const res = await prisma.document.findMany({
         where: {
-            OR: [{ user: { username: name } }, { team: { name: name } }],
-        },
-        include: {
-            user: true,
+            user: { username: name },
         },
     })
     return res
