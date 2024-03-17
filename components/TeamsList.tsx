@@ -67,11 +67,6 @@ export function TeamsListItemCard({ team }: { team: TeamType }) {
                         </p>
                     </CardContent>
                 )}
-                <CardFooter className="p-5">
-                    <Button variant={'outline'} size={'sm'}>
-                        Visit
-                    </Button>
-                </CardFooter>
             </Card>
         </Link>
     )

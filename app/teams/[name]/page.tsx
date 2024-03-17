@@ -2,7 +2,7 @@
 
 import DocumentList from '@/components/DocumentList'
 import { Input } from '@/components/shadCn/ui/input'
-import { useDocumentsQuery } from '@/hooks/useDocumentsQuery'
+import { useTeamDocumentsQuery } from '@/hooks/useTeamDocumentsQuery'
 import { CreateDocumentModal } from './CreateDocumentModal'
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 }
 
 export default function DashboardPage({ params }: Props) {
-    const { data: documents, isLoading } = useDocumentsQuery(params.name)
+    const { data: documents, isLoading } = useTeamDocumentsQuery(params.name)
 
     if (isLoading) return <div>Loading</div>
 
