@@ -43,11 +43,13 @@ export default function UserPage({ params }: Props) {
                 <span className="my-4 text-xl font-semibold">Teams</span>
                 <TeamsList variant="popup" teams={teams} />
             </div>
-            <div className="flex h-fit w-3/4 flex-col">
-                <div className="flex items-center justify-between">
+            <div className="flex h-fit w-3/4 flex-col pb-4">
+                <div className="mb-4 flex items-center justify-between">
                     <span className="m-2 text-lg">Documents</span>
                     <CreateUserDocumentModal>
-                        <Button>Create new document</Button>
+                        <Button variant={'secondary'}>
+                            Create new document
+                        </Button>
                     </CreateUserDocumentModal>
                 </div>
                 {documents && <DocumentList documents={documents} />}
