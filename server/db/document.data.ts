@@ -22,6 +22,7 @@ export const getUserDocuments = async (name: string) => {
     const res = await prisma.document.findMany({
         where: {
             user: { username: name },
+            team: null,
         },
     })
     return res
