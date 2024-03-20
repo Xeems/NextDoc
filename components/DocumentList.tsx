@@ -12,7 +12,7 @@ type Props = {
 export default function DocumentList({ documents }: Props) {
     if (!documents || documents.length === 0) {
         return (
-            <div className="flex w-[250px] flex-col items-center gap-y-5 ">
+            <div className="flex w-full flex-col items-center gap-y-5 ">
                 <div className="size-fit rounded-lg border border-solid border-border p-4">
                     <FilePlus2Icon
                         absoluteStrokeWidth
@@ -29,8 +29,8 @@ export default function DocumentList({ documents }: Props) {
     }
 
     return (
-        <div className="@container w-full">
-            <div className="@[500px]:grid-cols-2 @[1000px]:grid-cols-3 grid w-full grid-cols-1  gap-5">
+        <div className="w-full @container">
+            <div className="grid w-full grid-cols-1 gap-5 @[500px]:grid-cols-2  @[1000px]:grid-cols-3">
                 {documents?.map((document) => {
                     return (
                         <DocumentCard document={document} key={document.id} />
