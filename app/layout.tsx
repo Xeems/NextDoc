@@ -8,6 +8,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import QueryProvider from '@/components/Providers/QueryProvader'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
     title: 'NextDocs',
@@ -43,6 +44,7 @@ export default async function RootLayout({
 
                             <ReactQueryDevtools initialIsOpen={false} />
                         </ThemeProvider>
+                        <SpeedInsights />
                     </body>
                 </html>
             </QueryProvider>
