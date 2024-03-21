@@ -31,7 +31,7 @@ export default function DocumentPage({ params }: Props) {
         <Suspense fallback={<div>Loading</div>}>
             <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
                 <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
-                    <h1 className="text-4xl">{article?.title}</h1>
+                    <h1 className="my-2 text-4xl">{article?.title}</h1>
                     <DocumentEditForm article={article} />
                 </div>
             </div>

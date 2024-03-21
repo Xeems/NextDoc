@@ -29,7 +29,10 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-export function CreateTeamModal() {
+type Props = {
+    children: React.ReactNode
+}
+export function CreateTeamModal({ children }: Props) {
     const queryClient = useQueryClient()
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
     const { data: session } = useSession()
@@ -57,12 +60,7 @@ export function CreateTeamModal() {
             open={isDialog}
             onOpenChange={() => setDialog(!isDialog)}
             defaultOpen={isDialog}>
-            <DialogTrigger asChild>
-                <Button className="justify-start gap-x-2">
-                    <PlusSquareIcon className="h-4 w-4" />
-                    Create team
-                </Button>
-            </DialogTrigger>
+            <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="border-solid border-border">
                 <DialogHeader>
                     <DialogTitle className="text-2xl">Create team</DialogTitle>

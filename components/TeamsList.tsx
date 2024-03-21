@@ -2,8 +2,7 @@ import { CircleDashedIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
-import { Card, CardContent, CardFooter, CardHeader } from './shadCn/ui/card'
-import { Button } from './shadCn/ui/button'
+import { Card, CardContent, CardHeader } from './shadCn/ui/card'
 
 type Props = {
     teams: TeamType[] | undefined
@@ -11,6 +10,13 @@ type Props = {
 }
 
 export default function TeamsList({ teams, variant = 'default' }: Props) {
+    if (!teams || teams?.length == 0) {
+        return (
+            <span className="mb-4 text-sm font-light text-muted-foreground">
+                No teams yet
+            </span>
+        )
+    }
     return (
         <ul>
             {teams &&

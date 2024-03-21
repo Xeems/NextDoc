@@ -22,10 +22,10 @@ export default async function RootLayout({
 }) {
     return (
         <UserSessionProvider>
-            <QueryProvider>
-                <html
-                    lang="en"
-                    className={`${GeistSans.variable} ${GeistMono.variable}`}>
+            <html
+                lang="en"
+                className={`${GeistSans.variable} ${GeistMono.variable}`}>
+                <QueryProvider>
                     <body className="bg-background">
                         <ThemeProvider
                             attribute="class"
@@ -42,12 +42,12 @@ export default async function RootLayout({
                                 {children}
                             </main>
 
-                            <ReactQueryDevtools initialIsOpen={false} />
+                            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                         </ThemeProvider>
                         <SpeedInsights />
                     </body>
-                </html>
-            </QueryProvider>
+                </QueryProvider>
+            </html>
         </UserSessionProvider>
     )
 }

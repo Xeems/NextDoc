@@ -13,6 +13,8 @@ import { useUserDocumentsQuery } from '@/hooks/useUserDocumentsQuery'
 import DocumentList from '@/components/DocumentList'
 import { Button } from '@/components/shadCn/ui/button'
 import { CreateUserDocumentModal } from './CreateUserDocumentModal'
+import { CreateTeamModal } from '@/app/teams/CreateTeamModal'
+import { PlusSquareIcon } from 'lucide-react'
 
 type Props = {
     params: {
@@ -42,6 +44,12 @@ export default function UserPage({ params }: Props) {
                 </div>
                 <span className="my-4 text-xl font-semibold">Teams</span>
                 <TeamsList variant="popup" teams={teams} />
+                <CreateTeamModal>
+                    <Button variant={'ghost'} className="justify-start gap-x-2">
+                        <PlusSquareIcon className="h-4 w-4" />
+                        Create team
+                    </Button>
+                </CreateTeamModal>
             </div>
             <div className="flex h-fit w-3/4 flex-col pb-4">
                 <div className="mb-4 flex items-center justify-between">
@@ -52,7 +60,9 @@ export default function UserPage({ params }: Props) {
                         </Button>
                     </CreateUserDocumentModal>
                 </div>
-                {documents && <DocumentList documents={documents} />}
+                {documents && (
+                    <DocumentList documents={documents} withFooter={false} />
+                )}
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import TeamsList from '@/components/TeamsList'
 import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
 import { CreateTeamModal } from './CreateTeamModal'
+import { Button } from '@/components/shadCn/ui/button'
 
 export default function teamsPage() {
     const session = useSession()
@@ -15,7 +16,9 @@ export default function teamsPage() {
         <div className=" flex h-full w-full flex-col items-center p-10">
             <h1>Teams</h1>
             <TeamsList teams={teams} />
-            <CreateTeamModal />
+            <CreateTeamModal>
+                <Button></Button>
+            </CreateTeamModal>
         </div>
     )
 }

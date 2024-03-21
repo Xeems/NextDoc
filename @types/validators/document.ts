@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const newDocSchema = z.object({
+export const newDocumentSchema = z.object({
     documentName: z
         .string()
         .min(5, { message: 'At least 5 symbols' })
@@ -11,13 +11,13 @@ export const newDocSchema = z.object({
         .string()
         .min(1, { message: 'At least 10 characters' }),
     documentType: z.enum(['public', 'private']),
+    teamId: z.string().optional(),
 })
 
-export type NewDocType = z.infer<typeof newDocSchema>
+export type NewDocumentType = z.infer<typeof newDocumentSchema>
 
-export const newDocWithCreatorSchema = newDocSchema.extend({
+export const newDocWithCreatorSchema = newDocumentSchema.extend({
     userId: z.string(),
-    teamId: z.string().optional(),
 })
 
 export type NewDocumentWithCreatorType = z.infer<typeof newDocWithCreatorSchema>

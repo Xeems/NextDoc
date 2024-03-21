@@ -9,7 +9,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/shadCn/ui/dialog'
-import { Plus } from 'lucide-react'
 import {
     Form,
     FormControl,
@@ -19,7 +18,10 @@ import {
     FormMessage,
 } from '@/components/shadCn/ui/form'
 import { useForm } from 'react-hook-form'
-import { NewDocType, newDocSchema } from '@/@types/validators/document'
+import {
+    NewDocumentType,
+    newDocumentSchema,
+} from '@/@types/validators/document'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/shadCn/ui/input'
 import { Textarea } from '@/components/shadCn/ui/textarea'
@@ -33,7 +35,8 @@ import {
     SelectValue,
 } from '@/components/shadCn/ui/select'
 import { Button } from '@/components/shadCn/ui/button'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { createDocumentAction } from '@/server/actions/document/createDocument'
 
 type Props = {
     children: React.ReactNode
@@ -42,8 +45,8 @@ type Props = {
 export function CreateUserDocumentModal({ children }: Props) {
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
 
-    const form = useForm<NewDocType>({
-        resolver: zodResolver(newDocSchema),
+    const form = useForm<NewDocumentType>({
+        resolver: zodResolver(newDocumentSchema),
         defaultValues: {
             documentName: '',
             documentDescription: '',
@@ -51,7 +54,9 @@ export function CreateUserDocumentModal({ children }: Props) {
         },
     })
 
-    async function newDoucumentSubmit(data: NewDocType) {}
+    async function newDoucumentSubmit(data: NewDocumentType) {
+        const res = await createDocumentAction({ data })
+    }
 
     return (
         <Dialog
