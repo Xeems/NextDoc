@@ -50,7 +50,9 @@ export default function DocumentEditForm({ article }: Props) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Save changes</Button>
+                <Button type="submit" className="my-4">
+                    Save changes
+                </Button>
             </form>
         </Form>
     )

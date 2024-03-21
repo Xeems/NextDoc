@@ -14,6 +14,7 @@ type Props = {
 export default function DashboardPage({ params }: Props) {
     const { data: documents, isLoading } = useTeamDocumentsQuery(params.name)
 
+    console.log(documents)
     if (isLoading) return <div>Loading</div>
 
     return (

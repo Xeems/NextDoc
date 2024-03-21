@@ -20,11 +20,9 @@ import {
 } from '@/components/shadCn/ui/form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { useSession } from 'next-auth/react'
 import {
-    NewDocType,
-    NewDocumentWithCreatorType,
-    newDocSchema,
+    NewDocumentType,
+    newDocumentSchema,
 } from '@/@types/validators/document'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createDocumentAction } from '@/server/actions/document/createDocument'
@@ -43,43 +41,30 @@ import { Button } from '@/components/shadCn/ui/button'
 import { useContext, useState } from 'react'
 import { TeamContext } from './TeamContext'
 
-type Props = {
-    team: TeamType
-}
-
 export function CreateDocumentModal() {
     const teamContext = useContext(TeamContext)
 
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
 
-    const form = useForm<NewDocType>({
-        resolver: zodResolver(newDocSchema),
+    const form = useForm<NewDocumentType>({
+        resolver: zodResolver(newDocumentSchema),
         defaultValues: {
+            teamId: teamContext.teamId,
             documentName: '',
             documentDescription: '',
             documentType: 'private',
         },
     })
 
-    const { data: session } = useSession()
-
-    async function newDoucumentSubmit(data: NewDocType) {
-        const newDocument: NewDocumentWithCreatorType = {
-            userId: session?.user.id,
-            teamId: teamContext.teamId,
-            documentName: data.documentName,
-            documentDescription: data.documentDescription,
-            documentType: data.documentType,
-        }
-
-        const response = await createDocumentAction(newDocument)
+    async function newDoucumentSubmit(data: NewDocumentType) {
+        const response = await createDocumentAction({ data })
 
         if (response?.error) {
             toast.error(response.error)
         }
         if (response?.data) {
             setDialog(false)
-            toast.success('amadeto')
+            toast.success('Document succesefuly created')
         }
     }
 

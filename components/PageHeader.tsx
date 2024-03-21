@@ -10,6 +10,7 @@ import TeamsList from './TeamsList'
 import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from './shadCn/ui/popover'
 import { Separator } from './shadCn/ui/separator'
+import { Button } from './shadCn/ui/button'
 
 export default function PageHeader({ spaceName }: { spaceName: string }) {
     const { data: session } = useSession()
@@ -45,7 +46,9 @@ export default function PageHeader({ spaceName }: { spaceName: string }) {
                             Teams
                         </div>
                         <TeamsList variant="popup" teams={teams} />
-                        <CreateTeamModal />
+                        <CreateTeamModal>
+                            <Button>Create new document</Button>
+                        </CreateTeamModal>
                     </PopoverContent>
                 </Popover>
             </div>

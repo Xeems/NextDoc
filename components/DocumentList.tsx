@@ -1,15 +1,14 @@
 'use client'
 
-import { useContext } from 'react'
 import DocumentCard from './DocumentCard'
-import { TeamContext } from '@/app/teams/[name]/TeamContext'
 import { FilePlus2Icon } from 'lucide-react'
 
 type Props = {
     documents?: DocType[]
+    withFooter?: boolean
 }
 
-export default function DocumentList({ documents }: Props) {
+export default function DocumentList({ documents, withFooter = true }: Props) {
     if (!documents || documents.length === 0) {
         return (
             <div className="flex w-full flex-col items-center gap-y-5 ">
@@ -33,7 +32,11 @@ export default function DocumentList({ documents }: Props) {
             <div className="grid w-full grid-cols-1 gap-5 @[500px]:grid-cols-2  @[1000px]:grid-cols-3">
                 {documents?.map((document) => {
                     return (
-                        <DocumentCard document={document} key={document.id} />
+                        <DocumentCard
+                            withFooter={withFooter}
+                            document={document}
+                            key={document.id}
+                        />
                     )
                 })}
             </div>

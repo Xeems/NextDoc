@@ -2,22 +2,32 @@
 
 import { createDocument } from '@/server/db/document.data'
 import {
-    NewDocumentWithCreatorType,
-    newDocWithCreatorSchema,
+    NewDocumentType,
+    newDocumentSchema,
 } from '@/@types/validators/document'
+import { getUserBySessionTokenAction } from '../user/getUserBySessionToken'
 
-export const createDocumentAction = async (
-    data: NewDocumentWithCreatorType,
-) => {
-    const validationResult = await newDocWithCreatorSchema.safeParseAsync(data)
+type Props = {
+    data: NewDocumentType
+}
+export const createDocumentAction = async ({ data }: Props) => {
+    const validationResult = await newDocumentSchema.safeParseAsync(data)
 
     if (!validationResult.success)
-        return {
-            error: `Validation failed ${validationResult.error.issues[0].message}`,
-        }
+        throw Error(
+            `Validation failed ${validationResult.error.issues[0].message}`,
+        )
+
+    const user = await getUserBySessionTokenAction()
+    if (!user) throw Error('No user session')
+
+    const dataWithCreator = {
+        ...data,
+        userId: user.id,
+    }
 
     try {
-        const res = await createDocument(data)
+        const res = await createDocument(dataWithCreator)
         if (res) {
             return { data: res }
         }
