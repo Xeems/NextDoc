@@ -7,10 +7,10 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 import TeamsList from './TeamsList'
-import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
-import { Popover, PopoverContent, PopoverTrigger } from './shadCn/ui/popover'
-import { Separator } from './shadCn/ui/separator'
-import { Button } from './shadCn/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
+import { Popover, PopoverContent, PopoverTrigger } from '../shadCn/ui/popover'
+import { Separator } from '../shadCn/ui/separator'
+import { Button } from '../shadCn/ui/button'
 
 export default function PageHeader({ spaceName }: { spaceName: string }) {
     const { data: session } = useSession()
@@ -31,7 +31,7 @@ export default function PageHeader({ spaceName }: { spaceName: string }) {
                         </div>
                         <Link
                             className="flex flex-row items-center gap-x-4 rounded-md p-2 hover:bg-accent"
-                            href={`/teams/${session?.user.username}`}>
+                            href={`/users/${session?.user.username}`}>
                             <Avatar className="h-5 w-5">
                                 <AvatarImage
                                     sizes="1"
@@ -47,7 +47,7 @@ export default function PageHeader({ spaceName }: { spaceName: string }) {
                         </div>
                         <TeamsList variant="popup" teams={teams} />
                         <CreateTeamModal>
-                            <Button>Create new document</Button>
+                            <Button>Create new team</Button>
                         </CreateTeamModal>
                     </PopoverContent>
                 </Popover>

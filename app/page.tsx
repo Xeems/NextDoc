@@ -1,6 +1,6 @@
 'use client'
 
-import SignGithubBtn from '@/components/SignGithubBtn'
+import SignGithubBtn from '@/components/UI/SignGithubBtn'
 
 function MainPage() {
     return (

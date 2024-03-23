@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
-import UIButton from './UI/UIButton'
+import { Button } from '../shadCn/ui/button'
 
 export const ThemeSwitcher = () => {
     const [mounted, setMounted] = useState(false)
@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
     }
 
     return (
-        <UIButton
+        <Button
             className="bg-zinc-100 px-2 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             <svg
@@ -30,6 +30,6 @@ export const ThemeSwitcher = () => {
                     fill={theme === 'dark' ? 'white' : 'black'}
                 />
             </svg>
-        </UIButton>
+        </Button>
     )
 }

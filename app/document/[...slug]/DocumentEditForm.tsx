@@ -1,6 +1,6 @@
 'use client'
 
-import Editor from '@/components/Editor'
+import Editor from '@/components/UI/Editor'
 import { Button } from '@/components/shadCn/ui/button'
 import {
     Form,

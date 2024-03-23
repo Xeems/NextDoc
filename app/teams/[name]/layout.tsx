@@ -1,4 +1,4 @@
-import PageHeader from '@/components/PageHeader'
+import PageHeader from '@/components/UI/PageHeader'
 import { TeamContextProvider } from './TeamContext'
 import { teamQuery } from '@/hooks/useTeamQuery'
 import { getServerSession } from 'next-auth'

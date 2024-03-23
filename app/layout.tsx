@@ -6,7 +6,7 @@ import UserSessionProvider from '@/components/Providers/SessionProvider'
 import { Toaster } from 'sonner'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import QueryProvider from '@/components/Providers/QueryProvader'
+import QueryProvider from '@/components/Providers/QueryProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
@@ -21,10 +21,10 @@ export default async function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <UserSessionProvider>
-            <html
-                lang="en"
-                className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <html
+            lang="en"
+            className={`${GeistSans.variable} ${GeistMono.variable}`}>
+            <UserSessionProvider>
                 <QueryProvider>
                     <body className="bg-background">
                         <ThemeProvider
@@ -42,12 +42,12 @@ export default async function RootLayout({
                                 {children}
                             </main>
 
-                            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+                            <ReactQueryDevtools initialIsOpen={false} />
+                            <SpeedInsights />
                         </ThemeProvider>
-                        <SpeedInsights />
                     </body>
                 </QueryProvider>
-            </html>
-        </UserSessionProvider>
+            </UserSessionProvider>
+        </html>
     )
 }

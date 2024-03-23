@@ -1,7 +1,7 @@
 'use client'
 
 import { type Editor } from '@tiptap/react'
-import { Toggle } from './shadCn/ui/toggle'
+import { Toggle } from '../shadCn/ui/toggle'
 import {
     Bold,
     Code,
@@ -13,7 +13,7 @@ import {
     ListOrdered,
     Strikethrough,
 } from 'lucide-react'
-import { Button } from './shadCn/ui/button'
+import { Button } from '../shadCn/ui/button'
 import { ChangeEvent, useRef } from 'react'
 import { uploadImageAction } from '@/server/actions/article/uploadImage'
 import { toast } from 'sonner'

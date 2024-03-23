@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardContent } from './shadCn/ui/card'
-import { Avatar, AvatarImage } from './shadCn/ui/avatar'
+import { Card, CardContent } from '../shadCn/ui/card'
+import { Avatar, AvatarImage } from '../shadCn/ui/avatar'
 import { cn } from '@/lib/utils'
 
 type Props = {

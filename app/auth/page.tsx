@@ -1,4 +1,4 @@
-import SignGithubBtn from '@/components/SignGithubBtn'
+import SignGithubBtn from '@/components/UI/SignGithubBtn'
 
 function LoginPage() {
     return (
@@ -8,4 +8,3 @@ function LoginPage() {
     )
 }
 export default LoginPage
-

@@ -1,7 +1,7 @@
 'use client'
 
 import { signOut, useSession } from 'next-auth/react'
-import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import {
     DropdownMenu,
     DropdownMenuItem,
@@ -10,7 +10,7 @@ import {
     DropdownMenuRadioItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from './shadCn/ui/dropdown-menu'
+} from '../shadCn/ui/dropdown-menu'
 import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
 import { LogOut, Settings } from 'lucide-react'
 import Link from 'next/link'
@@ -29,14 +29,14 @@ export default function AvatarMenu() {
                         <AvatarFallback>RU</AvatarFallback>
                     </Avatar>
                     <span className="hidden text-start align-text-bottom font-normal md:block">
-                        {session?.user?.name}
+                        {session?.user?.username}
                     </span>
                 </div>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className="z-[9999] mt-2 w-fit min-w-52 rounded-md border border-solid bg-white px-1 py-2 dark:bg-black">
                 <DropdownMenuLabel className="font-normal">
-                    {session?.user?.username}
+                    {session?.user?.name}
                 </DropdownMenuLabel>
 
                 <DropdownMenuSeparator className="dark:bg-zinc-700" />
