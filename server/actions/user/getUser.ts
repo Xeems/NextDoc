@@ -2,7 +2,7 @@
 
 import { getUserByUsername } from '@/server/db/user.data'
 
-export const getUser = async (usernameOrEmail: string) => {
+export const getUserAction = async (usernameOrEmail: string) => {
     try {
         const response = await getUserByUsername(usernameOrEmail)
         return { data: response }

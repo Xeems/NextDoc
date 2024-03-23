@@ -6,8 +6,8 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from './shadCn/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from './shadCn/ui/avatar'
+} from '../shadCn/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 
 type Props = {
     document: DocType

@@ -1,6 +1,6 @@
 'use client'
 
-import DocumentList from '@/components/DocumentList'
+import DocumentList from '@/components/UI/DocumentList'
 import { Input } from '@/components/shadCn/ui/input'
 import { useTeamDocumentsQuery } from '@/hooks/useTeamDocumentsQuery'
 import { CreateDocumentModal } from './CreateDocumentModal'
@@ -14,7 +14,6 @@ type Props = {
 export default function DashboardPage({ params }: Props) {
     const { data: documents, isLoading } = useTeamDocumentsQuery(params.name)
 
-    console.log(documents)
     if (isLoading) return <div>Loading</div>
 
     return (

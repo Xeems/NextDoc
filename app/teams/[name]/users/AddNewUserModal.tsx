@@ -35,8 +35,8 @@ import { Button } from '@/components/shadCn/ui/button'
 import { useContext, useEffect, useState } from 'react'
 import { TeamContext } from '../TeamContext'
 import { newTeamUserSchema, newTeamUserType } from '@/@types/validators/team'
-import { getUser } from '@/server/actions/user/getUser'
-import UserCard from '@/components/UserCard'
+import { getUserAction } from '@/server/actions/user/getUser'
+import UserCard from '@/components/UI/UserCard'
 import { addUserToTeamAction } from '@/server/actions/team/addUserToTeam'
 import { z } from 'zod'
 
@@ -59,7 +59,7 @@ export function AddNewUserModal() {
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
 
     useEffect(() => {
-        const user = getUser(form.getValues('username')).then((user) => {
+        const user = getUserAction(form.getValues('username')).then((user) => {
             if (user.data) {
                 setUser(user.data)
                 form.setValue('userId', user.data.id)

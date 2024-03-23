@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
 import { GithubIcon } from 'lucide-react'
-import { Button } from './shadCn/ui/button'
+import { Button } from '../shadCn/ui/button'
 
 export default function SignGithubBtn() {
     const { data: session } = useSession()
