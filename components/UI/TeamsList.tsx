@@ -5,12 +5,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
 
 type Props = {
-    teams: TeamType[] | undefined
+    teams: TeamType[]
     variant?: 'default' | 'popup'
 }
 
 export default function TeamsList({ teams, variant = 'default' }: Props) {
-    if (!teams || teams?.length == 0 || teams == null) {
+    if (!teams || !Array.isArray(teams) || teams == null) {
         return (
             <span className="mb-4 text-sm font-light text-muted-foreground">
                 No teams yet

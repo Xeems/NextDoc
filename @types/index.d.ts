@@ -4,7 +4,7 @@ type UserType = {
     username: string
     email?: string | null
     image: string | null
-    createdAt: Date | null
+    createdAt?: Date | null
     updatedAt?: Date
 }
 

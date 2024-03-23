@@ -24,6 +24,16 @@ export const getUserDocuments = async (name: string) => {
             user: { username: name },
             team: null,
         },
+        include: {
+            user: {
+                select: {
+                    username: true,
+                    id: true,
+                    name: true,
+                    image: true,
+                },
+            },
+        },
     })
     return res
 }

@@ -13,19 +13,13 @@ function Header() {
 
                 <div className="my-auto flex h-full flex-row items-center gap-5">
                     {session.data ? (
-                        <div>
-                            <div className="flex gap-x-2">
-                                <Link
-                                    className="px-1 text-end font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
-                                    href={`/users/${session.data?.user.username}`}>
-                                    Dashboard
-                                </Link>
-                                {/* <Link
-                                    className="px-1 text-end font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
-                                    href={`/teams`}>
-                                    Teams
-                                </Link> */}
-                            </div>
+                        <div className="flex flex-row items-center gap-x-4">
+                            <Link
+                                className="px-1 text-end font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
+                                href={`/users/${session.data?.user.username}`}>
+                                Dashboard
+                            </Link>
+
                             <AvatarMenu />
                         </div>
                     ) : (

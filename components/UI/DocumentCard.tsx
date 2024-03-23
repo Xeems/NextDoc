@@ -19,6 +19,8 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
     if (document.team) docOwner = document.team.name
     else docOwner = document.user?.username as string
 
+    console.log(document.user)
+
     return (
         <Link
             href={{
