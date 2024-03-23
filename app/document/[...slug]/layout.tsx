@@ -7,6 +7,7 @@ import {
 import { getDocumentAction } from '@/server/actions/document/getDocument'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import getQueryClient from '@/lib/getQueryClient'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -16,7 +17,7 @@ type LayoutProps = {
 }
 
 export default async function DocLayout({ children, params }: LayoutProps) {
-    const queryClient = new QueryClient()
+    const queryClient = getQueryClient()
     const { data: data, error: error } = await queryClient.fetchQuery({
         queryKey: ['document', params.slug[0], params.slug[1]],
         queryFn: () => getDocumentAction(params.slug[0], params.slug[1]),

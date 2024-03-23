@@ -35,7 +35,7 @@ export default function UserPage({ params }: Props) {
             <div className="flex h-fit w-1/4 flex-col justify-stretch  p-2">
                 <div className="flex flex-row items-center  gap-x-4">
                     <Avatar className="size-20 border">
-                        <AvatarImage src={user.image as string} />
+                        <AvatarImage src={user.image!} />
                         <AvatarFallback>UN</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
@@ -48,7 +48,7 @@ export default function UserPage({ params }: Props) {
                     </div>
                 </div>
                 <span className="my-4 text-xl font-semibold">Teams</span>
-                <TeamsList variant="popup" teams={teams} />
+                <TeamsList variant="popup" teams={teams!} />
                 <CreateTeamModal>
                     <Button variant={'ghost'} className="justify-start gap-x-2">
                         <PlusSquareIcon className="h-4 w-4" />
