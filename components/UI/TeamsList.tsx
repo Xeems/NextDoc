@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
 
 type Props = {
-    teams: TeamType[]
+    teams: TeamType[] | undefined
     variant?: 'default' | 'popup'
 }
 
