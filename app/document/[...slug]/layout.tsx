@@ -8,6 +8,7 @@ import { getDocumentAction } from '@/server/actions/document/getDocument'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import getQueryClient from '@/lib/getQueryClient'
+import { DocumentContext, DocumentContextProvider } from './DocumentContext'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -26,18 +27,20 @@ export default async function DocLayout({ children, params }: LayoutProps) {
 
     const state = dehydrate(queryClient)
     return (
-        <HydrationBoundary state={state}>
-            <div className="flex w-full flex-col">
-                <div className="flex w-full items-start justify-center py-5">
-                    <DocumentNav
-                        //@ts-ignore
-                        document={data}
-                    />
-                    <Suspense fallback={<div>Loading</div>}>
-                        {children}
-                    </Suspense>
+        <DocumentContextProvider initial={{ userRole: 'NONE' }}>
+            <HydrationBoundary state={state}>
+                <div className="flex w-full flex-col">
+                    <div className="flex w-full items-start justify-center py-5">
+                        <DocumentNav
+                            //@ts-ignore
+                            document={data}
+                        />
+                        <Suspense fallback={<div>Loading</div>}>
+                            {children}
+                        </Suspense>
+                    </div>
                 </div>
-            </div>
-        </HydrationBoundary>
+            </HydrationBoundary>
+        </DocumentContextProvider>
     )
 }
