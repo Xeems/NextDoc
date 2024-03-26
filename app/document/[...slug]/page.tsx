@@ -1,8 +1,7 @@
 'use client'
 
-import React, { Suspense, useState } from 'react'
+import React, { Suspense } from 'react'
 import { useArticleQuery } from '@/hooks/useArticleQuery'
-import { notFound } from 'next/navigation'
 import DocumentEditForm from './DocumentEditForm'
 import EmptyDocument from './EmptyDocument'
 
