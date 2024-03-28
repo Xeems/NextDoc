@@ -20,6 +20,7 @@ export const DocumentContextProvider = ({
     initial,
 }: TeamContextProviderProps) => {
     const [userRole] = useState<TeamRoleType>(initial.userRole || 'NONE')
+
     return (
         <DocumentContext.Provider value={{ userRole }}>
             {children}

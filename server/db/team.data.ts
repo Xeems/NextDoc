@@ -62,6 +62,21 @@ export const getTeamMembers = async (teamName: string) => {
     return res
 }
 
+export const getTeamMember = async (userId: string, teamId: string) => {
+    const res = await prisma.userTeam.findFirst({
+        where: {
+            userId,
+            team: {
+                id: teamId,
+            },
+        },
+        select: {
+            role: true,
+        },
+    })
+    return res
+}
+
 export const getTeam = async (teamName: string) => {
     const res = await prisma.team.findUnique({
         where: {

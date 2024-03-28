@@ -68,9 +68,16 @@ export const getDocumentByOwner = async (username: string, idName: string) => {
         include: {
             user: {
                 select: {
+                    id: true,
                     name: true,
                     username: true,
                     image: true,
+                },
+            },
+            team: {
+                select: {
+                    id: true,
+                    name: true,
                 },
             },
         },
