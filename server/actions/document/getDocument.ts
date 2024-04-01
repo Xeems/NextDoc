@@ -3,8 +3,12 @@
 import { getDocumentByOwner } from '@/server/db/document.data'
 import { getUserBySessionTokenAction } from '../user/getUserBySessionToken'
 import { validateTeamMemberAction } from '../team/validateTeamMember'
+import { cookies } from 'next/headers'
 
 export const getDocumentAction = async (username: string, idName: string) => {
+    const sessionToken = cookies().get('next-auth.session-token')?.value
+    //if (!sessionToken) throw Error('no session token')
+    console.log('Session token ', sessionToken)
     const user = await getUserBySessionTokenAction()
 
     try {
