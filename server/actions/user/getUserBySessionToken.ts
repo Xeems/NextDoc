@@ -4,7 +4,9 @@ import { getUserBySessionToken } from '@/server/db/user.data'
 import { cookies } from 'next/headers'
 
 export const getUserBySessionTokenAction = async () => {
-    const sessionToken = await cookies().get('next-auth.session-token')?.value
+    const sessionToken = await cookies().get(
+        'next-auth.session-token' || '__Secure-next-auth.session-token',
+    )?.value
     //if (!sessionToken) throw Error('no session token')
     console.log('Session token ', sessionToken)
     const user = await getUserBySessionToken(sessionToken!)
