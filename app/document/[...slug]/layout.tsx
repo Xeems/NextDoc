@@ -16,7 +16,8 @@ export default async function DocLayout({ children, params }: LayoutProps) {
     const queryClient = getQueryClient()
     const { data: data, error: error } = await queryClient.fetchQuery({
         queryKey: ['document', params.slug[0], params.slug[1]],
-        queryFn: () => getDocumentAction(params.slug[0], params.slug[1]),
+        queryFn: async () =>
+            await getDocumentAction(params.slug[0], params.slug[1]),
     })
     if (error || !data?.doc) return <p>Some Error</p>
 
