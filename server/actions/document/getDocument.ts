@@ -6,9 +6,9 @@ import { validateTeamMemberAction } from '../team/validateTeamMember'
 import { cookies } from 'next/headers'
 
 export const getDocumentAction = async (username: string, idName: string) => {
-    const sessionToken = cookies().getAll()
-    //if (!sessionToken) throw Error('no session token')
-    console.log('Session token ', sessionToken)
+    // const sessionToken = cookies().getAll()
+    // //if (!sessionToken) throw Error('no session token')
+    // console.log('Session token ', sessionToken)
     const user = await getUserBySessionTokenAction()
 
     try {
