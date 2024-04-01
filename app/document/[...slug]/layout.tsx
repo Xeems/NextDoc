@@ -1,7 +1,6 @@
 import DocumentNav from './DocumentNav'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { getDocumentAction } from '@/server/actions/document/getDocument'
-import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import getQueryClient from '@/lib/getQueryClient'
 import { DocumentContextProvider } from './DocumentContext'
@@ -19,9 +18,8 @@ export default async function DocLayout({ children, params }: LayoutProps) {
         queryKey: ['document', params.slug[0], params.slug[1]],
         queryFn: () => getDocumentAction(params.slug[0], params.slug[1]),
     })
-    if (error || !data?.doc) notFound()
+    if (error || !data?.doc) return <p>Some Error</p>
 
-    console.log(data)
     const state = dehydrate(queryClient)
     return (
         <DocumentContextProvider
