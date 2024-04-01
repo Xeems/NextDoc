@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 export const getUserBySessionTokenAction = async () => {
     const sessionToken = await cookies().get('next-auth.session-token')?.value
     //if (!sessionToken) throw Error('no session token')
+    console.log('Session token ', sessionToken)
     const user = await getUserBySessionToken(sessionToken!)
     return user
 }
