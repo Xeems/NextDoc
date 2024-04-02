@@ -8,16 +8,18 @@ import {
 } from '@/components/shadCn/ui/dropdown-menu'
 import { Delete, Edit, Edit3, MoreHorizontalIcon, Plus } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import NewArticle from './newArticle'
 import { useArticlesQuery } from '@/hooks/useArticlesQuery'
 import { notFound } from 'next/navigation'
+import { DocumentContext } from './DocumentContext'
 
 type Props = {
     document: DocType
 }
 
 export default function DocumentNav({ document }: Props) {
+    const documentContext = useContext(DocumentContext)
     const { data, error } = useArticlesQuery(document.id)
     if (error) {
         notFound()
@@ -76,7 +78,10 @@ export default function DocumentNav({ document }: Props) {
                     )
                 })}
             </ul>
-            <NewArticle articles={articles} document={document} />
+            {documentContext.userRole == 'ADMIN' ||
+                (documentContext.userRole == 'OWNER' && (
+                    <NewArticle articles={articles} document={document} />
+                ))}
         </nav>
     )
 }

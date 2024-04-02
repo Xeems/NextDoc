@@ -1,9 +1,10 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useContext } from 'react'
 import { useArticleQuery } from '@/hooks/useArticleQuery'
 import DocumentEditForm from './DocumentEditForm'
 import EmptyDocument from './EmptyDocument'
+import { DocumentContext } from './DocumentContext'
 
 type Props = {
     params: {
@@ -17,6 +18,7 @@ export default function DocumentPage({ params }: Props) {
         return params.slug[params.slug.length - 1]
     }
     const articleTitle = articleFn()
+    const documentContext = useContext(DocumentContext)
 
     const {
         data: article,
@@ -31,7 +33,10 @@ export default function DocumentPage({ params }: Props) {
             <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
                 <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
                     <h1 className="my-2 text-4xl">{article?.title}</h1>
-                    <DocumentEditForm article={article} />
+                    {documentContext.userRole == 'ADMIN' ||
+                        (documentContext.userRole == 'OWNER' && (
+                            <DocumentEditForm article={article} />
+                        ))}
                 </div>
             </div>
         </Suspense>
