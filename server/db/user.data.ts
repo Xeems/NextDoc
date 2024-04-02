@@ -18,6 +18,15 @@ export const getUserBySessionToken = async (sessionToken: string) => {
     return user
 }
 
+export const getUserById = async (userId: string) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            id: userId,
+        },
+    })
+    return user
+}
+
 export const getUserByUsername = async (username: string) => {
     const user = await prisma.user.findFirst({
         where: {
