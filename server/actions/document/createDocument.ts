@@ -5,7 +5,7 @@ import {
     NewDocumentType,
     newDocumentSchema,
 } from '@/@types/validators/document'
-import { getUserBySessionTokenAction } from '../user/getUserBySessionToken'
+import { getUserBySessionAction } from '../user/getUserBySessionToken'
 
 type Props = {
     data: NewDocumentType
@@ -18,7 +18,7 @@ export const createDocumentAction = async ({ data }: Props) => {
             `Validation failed ${validationResult.error.issues[0].message}`,
         )
 
-    const user = await getUserBySessionTokenAction()
+    const user = await getUserBySessionAction()
     if (!user) throw Error('No user session')
 
     const dataWithCreator = {

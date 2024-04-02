@@ -1,10 +1,10 @@
 'use server'
 
 import { getTeamDocuments } from '@/server/db/team.data'
-import { getUserBySessionTokenAction } from '../user/getUserBySessionToken'
+import { getUserBySessionAction } from '../user/getUserBySessionToken'
 
 export const getTeamDocumentsAction = async (name: string) => {
-    const user = getUserBySessionTokenAction()
+    const user = getUserBySessionAction()
     try {
         const res = await getTeamDocuments(name)
         if (!res) throw new Error('Failed to get documents')

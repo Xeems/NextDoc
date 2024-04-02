@@ -1,14 +1,11 @@
 'use server'
 
 import { getUserBySessionToken } from '@/server/db/user.data'
-import { cookies } from 'next/headers'
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 
-export const getUserBySessionTokenAction = async () => {
-    const sessionToken = await cookies().get(
-        'next-auth.session-token' || '__Secure-next-auth.session-token',
-    )?.value
-    //if (!sessionToken) throw Error('no session token')
-    console.log('Session token ', sessionToken)
-    const user = await getUserBySessionToken(sessionToken!)
+export const getUserBySessionAction = async () => {
+    const session = await getServerSession(authOptions)
+    const user = await getUserBySessionToken(session?.user.id)
     return user
 }
