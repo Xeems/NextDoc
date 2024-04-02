@@ -1,7 +1,7 @@
 'use server'
 
 import { getDocumentByOwner } from '@/server/db/document.data'
-import { getUserBySessionTokenAction } from '../user/getUserBySessionToken'
+import { getUserBySessionAction } from '../user/getUserBySessionToken'
 import { validateTeamMemberAction } from '../team/validateTeamMember'
 import { cookies } from 'next/headers'
 
@@ -9,7 +9,7 @@ export const getDocumentAction = async (username: string, idName: string) => {
     // const sessionToken = cookies().getAll()
     // //if (!sessionToken) throw Error('no session token')
     // console.log('Session token ', sessionToken)
-    const user = await getUserBySessionTokenAction()
+    const user = await getUserBySessionAction()
 
     try {
         let userRole: TeamRoleType = 'NONE'
