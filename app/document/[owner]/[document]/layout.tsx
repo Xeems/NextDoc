@@ -1,23 +1,26 @@
-import DocumentNav from './DocumentNav'
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import { getDocumentAction } from '@/server/actions/document/getDocument'
-import { Suspense } from 'react'
+import Loading from '@/app/document/loading'
 import getQueryClient from '@/lib/getQueryClient'
-import { DocumentContextProvider } from './DocumentContext'
+import { getDocumentAction } from '@/server/actions/document/getDocument'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import { Suspense } from 'react'
+
+import { DocumentContextProvider } from './[[...slug]]/DocumentContext'
+import DocumentNav from './DocumentNav'
 
 type LayoutProps = {
     children: React.ReactNode
     params: {
-        slug: string[]
+        owner: string
+        document: string
     }
 }
 
 export default async function DocLayout({ children, params }: LayoutProps) {
     const queryClient = getQueryClient()
     const { data: data, error: error } = await queryClient.fetchQuery({
-        queryKey: ['document', params.slug[0], params.slug[1]],
+        queryKey: ['document', params.owner, params.document],
         queryFn: async () =>
-            await getDocumentAction(params.slug[0], params.slug[1]),
+            await getDocumentAction(params.owner, params.document),
     })
     if (error || !data?.doc) return <p>Some Error</p>
 
@@ -28,12 +31,13 @@ export default async function DocLayout({ children, params }: LayoutProps) {
                 userRole: data.userRole,
             }}>
             <HydrationBoundary state={state}>
-                <div className="flex w-full flex-col">
-                    <div className="flex w-full items-start justify-center py-5">
+                <div className="flex w-fit flex-col gap-y-5">
+                    <h1 className="mt-10 text-start text-4xl font-semibold">
+                        {data.doc.name}
+                    </h1>
+                    <div className="flex w-full items-start justify-center">
                         <DocumentNav document={data.doc!} />
-                        <Suspense fallback={<div>Loading</div>}>
-                            {children}
-                        </Suspense>
+                        {children}
                     </div>
                 </div>
             </HydrationBoundary>

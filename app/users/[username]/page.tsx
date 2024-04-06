@@ -1,22 +1,22 @@
 'use client'
 
+import { CreateTeamModal } from '@/app/teams/CreateTeamModal'
 import {
     Avatar,
     AvatarFallback,
     AvatarImage,
 } from '@/components/shadCn/ui/avatar'
-import React from 'react'
-
 import { Button } from '@/components/shadCn/ui/button'
-import { CreateUserDocumentModal } from './CreateUserDocumentModal'
-import { CreateTeamModal } from '@/app/teams/CreateTeamModal'
-import { PlusSquareIcon } from 'lucide-react'
-import { useUserQuery } from '@/hooks/useUserQuery'
-import { notFound } from 'next/navigation'
 import DocumentList from '@/components/UI/DocumentList'
 import TeamsList from '@/components/UI/TeamsList'
 import { useUserDocumentsQuery } from '@/hooks/useUserDocumentsQuery'
+import { useUserQuery } from '@/hooks/useUserQuery'
 import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
+import { PlusSquareIcon } from 'lucide-react'
+import { notFound } from 'next/navigation'
+import React from 'react'
+
+import { CreateUserDocumentModal } from './CreateUserDocumentModal'
 
 type Props = {
     params: {
