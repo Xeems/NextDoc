@@ -1,30 +1,28 @@
 'use client'
 
-import { useEditor, EditorContent, JSONContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import EditorToolBar from './EditorToolBar'
-import Heading from '@tiptap/extension-heading'
-import { lowlight } from 'lowlight/lib/core'
-import ts from 'highlight.js/lib/languages/typescript'
-import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
-import Code from '@tiptap/extension-code'
-import Paragraph from '@tiptap/extension-paragraph'
-import ImageResize from 'tiptap-extension-resize-image'
-import Dropcursor from '@tiptap/extension-dropcursor'
-import { toast } from 'sonner'
 import { uploadImageAction } from '@/server/actions/article/uploadImage'
 import { JsonValue } from '@prisma/client/runtime/library'
 import BulletList from '@tiptap/extension-bullet-list'
+import Code from '@tiptap/extension-code'
+import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
+import Dropcursor from '@tiptap/extension-dropcursor'
+import Heading from '@tiptap/extension-heading'
 import OrderedList from '@tiptap/extension-ordered-list'
+import Paragraph from '@tiptap/extension-paragraph'
+import { EditorContent, JSONContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import { lowlight } from 'lowlight/lib/core'
+import { toast } from 'sonner'
+import ImageResize from 'tiptap-extension-resize-image'
 
-lowlight.registerLanguage('ts', ts)
+import EditorToolBar from './EditorToolBar'
 
 type Props = {
-    initialValue?: JsonValue | null
-    onChange: (content: JSON | null) => void
+    initialValue?: JsonValue
+    onChange: (content: JSON | undefined) => void
 }
 
-const Editor = ({ initialValue = null, onChange }: Props) => {
+const Editor = ({ initialValue = undefined, onChange }: Props) => {
     const editor = useEditor({
         editorProps: {
             attributes: {
@@ -153,14 +151,15 @@ const Editor = ({ initialValue = null, onChange }: Props) => {
                 },
             }),
         ],
+        //@ts-ignore
         content: {
             type: 'doc',
-            content: initialValue as JSONContent[],
+            content: initialValue || {},
         },
         onUpdate: ({ editor }) => {
             const jsonContent = editor.getJSON().content
             if (!jsonContent) {
-                onChange(null)
+                onChange(undefined)
                 return
             } else {
                 const constentString = JSON.stringify(jsonContent)

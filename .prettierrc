@@ -8,9 +8,21 @@
     "endOfLine": "crlf",
     "trailingComma": "all",
     "semi": false,
-    "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true,
 
-    "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-prisma"]
+    "importOrder": [
+        "^@core/(.*)$",
+        "",
+        "^@server/(.*)$",
+        "",
+        "^@ui/(.*)$",
+        "",
+        "^[./]"
+    ],
+    "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+    "importOrderTypeScriptVersion": "5.0.0",
+    "plugins": [
+        "prettier-plugin-tailwindcss",
+        "prettier-plugin-prisma",
+        "@ianvs/prettier-plugin-sort-imports"
+    ]
 }

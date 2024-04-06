@@ -1,6 +1,5 @@
 'use client'
 
-import Editor from '@/components/TextEditor/Editor'
 import { Button } from '@/components/shadCn/ui/button'
 import {
     Form,
@@ -8,6 +7,7 @@ import {
     FormField,
     FormItem,
 } from '@/components/shadCn/ui/form'
+import Editor from '@/components/TextEditor/Editor'
 import { updateAricleContentAction } from '@/server/actions/article/updateAricleContent'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -22,7 +22,7 @@ type Props = {
     article: ArticleType
 }
 
-export default function DocumentEditForm({ article }: Props) {
+export default function ArticleEditForm({ article }: Props) {
     const form = useForm<z.infer<typeof formData>>({
         resolver: zodResolver(formData),
     })
@@ -43,7 +43,7 @@ export default function DocumentEditForm({ article }: Props) {
                         <FormItem>
                             <FormControl>
                                 <Editor
-                                    initialValue={article.content}
+                                    initialValue={article?.content}
                                     onChange={field.onChange}
                                 />
                             </FormControl>
