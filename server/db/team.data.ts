@@ -31,7 +31,6 @@ export const getUserTeamsByUsername = async (username: string) => {
             },
         },
     })
-    //console.log(username, res)
     return res
 }
 

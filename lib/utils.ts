@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function normilizeName(str: string): string {
-    return str.replace(/\s/g, '-')
+    return str.toLowerCase().replace(/\s/g, '-')
 }
 
 export const wait = (n: number) =>

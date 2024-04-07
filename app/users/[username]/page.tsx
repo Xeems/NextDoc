@@ -1,5 +1,3 @@
-'use client'
-
 import { CreateTeamModal } from '@/app/teams/CreateTeamModal'
 import {
     Avatar,
@@ -9,9 +7,10 @@ import {
 import { Button } from '@/components/shadCn/ui/button'
 import DocumentList from '@/components/UI/DocumentList'
 import TeamsList from '@/components/UI/TeamsList'
-import { useUserDocumentsQuery } from '@/hooks/useUserDocumentsQuery'
-import { useUserQuery } from '@/hooks/useUserQuery'
-import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
+import getQueryClient from '@/lib/getQueryClient'
+import { getUserDocumentsAction } from '@/server/actions/document/getUserDocuments'
+import { getUserTeamsAction } from '@/server/actions/team/getUserTeams'
+import { getUserAction } from '@/server/actions/user/getUser'
 import { PlusSquareIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import React from 'react'
@@ -23,32 +22,43 @@ type Props = {
         username: string
     }
 }
-export default function UserPage({ params }: Props) {
-    const { data: user } = useUserQuery(params.username)
-    const { data: teams } = useUserTeamsQuery(params.username)
-    const { data: documents } = useUserDocumentsQuery(params.username)
+export default async function UserPage({ params }: Props) {
+    const queryClient = getQueryClient()
 
-    if (!user) notFound()
+    const { data: teams } = await queryClient.fetchQuery({
+        queryKey: ['user', params.username, 'teams'],
+        queryFn: async () => await getUserTeamsAction(params.username),
+    })
+    const { data: user } = await queryClient.fetchQuery({
+        queryKey: ['user', params.username],
+        queryFn: async () => await getUserAction(params.username),
+    })
+    const { data: documents } = await queryClient.fetchQuery({
+        queryKey: ['user', params.username, 'documents'],
+        queryFn: async () => await getUserDocumentsAction(params.username),
+    })
+
+    if (!user || teams == undefined || documents == undefined) notFound()
 
     return (
         <div className=" flex w-full flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
             <div className="flex h-fit w-1/4 flex-col justify-stretch  p-2">
                 <div className="flex flex-row items-center  gap-x-4">
                     <Avatar className="size-20 border">
-                        <AvatarImage src={user.image!} />
+                        <AvatarImage src={user.image || undefined} />
                         <AvatarFallback>UN</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
                         <span className="text-2xl font-semibold tracking-wide">
-                            {user?.username}
+                            {user.username}
                         </span>
                         <span className="font-light text-muted-foreground">
-                            {user?.name}
+                            {user.name}
                         </span>
                     </div>
                 </div>
                 <span className="my-4 text-xl font-semibold">Teams</span>
-                <TeamsList variant="popup" teams={teams!} />
+                <TeamsList variant="popup" teams={teams} />
                 <CreateTeamModal>
                     <Button variant={'ghost'} className="justify-start gap-x-2">
                         <PlusSquareIcon className="h-4 w-4" />

@@ -41,7 +41,7 @@ export const uploadImageAction = async (data: FormData) => {
 
         return { src: `/uploads/${fileName}` }
     } catch (e: any) {
-        console.log(e)
+        console.error(e)
         return { error: 'Не удалось загрузить изображение' }
     }
 }

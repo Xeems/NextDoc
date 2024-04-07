@@ -20,7 +20,7 @@ export const getArticleByTitleAction = async ({
         }
         throw new Error()
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { error: 'Could not get article' }
     }
 }
