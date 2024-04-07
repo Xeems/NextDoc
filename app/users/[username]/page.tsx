@@ -41,8 +41,8 @@ export default async function UserPage({ params }: Props) {
     if (!user || teams == undefined || documents == undefined) notFound()
 
     return (
-        <div className=" flex w-full flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
-            <div className="flex h-fit w-1/4 flex-col justify-stretch  p-2">
+        <div className=" flex w-full flex-col lg:flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
+            <div className="flex h-fit w-full lg:w-1/4 flex-col justify-stretch  p-2">
                 <div className="flex flex-row items-center  gap-x-4">
                     <Avatar className="size-20 border">
                         <AvatarImage src={user.image || undefined} />
@@ -67,9 +67,9 @@ export default async function UserPage({ params }: Props) {
                 </CreateTeamModal>
             </div>
 
-            <div className="flex h-fit w-3/4 flex-col pb-4">
+            <div className="flex h-fit lg:w-3/4 flex-col pb-4">
                 <div className="mb-4 flex items-center justify-between">
-                    <span className="m-2 text-lg">Documents</span>
+                    <span className="m-2 text-xl font-semibold">Documents</span>
                     <CreateUserDocumentModal>
                         <Button variant={'secondary'}>
                             Create new document
