@@ -1,19 +1,5 @@
 'use client'
 
-import * as React from 'react'
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from '@tanstack/react-table'
-import { ChevronDown } from 'lucide-react'
 import { Button } from '@/components/shadCn/ui/button'
 import {
     DropdownMenu,
@@ -30,8 +16,22 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/shadCn/ui/table'
+import {
+    ColumnDef,
+    ColumnFiltersState,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    SortingState,
+    useReactTable,
+    VisibilityState,
+} from '@tanstack/react-table'
+import { ChevronDown } from 'lucide-react'
+import * as React from 'react'
+
 import { AddNewUserModal } from './AddNewUserModal'
-import { TeamContext } from '../TeamContext'
 
 interface TableProps<TData, TValue> {
     data: TData[]

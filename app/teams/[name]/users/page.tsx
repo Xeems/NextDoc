@@ -1,6 +1,7 @@
-import { QueryClient } from '@tanstack/react-query'
-import UsersTable from './UsersTable'
 import { getTeamMembersAction } from '@/server/actions/team/getTeamMembers'
+import { QueryClient } from '@tanstack/react-query'
+
+import UsersTable from './UsersTable'
 import { UserTableColumns } from './UserTableColumns'
 
 type Props = {
@@ -17,11 +18,14 @@ export default async function UsersPage({ params }: Props) {
             return await getTeamMembersAction(params.name)
         },
     })
-    //console.log(data?.findLast()?.user.)
 
     return (
         <div className="flex w-full flex-col items-center gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
-            <UsersTable data={data!} columns={UserTableColumns} />
+            <UsersTable
+                data={data!}
+                //@ts-ignore
+                columns={UserTableColumns}
+            />
         </div>
     )
 }

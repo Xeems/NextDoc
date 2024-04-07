@@ -1,4 +1,5 @@
 'use server'
+
 import { updateAricleContent } from '@/server/db/article.data'
 
 export const updateAricleContentAction = async (
@@ -9,7 +10,7 @@ export const updateAricleContentAction = async (
         const res = await updateAricleContent(airticleId, content)
         return { data: res }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { error: 'Errors happends' }
     }
 }

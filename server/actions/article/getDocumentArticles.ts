@@ -7,7 +7,7 @@ export const getDocumentArticlesAction = async (documentId: string) => {
         const res = await getDocumentArticles(documentId)
         return { data: res }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { error: "Can't resolve articles" }
     }
 }

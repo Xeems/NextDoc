@@ -20,7 +20,7 @@ export const createArticleAction = async (
         const res = await createArticle(article, documentId)
         return { data: res }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { error: 'Something went wrong' }
     }
 }

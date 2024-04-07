@@ -1,4 +1,6 @@
 import Link from 'next/link'
+
+import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import {
     Card,
     CardContent,
@@ -7,7 +9,6 @@ import {
     CardHeader,
     CardTitle,
 } from '../shadCn/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 
 type Props = {
     document: DocType
@@ -18,8 +19,6 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
     let docOwner: string
     if (document.team) docOwner = document.team.name
     else docOwner = document.user?.username as string
-
-    console.log(document.user)
 
     return (
         <Link
