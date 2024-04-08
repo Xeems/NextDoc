@@ -1,3 +1,4 @@
+import getQueryClient from '@/lib/getQueryClient'
 import { getUserAction } from '@/server/actions/user/getUser'
 import { QueryClient, useQuery } from '@tanstack/react-query'
 
@@ -7,18 +8,19 @@ export const useUserQuery = (username: string) => {
         queryFn: async () => {
             const res = await getUserAction(username)
             if (res.error) throw new Error(res.error)
-            else return res.data
+            else return res.user
         },
     })
 }
 
-export const userQuery = (username: string, queryClient: QueryClient) => {
+export const userQuery = (username: string) => {
+    const queryClient = getQueryClient()
     return queryClient.fetchQuery({
         queryKey: ['user', username],
         queryFn: async () => {
             const res = await getUserAction(username)
             if (res.error) throw new Error(res.error)
-            else return res.data
+            else return res.user
         },
     })
 }

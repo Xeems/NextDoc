@@ -1,8 +1,9 @@
 'use server'
 
 import { getDocumentByOwner } from '@/server/db/document.data'
-import { getUserBySessionAction } from '../user/getUserBySessionToken'
+
 import { validateTeamMemberAction } from '../team/validateTeamMember'
+import { getUserBySessionAction } from '../user/getUserBySession'
 
 export const getDocumentAction = async (username: string, idName: string) => {
     const user = await getUserBySessionAction()

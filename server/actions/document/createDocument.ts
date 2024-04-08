@@ -1,11 +1,12 @@
 'use server'
 
-import { createDocument } from '@/server/db/document.data'
 import {
-    NewDocumentType,
     newDocumentSchema,
+    NewDocumentType,
 } from '@/@types/validators/document'
-import { getUserBySessionAction } from '../user/getUserBySessionToken'
+import { createDocument } from '@/server/db/document.data'
+
+import { getUserBySessionAction } from '../user/getUserBySession'
 
 type Props = {
     data: NewDocumentType
