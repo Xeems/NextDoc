@@ -1,5 +1,7 @@
 'use client'
 
+import { newTeamUserSchema, newTeamUserType } from '@/@types/validators/team'
+import { Button } from '@/components/shadCn/ui/button'
 import {
     Dialog,
     DialogContent,
@@ -9,7 +11,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/shadCn/ui/dialog'
-import { Plus } from 'lucide-react'
 import {
     Form,
     FormControl,
@@ -18,9 +19,6 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/shadCn/ui/form'
-import { useForm } from 'react-hook-form'
-import { useSession } from 'next-auth/react'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/shadCn/ui/input'
 import {
     Select,
@@ -31,14 +29,17 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/shadCn/ui/select'
-import { Button } from '@/components/shadCn/ui/button'
-import { useContext, useEffect, useState } from 'react'
-import { TeamContext } from '../TeamContext'
-import { newTeamUserSchema, newTeamUserType } from '@/@types/validators/team'
-import { getUserAction } from '@/server/actions/user/getUser'
 import UserCard from '@/components/UI/UserCard'
 import { addUserToTeamAction } from '@/server/actions/team/addUserToTeam'
+import { getUserAction } from '@/server/actions/user/getUser'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Plus } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { TeamContext } from '../TeamContext'
 
 const newTeamUserSchemaWithUsername = newTeamUserSchema.extend({
     username: z.string(),
@@ -59,10 +60,10 @@ export function AddNewUserModal() {
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
 
     useEffect(() => {
-        const user = getUserAction(form.getValues('username')).then((user) => {
-            if (user.data) {
-                setUser(user.data)
-                form.setValue('userId', user.data.id)
+        const data = getUserAction(form.getValues('username')).then((data) => {
+            if (data.user) {
+                setUser(data.user)
+                form.setValue('userId', data.user.id)
             } else setUser(null)
         })
     }, [form.watch('username')])

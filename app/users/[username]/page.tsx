@@ -29,7 +29,7 @@ export default async function UserPage({ params }: Props) {
         queryKey: ['user', params.username, 'teams'],
         queryFn: async () => await getUserTeamsAction(params.username),
     })
-    const { data: user } = await queryClient.fetchQuery({
+    const { isSameUser, user } = await queryClient.fetchQuery({
         queryKey: ['user', params.username],
         queryFn: async () => await getUserAction(params.username),
     })
@@ -59,22 +59,28 @@ export default async function UserPage({ params }: Props) {
                 </div>
                 <span className="my-4 text-xl font-semibold">Teams</span>
                 <TeamsList variant="popup" teams={teams} />
-                <CreateTeamModal>
-                    <Button variant={'ghost'} className="justify-start gap-x-2">
-                        <PlusSquareIcon className="h-4 w-4" />
-                        Create team
-                    </Button>
-                </CreateTeamModal>
+                {isSameUser && (
+                    <CreateTeamModal>
+                        <Button
+                            variant={'ghost'}
+                            className="justify-start gap-x-2">
+                            <PlusSquareIcon className="h-4 w-4" />
+                            Create team
+                        </Button>
+                    </CreateTeamModal>
+                )}
             </div>
 
             <div className="flex h-fit lg:w-3/4 flex-col pb-4">
                 <div className="mb-4 flex items-center justify-between">
                     <span className="m-2 text-xl font-semibold">Documents</span>
-                    <CreateUserDocumentModal>
-                        <Button variant={'secondary'}>
-                            Create new document
-                        </Button>
-                    </CreateUserDocumentModal>
+                    {isSameUser && (
+                        <CreateUserDocumentModal>
+                            <Button variant={'secondary'}>
+                                Create new document
+                            </Button>
+                        </CreateUserDocumentModal>
+                    )}
                 </div>
                 {documents && (
                     <DocumentList documents={documents} withFooter={false} />

@@ -1,7 +1,8 @@
 'use server'
 
 import { getTeamDocuments } from '@/server/db/team.data'
-import { getUserBySessionAction } from '../user/getUserBySessionToken'
+
+import { getUserBySessionAction } from '../user/getUserBySession'
 
 export const getTeamDocumentsAction = async (name: string) => {
     const user = getUserBySessionAction()

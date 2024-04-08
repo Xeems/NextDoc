@@ -18,11 +18,21 @@ export const createDocument = async (data: NewDocumentWithCreatorType) => {
     return res
 }
 
-export const getUserDocuments = async (name: string) => {
+export const getUserDocuments = async (name: string, userId?: string) => {
     const res = await prisma.document.findMany({
         where: {
             user: { username: name },
             team: null,
+            OR: [
+                {
+                    // Если userId совпадает с id владельца документа
+                    user: { id: userId },
+                },
+                {
+                    // Иначе, проверяем значение ispublic
+                    type: 'public',
+                },
+            ],
         },
         include: {
             user: {

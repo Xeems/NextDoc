@@ -21,7 +21,7 @@ export default function loading() {
 
             <div className="flex h-fit w-full lg:w-3/4 flex-col pb-8">
                 <div className="mb-4 flex items-center justify-between">
-                    <span className="m-2 text-lg">Documents</span>
+                    <span className="m-2 text-xl font-semibold">Documents</span>
                 </div>
                 <DocumentListSkeleton number={5} />
             </div>
