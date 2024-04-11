@@ -1,9 +1,10 @@
-import PageHeader from '@/components/UI/PageHeader'
-import { TeamContextProvider } from './TeamContext'
-import { teamQuery } from '@/hooks/useTeamQuery'
-import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import PageHeader from '@/components/UI/PageHeader'
+import { teamQuery } from '@/hooks/querys/useTeamQuery'
+import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
+
+import { TeamContextProvider } from './TeamContext'
 import TeamNav from './TeamNav'
 
 const NavLinks = [

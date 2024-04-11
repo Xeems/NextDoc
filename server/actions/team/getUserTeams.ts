@@ -3,8 +3,6 @@
 import { getUserTeamsByUsername } from '@/server/db/team.data'
 
 export const getUserTeamsAction = async (username: string) => {
-    ///to-do server side user validation
-
     try {
         const res = await getUserTeamsByUsername(username)
         if (!res) throw new Error('user teams db query failed')

@@ -1,13 +1,13 @@
 'use client'
 
-import { useArticlesQuery } from '@/hooks/useArticlesQuery'
+import { useArticlesQuery } from '@/hooks/querys/useArticlesQuery'
 import { Edit } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { useContext } from 'react'
 
-import { DocumentContext } from './[[...slug]]/DocumentContext'
-import NewArticle from './[[...slug]]/newArticle'
+import { DocumentContext } from './DocumentContext'
+import NewArticle from './newArticle'
 
 type Props = {
     document: DocType

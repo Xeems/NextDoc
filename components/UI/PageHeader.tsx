@@ -1,16 +1,16 @@
 'use client'
 
 import { CreateTeamModal } from '@/app/teams/CreateTeamModal'
-import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
+import { useUserTeamsQuery } from '@/hooks/querys/useUserTeamsQuery'
 import { ChevronsUpDownIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import TeamsList from './TeamsList'
 import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
+import { Button } from '../shadCn/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '../shadCn/ui/popover'
 import { Separator } from '../shadCn/ui/separator'
-import { Button } from '../shadCn/ui/button'
+import TeamsList from './TeamsList'
 
 export default function PageHeader({ spaceName }: { spaceName: string }) {
     const { data: session } = useSession()

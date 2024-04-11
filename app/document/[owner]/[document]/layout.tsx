@@ -4,7 +4,7 @@ import { getDocumentAction } from '@/server/actions/document/getDocument'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { Suspense } from 'react'
 
-import { DocumentContextProvider } from './[[...slug]]/DocumentContext'
+import { DocumentContextProvider } from './DocumentContext'
 import DocumentNav from './DocumentNav'
 
 type LayoutProps = {

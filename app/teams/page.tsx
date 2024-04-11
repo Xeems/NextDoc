@@ -1,11 +1,12 @@
 'use client'
 
-import React from 'react'
-import { useSession } from 'next-auth/react'
-import TeamsList from '@/components/UI/TeamsList'
-import { useUserTeamsQuery } from '@/hooks/useUserTeamsQuery'
-import { CreateTeamModal } from './CreateTeamModal'
 import { Button } from '@/components/shadCn/ui/button'
+import TeamsList from '@/components/UI/TeamsList'
+import { useUserTeamsQuery } from '@/hooks/querys/useUserTeamsQuery'
+import { useSession } from 'next-auth/react'
+import React from 'react'
+
+import { CreateTeamModal } from './CreateTeamModal'
 
 export default function teamsPage() {
     const session = useSession()
