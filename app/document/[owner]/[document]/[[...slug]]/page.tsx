@@ -1,4 +1,4 @@
-import { articleQuery } from '@/hooks/useArticleQuery'
+import { articleQuery } from '@/hooks/querys/useArticleQuery'
 import React from 'react'
 
 import ArticleEditForm from './ArticleEditForm'

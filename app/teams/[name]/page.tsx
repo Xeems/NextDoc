@@ -1,8 +1,9 @@
 'use client'
 
-import DocumentList from '@/components/UI/DocumentList'
 import { Input } from '@/components/shadCn/ui/input'
-import { useTeamDocumentsQuery } from '@/hooks/useTeamDocumentsQuery'
+import DocumentList from '@/components/UI/DocumentList'
+import { useTeamDocumentsQuery } from '@/hooks/querys/useTeamDocumentsQuery'
+
 import { CreateDocumentModal } from './CreateDocumentModal'
 
 type Props = {
