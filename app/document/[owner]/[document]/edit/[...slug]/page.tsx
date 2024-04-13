@@ -1,8 +1,8 @@
 'use client'
 
+import ReactMarkdown from '@/components/TextEditor/ReactMarkdown'
 import { notFound } from 'next/navigation'
 import React, { useState } from 'react'
-import Markdown from 'react-markdown'
 
 type Props = {
     params: {
@@ -22,19 +22,16 @@ export default async function DocumentPage({ params }: Props) {
     // })
     const [markdown, setMarkdown] = useState<string>('')
     return (
-        <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
-            <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
+        <div className="flex flex-col items-center md:w-full ">
+            <div className="w-full flex flex-initial flex-row items-start justify-stretch gap-7 p-3 text-start">
                 <textarea
-                    className="w-full min-h-40"
+                    autoFocus={true}
+                    className="w-[500px] min-h-40 outline-none"
                     value={markdown}
                     onChange={(e) => setMarkdown(e.target.value)}
                 />
-                <div className="w-full min-h-10 markdown">
-                    <Markdown>
-                        {`${markdown}  # Hi
-
-This is **not** a paragraph.`}
-                    </Markdown>
+                <div className="w-[500px]">
+                    <ReactMarkdown markdown={markdown} />
                 </div>
             </div>
         </div>

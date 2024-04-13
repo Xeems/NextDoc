@@ -31,6 +31,10 @@ export default function DocumentNav({ document }: Props) {
                                 href={`/document/${document.user?.username}/${document.idName}/${article.idTitle}`}
                                 className="group text-sm my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden font-normal">
                                 {article.title}
+                                <Link
+                                    href={`/document/${document.user?.username}/${document.idName}/edit/${article.idTitle}`}>
+                                    <Edit className="invisible ml-auto size-4 group-hover:visible" />
+                                </Link>
                             </Link>
 
                             <ul>
@@ -40,12 +44,17 @@ export default function DocumentNav({ document }: Props) {
                                             key={child.title}
                                             className="group relative text-sm flex items-center py-2 font-light text-muted-foreground hover:text-foreground">
                                             <span className="absolute bottom-0 left-2 top-0 w-px bg-border" />
-                                            <Link
-                                                className="pl-7"
-                                                href={`/document/${document.user?.username}/${document.idName}/${article.title}/${child.title}`}>
-                                                {child.title}
-                                            </Link>
-                                            <Edit className="invisible ml-auto size-4 group-hover:visible" />
+                                            <div className=" flex flex-row items-center justify-between w-full">
+                                                <Link
+                                                    className="pl-7"
+                                                    href={`/document/${document.user?.username}/${document.idName}/${article.idTitle}/${child.idTitle}`}>
+                                                    {child.title}
+                                                </Link>
+                                                <Link
+                                                    href={`/document/${document.user?.username}/${document.idName}/edit/${article.idTitle}/${child.idTitle}`}>
+                                                    <Edit className="invisible ml-auto  size-4 group-hover:visible" />
+                                                </Link>
+                                            </div>
                                         </li>
                                     )
                                 })}
