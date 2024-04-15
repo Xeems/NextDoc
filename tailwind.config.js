@@ -29,7 +29,10 @@ module.exports = {
                     DEFAULT: 'hsl(var(--background-primary))',
                     accent: 'hsl(var(--background-accent))',
                 },
-                foreground: 'hsl(var(--foreground))',
+                foreground: {
+                    DEFAULT: 'hsl(var(--foreground))',
+                    link: 'hsl(var(--foreground-link))',
+                },
                 primary: {
                     DEFAULT: 'hsl(var(--primary))',
                     foreground: 'hsl(var(--primary-foreground))',

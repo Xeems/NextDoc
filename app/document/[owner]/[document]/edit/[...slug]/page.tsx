@@ -32,7 +32,7 @@ export default function DocumentPage({ params }: Props) {
             <div className="w-full flex flex-initial flex-row items-start justify-stretch gap-7 p-3 text-start min-w-[700px]">
                 <Tabs
                     defaultValue="editor"
-                    className="flex flex-col w-full min-w-[700px] justify-center">
+                    className="flex flex-col  w-[700px] justify-center">
                     <TabsList className="w-fit">
                         <TabsTrigger value="editor">Editor</TabsTrigger>
                         <TabsTrigger value="preview">Preview</TabsTrigger>

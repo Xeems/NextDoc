@@ -6,9 +6,9 @@ import styles from './MarkdownPreview.module.scss'
 import ReactSyntax from './ReactSyntax'
 
 type Props = {
-    markdown: string
+    markdown?: string | null
 }
-function ReactMarkdown({ markdown }: Props) {
+function ReactMarkdown({ markdown = null }: Props) {
     return (
         <Markdown
             className={styles.markdownbody}

@@ -53,7 +53,7 @@ type ArticleType = {
     id: string | null
     title: string
     idTitle: string
-    content?: null | import('@prisma/client/runtime/library').JsonValue
+    content?: null | import('@prisma/client/runtime/library').JsonValue | string
 
     documentId: string
     parrent?: ArticleType
