@@ -135,11 +135,11 @@
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
-    border-bottom: 1px solid var(--color-border-muted);
-    height: 0.25em;
+    border-bottom: 1px solid hsl(var(--border));
+    height: 1px;
     padding: 0;
     margin: 24px 0;
-    background-color: var(--color-border-default);
+    background-color: hsl(var(--border));
     border: 0;
 }
 
@@ -210,22 +210,18 @@
 .markdownbody table {
     border-spacing: 0;
     border-collapse: collapse;
-    border: 1px solid;
+    //border: 1px solid hsl(var(--border));
     display: block;
     width: max-content;
     max-width: 100%;
     overflow: auto;
-
-    td,
-    th {
-        border: 1px solid;
-    }
 }
 
 .markdownbody td,
 .markdownbody th {
     padding: 0;
-    border: 1px solid;
+    padding: 6px 13px;
+    border: 1px solid hsl(var(--border));
 }
 
 .markdownbody details summary {
@@ -339,7 +335,7 @@
 .markdownbody blockquote {
     margin: 0;
     padding: 0 1em;
-    color: var(--color-fg-muted);
+    color: hsl(var(--border));
     border-left: 0.25em solid hsl(var(--border));
 }
 
@@ -571,6 +567,14 @@
     list-style-type: decimal;
 }
 
+.markdownbody ul {
+    list-style: disc;
+}
+
+.markdownbody ol {
+    list-style: decimal;
+}
+
 .markdownbody ul ul,
 .markdownbody ul ol,
 .markdownbody ol ol,
@@ -611,7 +615,7 @@
 .markdownbody table th,
 .markdownbody table td {
     padding: 6px 13px;
-    border: 1px solid var(--color-border-default);
+    border: 1px solid hsl(var(--border));
 }
 
 .markdownbody table td > :last-child {
@@ -620,7 +624,7 @@
 
 .markdownbody table tr {
     background-color: var(--color-canvas-default);
-    border-top: 1px solid var(--boeder);
+    border-top: 1px solid hsl(var(--border));
 }
 
 .markdownbody table tr:nth-child(2n) {
@@ -738,8 +742,9 @@
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
+    border: 1px solid hsl(var(--border));
     white-space: break-spaces;
-    background-color: var(--color-neutral-muted);
+    background-color: hsl(var(--muted-background));
     border-radius: 6px;
 }
 
