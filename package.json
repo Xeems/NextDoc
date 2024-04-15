@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev ",
+        "dev": "next dev --turbo",
         "debug": "cross-env NODE_OPTIONS='--inspect'  next dev",
         "build": "prisma generate && next build",
         "start": "next start",
@@ -56,7 +56,6 @@
         "eslint-config-next": "^14.0.4",
         "g": "^2.0.1",
         "geist": "^1.2.1",
-        "github-markdown-css": "^5.5.1",
         "highlight.js": "^11.9.0",
         "lowlight": "^2.4.0",
         "lucide-react": "^0.303.0",

@@ -1,7 +1,6 @@
+import ReactMarkdown from '@/components/TextEditor/ReactMarkdown'
 import { articleQuery } from '@/hooks/querys/useArticleQuery'
 import React from 'react'
-
-import ArticleEditForm from './ArticleEditForm'
 
 type Props = {
     params: {
@@ -18,11 +17,13 @@ export default async function DocumentPage({ params }: Props) {
     })
 
     return (
-        <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
-            <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
-                <h1 className="my-2 text-4xl">{article?.title}</h1>
-                <ArticleEditForm article={article!} />
+        <>
+            <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
+                <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
+                    <h1 className="my-2 text-4xl">{article?.title}</h1>
+                    <ReactMarkdown markdown={article?.content} />
+                </div>
             </div>
-        </div>
+        </>
     )
 }
