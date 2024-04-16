@@ -7,7 +7,6 @@ import {
     FormField,
     FormItem,
 } from '@/components/shadCn/ui/form'
-import Editor from '@/components/TextEditor/TipTap/Editor'
 import { updateAricleContentAction } from '@/server/actions/article/updateAricleContent'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -41,12 +40,7 @@ export default function ArticleEditForm({ article }: Props) {
                     name="content"
                     render={({ field }) => (
                         <FormItem>
-                            <FormControl>
-                                <Editor
-                                    initialValue={article?.content}
-                                    onChange={field.onChange}
-                                />
-                            </FormControl>
+                            <FormControl></FormControl>
                         </FormItem>
                     )}
                 />
