@@ -35,15 +35,6 @@ export default function ArticleEditForm({ article }: Props) {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name="content"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl></FormControl>
-                        </FormItem>
-                    )}
-                />
                 <Button type="submit" className="my-4">
                     Save changes
                 </Button>
