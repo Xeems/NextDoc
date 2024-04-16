@@ -26,22 +26,22 @@ type Props = {
 
 export default function DocumentPage({ params }: Props) {
     if (params.slug == undefined) notFound()
-    // const { data: article } = useArticleQuery({
-    //     documentName: params.document,
-    //     articleTitle: params.slug.slice(-1)[0],
-    // })
-    const [markdown, setMarkdown] = useState<string>('')
+    const { data: article } = useArticleQuery({
+        documentName: params.document,
+        articleTitle: params.slug.slice(-1)[0],
+    })
+    const [markdown, setMarkdown] = useState<string>(article?.content || '')
 
-    useEffect(() => {
-        ;async () => {
-            const res = await getArticleByTitleAction({
-                documentName: params.document,
-                articleTitle: params.slug.slice(-1)[0],
-            })
-            console.log(res)
-            setMarkdown(res.data?.content!)
-        }
-    }, [])
+    // useEffect(() => {
+    //     ;async () => {
+    //         const res = await getArticleByTitleAction({
+    //             documentName: params.document,
+    //             articleTitle: params.slug.slice(-1)[0],
+    //         })
+    //         console.log(res)
+    //         setMarkdown(res.data?.content!)
+    //     }
+    // }, [])
 
     // const mutation = useMutation({
     //     mutationKey: ['article', params.document, params.slug.slice(0)[-1]],
@@ -63,11 +63,14 @@ export default function DocumentPage({ params }: Props) {
                 <Tabs
                     defaultValue="editor"
                     className="flex flex-col  w-[700px] justify-center">
-                    <TabsList className="w-fit">
-                        <TabsTrigger value="editor">Editor</TabsTrigger>
-                        <TabsTrigger value="preview">Preview</TabsTrigger>
+                    <div className="flex flex-row gap-x-4">
+                        <TabsList className="w-fit">
+                            <TabsTrigger value="editor">Editor</TabsTrigger>
+                            <TabsTrigger value="preview">Preview</TabsTrigger>
+                        </TabsList>
                         <Button type="submit">Save</Button>
-                    </TabsList>
+                    </div>
+
                     <TabsContent value="editor" className="w-full">
                         <form>
                             <textarea
