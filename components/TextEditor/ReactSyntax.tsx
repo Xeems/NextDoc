@@ -10,14 +10,12 @@ type Props = {
 function ReactSyntax({ className, children, rest }: Props) {
     const match = /language-(\w+)/.exec(className || '')
     return match ? (
-        <div className="border border-accent rounded-md h-fit">
-            <SyntaxHighlighter
-                {...rest}
-                PreTag="div"
-                children={String(children).replace(/\n$/, '')}
-                language={match[1]}
-            />
-        </div>
+        <SyntaxHighlighter
+            {...rest}
+            PreTag="div"
+            children={String(children).replace(/\n$/, '')}
+            language={match[1]}
+        />
     ) : (
         <code {...rest} className={className}>
             {children}
