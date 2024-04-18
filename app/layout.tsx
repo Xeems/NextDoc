@@ -1,14 +1,15 @@
 import './globals.scss'
-import type { Metadata } from 'next'
+
 import Header from '@/app/Header'
-import { ThemeProvider } from '@/components/Providers/ThemeProvider'
-import UserSessionProvider from '@/components/Providers/SessionProvider'
-import { Toaster } from 'sonner'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
 import QueryProvider from '@/components/Providers/QueryProvider'
+import UserSessionProvider from '@/components/Providers/SessionProvider'
+import { ThemeProvider } from '@/components/Providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
+import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
     title: 'NextDocs',
@@ -38,7 +39,7 @@ export default async function RootLayout({
                                 visibleToasts={5}
                             />
                             <Header />
-                            <main className="flex h-[calc(100vh-60px)] w-full justify-center">
+                            <main className="flex h-[calc(100vh-50px)] w-full justify-center">
                                 {children}
                             </main>
 
