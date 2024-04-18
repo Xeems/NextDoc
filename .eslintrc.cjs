@@ -1,9 +1,5 @@
 module.exports = {
-    extends: [
-        'plugin:prettier/recommended',
-        'prettier',
-        'plugin:@next/next/recommended',
-    ],
+    extends: ['prettier', 'plugin:@next/next/recommended'],
     env: {
         browser: true,
         es2021: true,
