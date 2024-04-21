@@ -4,8 +4,8 @@ import SearchFrom from './SearchFrom'
 
 function SearchPage() {
     return (
-        <div className="w-full ">
-            <div className="flex w-1/3 mx-auto">
+        <div className="w-full flex flex-col items-center ">
+            <div className="w-full  lg:max-w-[70rem] justify-stretch flex my-10 px-5">
                 <SearchFrom />
             </div>
         </div>
