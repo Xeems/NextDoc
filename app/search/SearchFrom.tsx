@@ -1,5 +1,6 @@
 'use client'
 
+import { searchSchema, SearchType } from '@/@types/validators/search'
 import { Button } from '@/components/shadCn/ui/button'
 import {
     DropdownMenu,
@@ -11,30 +12,27 @@ import {
 import { Form, FormControl, FormField } from '@/components/shadCn/ui/form'
 import { Input } from '@/components/shadCn/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChevronDownIcon } from 'lucide-react'
+import { ChevronDownIcon, SearchIcon } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-const searchSchema = z.object({
-    searchQuery: z.string(),
-    searchOptions: z.string().array().default(['users', 'teams', 'documents']),
-})
-
-type SearchType = z.input<typeof searchSchema>
 
 const items = ['users', 'teams', 'documents']
 export const SearchFrom = () => {
+    const params = new URLSearchParams()
+    const pathname = usePathname()
+    const { replace } = useRouter()
     const form = useForm<SearchType>({
         resolver: zodResolver(searchSchema),
         defaultValues: {
-            searchQuery: '',
+            searchQuery: params.get('query')?.toString(),
             searchOptions: [...items],
         },
     })
 
-    async function searchSubmit(data: SearchType) {
-        console.log(data)
+    function searchSubmit(data: SearchType) {
+        params.set('query', data.searchQuery)
+        replace(`${pathname}?${params.toString()}`)
     }
 
     return (
@@ -103,7 +101,9 @@ export const SearchFrom = () => {
                         </FormControl>
                     )}
                 />
-                <Button type="submit">Search</Button>
+                <Button type="submit" className="gap-x-2">
+                    Search <SearchIcon className="size-5" />
+                </Button>
             </form>
         </Form>
     )
