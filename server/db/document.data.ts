@@ -95,3 +95,18 @@ export const getDocumentByOwner = async (username: string, idName: string) => {
 
     return res
 }
+
+export const infiniteDocumentsSearch = async (
+    searchQuery: string,
+    page: number,
+) => {
+    return await prisma.document.findMany({
+        where: {
+            name: {
+                contains: searchQuery,
+            },
+        },
+        skip: (page - 1) * 10,
+        take: 10,
+    })
+}
