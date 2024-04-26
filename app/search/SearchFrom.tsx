@@ -1,37 +1,47 @@
 'use client'
 
-import { searchSchema, SearchType } from '@/@types/validators/search'
+import {
+    searchSchema,
+    searchTargetValues,
+    SearchType,
+} from '@/@types/validators/search'
 import { Button } from '@/components/shadCn/ui/button'
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
     DropdownMenuLabel,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/shadCn/ui/dropdown-menu'
 import { Form, FormControl, FormField } from '@/components/shadCn/ui/form'
 import { Input } from '@/components/shadCn/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChevronDownIcon, SearchIcon } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { ChevronDown, ChevronDownIcon, SearchIcon } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const items = ['users', 'teams', 'documents']
 export const SearchFrom = () => {
-    const params = new URLSearchParams()
+    const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
     const form = useForm<SearchType>({
         resolver: zodResolver(searchSchema),
         defaultValues: {
-            searchQuery: params.get('query')?.toString(),
-            searchOptions: [...items],
+            searchQuery: searchParams.get('query')?.toString() || '',
+            searchTarget: 'documents',
         },
     })
 
     function searchSubmit(data: SearchType) {
-        params.set('query', data.searchQuery)
+        const params = new URLSearchParams()
+        params.delete('query')
+        params.delete('target')
+        params.append('query', data.searchQuery)
+        params.append('target', data.searchTarget)
         replace(`${pathname}?${params.toString()}`)
     }
 
@@ -46,7 +56,7 @@ export const SearchFrom = () => {
                     render={({ field }) => (
                         <FormControl className="w-full">
                             <Input
-                                className="bg-background-accent w-full"
+                                className="bg-background-accent w-full "
                                 placeholder="Enter query"
                                 {...field}
                             />
@@ -55,47 +65,35 @@ export const SearchFrom = () => {
                 />
                 <FormField
                     control={form.control}
-                    name="searchOptions"
+                    name="searchTarget"
                     render={({ field }) => (
                         <FormControl>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button
-                                        variant="secondary"
-                                        className="w-fit px-3 ">
-                                        <ChevronDownIcon className=" h-4 w-4" />
+                                        className="capitalize"
+                                        variant={'outline'}>
+                                        Search target{' '}
+                                        <ChevronDownIcon className="size-4" />
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
+                                <DropdownMenuContent>
                                     <DropdownMenuLabel>
-                                        Search by
+                                        Panel Position
                                     </DropdownMenuLabel>
-
-                                    {items.map((item) => (
-                                        <DropdownMenuCheckboxItem
-                                            {...field}
-                                            className="capitalize"
-                                            key={item}
-                                            checked={field.value?.includes(
-                                                item,
-                                            )}
-                                            onCheckedChange={(checked) => {
-                                                return checked
-                                                    ? field.onChange([
-                                                          ...field.value!,
-                                                          item,
-                                                      ])
-                                                    : field.onChange(
-                                                          field.value?.filter(
-                                                              (value) =>
-                                                                  value !==
-                                                                  item,
-                                                          ),
-                                                      )
-                                            }}>
-                                            {item}
-                                        </DropdownMenuCheckboxItem>
-                                    ))}
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuRadioGroup
+                                        value={field.value}
+                                        onValueChange={field.onChange}>
+                                        {searchTargetValues.map((value) => (
+                                            <DropdownMenuRadioItem
+                                                value={value}
+                                                key={value}
+                                                className="capitalize">
+                                                {value}
+                                            </DropdownMenuRadioItem>
+                                        ))}
+                                    </DropdownMenuRadioGroup>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </FormControl>

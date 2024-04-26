@@ -1,8 +1,10 @@
 import { z } from 'zod'
 
+export const searchTargetValues = ['users', 'teams', 'documents'] as const
+
 export const searchSchema = z.object({
     searchQuery: z.string(),
-    searchOptions: z.string().array().default(['users', 'teams', 'documents']),
+    searchTarget: z.enum(searchTargetValues),
 })
 
-export type SearchType = z.input<typeof searchSchema>
+export type SearchType = z.infer<typeof searchSchema>
