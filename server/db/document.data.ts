@@ -96,7 +96,7 @@ export const getDocumentByOwner = async (username: string, idName: string) => {
     return res
 }
 
-export const infiniteDocumentsSearch = async (
+export const paginationDocumentsSearch = async (
     searchQuery: string,
     page: number,
 ) => {
