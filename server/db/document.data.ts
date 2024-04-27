@@ -101,12 +101,17 @@ export const paginationDocumentsSearch = async (
     page: number,
 ) => {
     return await prisma.document.findMany({
+        skip: page === 1 ? 0 : page * 10,
+        take: 10,
         where: {
             name: {
                 contains: searchQuery,
+                mode: 'insensitive',
             },
         },
-        skip: (page - 1) * 10,
-        take: 10,
+        include: {
+            team: true,
+            user: true,
+        },
     })
 }

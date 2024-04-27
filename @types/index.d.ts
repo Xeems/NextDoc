@@ -39,6 +39,7 @@ type DocType = {
     name: string
     description?: string | null
     type: string
+    documentOwnerType: DocumentOwnerType
     createdAt: Date
     updatedAt: Date
 
@@ -48,6 +49,8 @@ type DocType = {
     teamId?: string | null
     team?: TeamType | null
 }
+
+type DocumentOwnerType = 'USER' | 'TEAM'
 
 type ArticleType = {
     id: string | null

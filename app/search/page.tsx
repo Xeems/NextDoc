@@ -4,9 +4,9 @@ import { Button } from '@/components/shadCn/ui/button'
 import { paginationSearchAction } from '@/server/actions/paginationSearch'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import React from 'react'
-import { undefined } from 'zod'
 
 import SearchFrom from './SearchFrom'
+import SearchResultCard from './SearchResultCard'
 
 type TargetVariant = 'users' | 'documents' | 'teams'
 
@@ -17,18 +17,17 @@ type Props = {
     }
 }
 function SearchPage({ searchParams = { target: 'documents' } }: Props) {
-    const { data, fetchNextPage, isLoading, hasNextPage } =
+    const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
         useSuspenseInfiniteQuery({
             queryKey: ['search', searchParams.target, searchParams?.query],
-            queryFn: async (getNextPageParam) => {
-                return await paginationSearchAction({
+            queryFn: (getNextPageParam) =>
+                paginationSearchAction({
                     data: {
                         searchQuery: searchParams.query || '',
                         searchTarget: searchParams.target || 'documents',
                     },
                     page: getNextPageParam.pageParam,
-                })
-            },
+                }),
             initialPageParam: 1,
             getNextPageParam: (lastPage, allPages) => {
                 const nextPage =
@@ -42,29 +41,26 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
                 <SearchFrom />
             </div>
 
-            <div>
-                {/* {data.pages.map((page: DocType[]) => (
-                    <React.Fragment>
-                        {page.map((doc) => {
-                            return <></>
-                        })}
-                    </React.Fragment>
-                ))} */}
-                {data.pages.map((value, index, array) => {
-                    console.log(array)
-
-                    return (
-                        <React.Fragment key={index}>
-                            {/* {value.map((val) => (
-                            <div>{val}</div>
-                        ))} */}
-                        </React.Fragment>
-                    )
-                })}
+            <div className="w-full flex-col gap-4 lg:max-w-[70rem] justify-stretch flex px-5 mb-4">
+                {data &&
+                    data.pages.map((value, index, array) => {
+                        return (
+                            <React.Fragment key={index}>
+                                {value.data?.map((el) => (
+                                    <SearchResultCard
+                                        key={el.id}
+                                        searchResult={el}
+                                    />
+                                ))}
+                            </React.Fragment>
+                        )
+                    })}
             </div>
-            {isLoading && <div className="w-full h-40">Loading...</div>}
+            {(isLoading || isFetchingNextPage) && (
+                <div className="w-full h-40">Loading...</div>
+            )}
             <Button
-                disabled={!hasNextPage}
+                disabled={!hasNextPage || isFetchingNextPage || isLoading}
                 variant={'outline'}
                 onClick={() => fetchNextPage()}>
                 Load more

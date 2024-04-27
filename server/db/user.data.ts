@@ -44,3 +44,29 @@ export const getUserByEmail = async (email: string) => {
     })
     return user
 }
+
+export const paginationUsersSearch = async (
+    searchQuery: string,
+    page: number,
+) => {
+    return await prisma.user.findMany({
+        skip: page === 1 ? 0 : page * 10,
+        take: 10,
+        where: {
+            OR: [
+                {
+                    name: {
+                        contains: searchQuery,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    username: {
+                        contains: searchQuery,
+                        mode: 'insensitive',
+                    },
+                },
+            ],
+        },
+    })
+}

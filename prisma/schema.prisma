@@ -70,20 +70,26 @@ model VerificationRequest {
 }
 
 model Document {
-    id          String       @id @default(cuid())
-    userId      String?
-    name        String       @unique
-    description String
-    type        DocumentType @default(private)
-    createdAt   DateTime     @default(now())
-    updatedAt   DateTime     @updatedAt
-    idName      String       @unique
-    teamId      String?
-    articles    Article[]
-    team        Team?        @relation(fields: [teamId], references: [id])
-    user        User?        @relation(fields: [userId], references: [id])
+    id                String            @id @default(cuid())
+    userId            String?
+    name              String            @unique
+    description       String
+    documentOwnerType DocumentOwnerType @default(USER)
+    type              DocumentType      @default(private)
+    createdAt         DateTime          @default(now())
+    updatedAt         DateTime          @updatedAt
+    idName            String            @unique
+    teamId            String?
+    articles          Article[]
+    team              Team?             @relation(fields: [teamId], references: [id])
+    user              User?             @relation(fields: [userId], references: [id])
 
     @@map("documents")
+}
+
+enum DocumentOwnerType {
+    USER
+    TEAM
 }
 
 model Article {

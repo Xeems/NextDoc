@@ -3,6 +3,7 @@
 import { searchSchema, SearchType } from '@/@types/validators/search'
 
 import { paginationDocumentsSearch } from '../db/document.data'
+import { paginationUsersSearch } from '../db/user.data'
 
 type Props = {
     data: SearchType
@@ -17,16 +18,16 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
         )
 
     try {
-        // let res
-        // switch (data.searchTarget) {
-        //     case 'documents': {
-        //         res = await paginationDocumentsSearch(data.searchQuery, page)
-        //     }
-        //     default: {
-        //         res = await paginationDocumentsSearch(data.searchQuery, page)
-        //     }
-        // }
-        const res = await paginationDocumentsSearch(data.searchQuery, page)
+        let res
+        switch (data.searchTarget) {
+            case 'documents': {
+                res = await paginationDocumentsSearch(data.searchQuery, page)
+            }
+            case 'users': {
+                res = await paginationUsersSearch(data.searchQuery, page)
+            }
+        }
+
         return { data: res }
     } catch (error) {
         console.log(error)

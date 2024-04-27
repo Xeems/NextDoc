@@ -1,8 +1,7 @@
-import NextAuth from 'next-auth'
-import { NextAuthOptions } from 'next-auth'
 import { prisma } from '@/lib/prisma'
-import GitHubProvider from 'next-auth/providers/github'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import GitHubProvider from 'next-auth/providers/github'
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -35,10 +34,6 @@ export const authOptions: NextAuthOptions = {
         strategy: 'database',
     },
 
-    pages: {
-        signIn: '/auth',
-        signOut: '/auth',
-    },
     adapter: PrismaAdapter(prisma as any),
 }
 
