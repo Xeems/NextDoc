@@ -100,6 +100,23 @@ export const getTeamDocuments = async (teamName: string) => {
     return res
 }
 
+export const paginationTeamsSearch = async (
+    searchQuery: string,
+    page: number,
+) => {
+    return await prisma.team.findMany({
+        take: 10,
+        skip: (page - 1) * 10 || 0,
+
+        where: {
+            name: {
+                contains: searchQuery,
+                mode: 'insensitive',
+            },
+        },
+    })
+}
+
 export const addUserToTeam = async (data: newTeamUserType) => {
     const res = await prisma.userTeam.create({
         data: {

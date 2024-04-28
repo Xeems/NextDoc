@@ -35,6 +35,8 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
                 return nextPage
             },
         })
+
+    console.log(data)
     return (
         <div className="w-full flex flex-col items-center ">
             <div className="w-full  lg:max-w-[70rem] justify-stretch flex my-10 px-5">
