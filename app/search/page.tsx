@@ -20,8 +20,8 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
     const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
         useSuspenseInfiniteQuery({
             queryKey: ['search', searchParams.target, searchParams?.query],
-            queryFn: (getNextPageParam) =>
-                paginationSearchAction({
+            queryFn: async (getNextPageParam) =>
+                await paginationSearchAction({
                     data: {
                         searchQuery: searchParams.query || '',
                         searchTarget: searchParams.target || 'documents',
@@ -36,7 +36,6 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
             },
         })
 
-    console.log(data)
     return (
         <div className="w-full flex flex-col items-center ">
             <div className="w-full  lg:max-w-[70rem] justify-stretch flex my-10 px-5">
@@ -44,7 +43,7 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
             </div>
 
             <div className="w-full flex-col gap-4 lg:max-w-[70rem] justify-stretch flex px-5 mb-4">
-                {data &&
+                {data.pages &&
                     data.pages.map((value, index, array) => {
                         return (
                             <React.Fragment key={index}>
