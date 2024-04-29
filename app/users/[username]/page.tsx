@@ -11,9 +11,11 @@ import { userDocumentsQuery } from '@/hooks/querys/useUserDocumentsQuery'
 import { userQuery } from '@/hooks/querys/useUserQuery'
 import { userTeamsQuery } from '@/hooks/querys/useUserTeamsQuery'
 import { PlusSquareIcon } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { CreateUserDocumentModal } from './CreateUserDocumentModal'
+import ProfileCard from './ProfileCard'
 
 type Props = {
     params: {
@@ -27,6 +29,8 @@ export default async function UserPage({ params }: Props) {
         userDocumentsQuery(params.username),
     ])
 
+    if (!userData.user) notFound()
+
     if (userData.error || teamsData.error || documentsData.error)
         throw new Error()
 
@@ -36,20 +40,7 @@ export default async function UserPage({ params }: Props) {
     return (
         <div className=" flex w-full flex-col lg:flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
             <div className="flex h-fit w-full lg:w-1/4 flex-col justify-stretch  p-2">
-                <div className="flex flex-row items-center  gap-x-4">
-                    <Avatar className="size-20 border">
-                        <AvatarImage src={user.image || undefined} />
-                        <AvatarFallback>UN</AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                        <span className="text-2xl font-semibold tracking-wide">
-                            {user.username}
-                        </span>
-                        <span className="font-light text-muted-foreground">
-                            {user.name}
-                        </span>
-                    </div>
-                </div>
+                <ProfileCard user={user} />
                 <span className="my-4 text-xl font-semibold">Teams</span>
                 <TeamsList variant="popup" teams={teams} />
                 {isSameUser && (
