@@ -7,12 +7,10 @@ import {
 import { Button } from '@/components/shadCn/ui/button'
 import DocumentList from '@/components/UI/DocumentList'
 import TeamsList from '@/components/UI/TeamsList'
-import getQueryClient from '@/lib/getQueryClient'
-import { getUserDocumentsAction } from '@/server/actions/document/getUserDocuments'
-import { getUserTeamsAction } from '@/server/actions/team/getUserTeams'
-import { getUserAction } from '@/server/actions/user/getUser'
+import { userDocumentsQuery } from '@/hooks/querys/useUserDocumentsQuery'
+import { userQuery } from '@/hooks/querys/useUserQuery'
+import { userTeamsQuery } from '@/hooks/querys/useUserTeamsQuery'
 import { PlusSquareIcon } from 'lucide-react'
-import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { CreateUserDocumentModal } from './CreateUserDocumentModal'
@@ -23,23 +21,18 @@ type Props = {
     }
 }
 export default async function UserPage({ params }: Props) {
-    const queryClient = getQueryClient()
+    const [teamsData, userData, documentsData] = await Promise.all([
+        userTeamsQuery(params.username),
+        userQuery(params.username),
+        userDocumentsQuery(params.username),
+    ])
 
-    const { data: teams } = await queryClient.fetchQuery({
-        queryKey: ['user', params.username, 'teams'],
-        queryFn: async () => await getUserTeamsAction(params.username),
-    })
-    const { isSameUser, user } = await queryClient.fetchQuery({
-        queryKey: ['user', params.username],
-        queryFn: async () => await getUserAction(params.username),
-    })
-    const { data: documents } = await queryClient.fetchQuery({
-        queryKey: ['user', params.username, 'documents'],
-        queryFn: async () => await getUserDocumentsAction(params.username),
-    })
+    if (userData.error || teamsData.error || documentsData.error)
+        throw new Error()
 
-    if (!user || teams == undefined || documents == undefined) notFound()
-
+    const { user, isSameUser } = userData
+    const { data: documents } = documentsData
+    const { data: teams } = teamsData
     return (
         <div className=" flex w-full flex-col lg:flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
             <div className="flex h-fit w-full lg:w-1/4 flex-col justify-stretch  p-2">

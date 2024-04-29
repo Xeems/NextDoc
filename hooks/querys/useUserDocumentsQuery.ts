@@ -1,5 +1,6 @@
+import getQueryClient from '@/lib/getQueryClient'
 import { getUserDocumentsAction } from '@/server/actions/document/getUserDocuments'
-import { QueryClient, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 export const useUserDocumentsQuery = (username: string) => {
     return useQuery({
@@ -12,14 +13,10 @@ export const useUserDocumentsQuery = (username: string) => {
     })
 }
 
-export const userDocumentsQuery = (
-    username: string,
-    queryClient: QueryClient,
-) => {
+export const userDocumentsQuery = (username: string) => {
+    const queryClient = getQueryClient()
     return queryClient.fetchQuery({
-        queryKey: ['documents', username],
-        queryFn: async () => {
-            return await getUserDocumentsAction(username)
-        },
+        queryKey: ['user', username, 'documents'],
+        queryFn: () => getUserDocumentsAction(username),
     })
 }
