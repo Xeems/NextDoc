@@ -10,6 +10,7 @@ export const getUserAction = async (username: string) => {
         const user = await getUserByUsername(username)
         let isSameUser: boolean = false
         if (user?.id == session?.user.id) isSameUser = true
+
         return { user, isSameUser }
     } catch (error) {
         console.log(error)

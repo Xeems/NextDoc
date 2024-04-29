@@ -20,8 +20,8 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
     const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
         useSuspenseInfiniteQuery({
             queryKey: ['search', searchParams.target, searchParams?.query],
-            queryFn: async (getNextPageParam) =>
-                await paginationSearchAction({
+            queryFn: (getNextPageParam) =>
+                paginationSearchAction({
                     data: {
                         searchQuery: searchParams.query || '',
                         searchTarget: searchParams.target || 'documents',

@@ -1,3 +1,4 @@
+import getQueryClient from '@/lib/getQueryClient'
 import { getUserTeamsAction } from '@/server/actions/team/getUserTeams'
 import { QueryClient, useQuery } from '@tanstack/react-query'
 
@@ -14,11 +15,10 @@ export const useUserTeamsQuery = (username: string) => {
     })
 }
 
-export const userTeamsQuery = (username: string, queryClient: QueryClient) => {
+export const userTeamsQuery = (username: string) => {
+    const queryClient = getQueryClient()
     return queryClient.fetchQuery({
-        queryKey: ['teams', username],
-        queryFn: async () => {
-            return await getUserTeamsAction(username)
-        },
+        queryKey: ['user', username, 'teams'],
+        queryFn: () => getUserTeamsAction(username),
     })
 }
