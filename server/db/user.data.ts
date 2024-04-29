@@ -50,7 +50,7 @@ export const paginationUsersSearch = async (
     page: number,
 ) => {
     return await prisma.user.findMany({
-        skip: page === 1 ? 0 : page * 10,
+        skip: (page - 1) * 10 || 0,
         take: 10,
         where: {
             OR: [

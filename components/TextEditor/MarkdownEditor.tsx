@@ -1,12 +1,15 @@
 'use client'
 
-import React, { forwardRef, useEffect, useState } from 'react'
+import React, { forwardRef, lazy, Suspense, useEffect, useState } from 'react'
 
 import { Button } from '../shadCn/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../shadCn/ui/tabs'
-import ReactMarkdown from './ReactMarkdown'
 
 type Props = {} & React.TextareaHTMLAttributes<HTMLTextAreaElement>
+
+const ReactMarkdown = lazy(
+    () => import('@/components/TextEditor/ReactMarkdown'),
+)
 
 const MarkdownEditor = forwardRef<HTMLTextAreaElement, Props>(
     ({ className, ...props }, ref) => {
@@ -37,7 +40,9 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, Props>(
                     />
                 </TabsContent>
                 <TabsContent value="preview" className="">
-                    <ReactMarkdown markdown={markdown} />
+                    <Suspense fallback={'Loadind preview...'}>
+                        <ReactMarkdown markdown={markdown} />
+                    </Suspense>
                 </TabsContent>
             </Tabs>
         )
