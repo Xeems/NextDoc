@@ -47,6 +47,20 @@ export const getUserTeamsByUserId = async (userId: string) => {
     return res
 }
 
+export const getUserTeamsWhereAdminById = async (userId: string) => {
+    const res = await prisma.team.findMany({
+        where: {
+            userTeams: {
+                every: {
+                    userId,
+                    role: 'OWNER' || 'ADMIN',
+                },
+            },
+        },
+    })
+    return res
+}
+
 export const getTeamMembers = async (teamName: string) => {
     const res = await prisma.userTeam.findMany({
         where: {
