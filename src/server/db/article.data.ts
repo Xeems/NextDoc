@@ -2,7 +2,7 @@
 
 import { newArticleType } from '@/@types/validators/article'
 import { prisma } from '@/src/lib/prisma'
-import { normilizeName } from '@/src/lib/utils'
+import { normalizeName } from '@/src/lib/utils'
 
 export const createArticle = async (
     article: newArticleType,
@@ -11,7 +11,7 @@ export const createArticle = async (
     const res = await prisma.article.create({
         data: {
             title: article.title,
-            idTitle: normilizeName(article.title),
+            idTitle: normalizeName(article.title),
             documentId: documentId,
             parentId: article.parentArticleId as string,
         },

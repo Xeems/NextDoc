@@ -7,5 +7,6 @@ import { getServerSession } from 'next-auth/next'
 export const getUserBySessionAction = async () => {
     const session = await getServerSession(authOptions)
     const user = await getUserById(session?.user.id)
+    if (!user) throw new Error('No user session')
     return user
 }

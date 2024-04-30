@@ -33,7 +33,6 @@ export const createDocumentAction = async ({ data }: Props) => {
             return { data: res }
         }
     } catch (error) {
-        console.log(error)
         return { error: 'Something went wrong' }
     }
 }

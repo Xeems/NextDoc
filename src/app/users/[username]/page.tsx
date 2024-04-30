@@ -6,10 +6,10 @@ import { userDocumentsQuery } from '@/src/hooks/querys/useUserDocumentsQuery'
 import { userQuery } from '@/src/hooks/querys/useUserQuery'
 import { userTeamsQuery } from '@/src/hooks/querys/useUserTeamsQuery'
 import { PlusSquareIcon } from 'lucide-react'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { CreateUserDocumentModal } from './CreateUserDocumentModal'
 import ProfileCard from './ProfileCard'
 
 type Props = {
@@ -54,11 +54,11 @@ export default async function UserPage({ params }: Props) {
                 <div className="mb-4 flex items-center justify-between">
                     <span className="m-2 text-xl font-semibold">Documents</span>
                     {isSameUser && (
-                        <CreateUserDocumentModal>
+                        <a href={`${user.username}/new`}>
                             <Button variant={'secondary'}>
                                 Create new document
                             </Button>
-                        </CreateUserDocumentModal>
+                        </a>
                     )}
                 </div>
                 {documents && (

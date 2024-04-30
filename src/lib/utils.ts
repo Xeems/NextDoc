@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-export function normilizeName(str: string): string {
-    return str.toLowerCase().replace(/\s/g, '-')
+export function normalizeName(str: string): string {
+    return str.trim().replace(/\s/g, '-')
 }
 
 export const wait = (n: number) =>
