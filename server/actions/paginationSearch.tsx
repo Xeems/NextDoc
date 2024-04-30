@@ -20,7 +20,6 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
 
     try {
         let res
-        console.log(data.searchTarget)
         switch (data.searchTarget) {
             case 'documents': {
                 res = await paginationDocumentsSearch(data.searchQuery, page)
