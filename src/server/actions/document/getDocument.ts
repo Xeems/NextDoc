@@ -1,6 +1,6 @@
 'use server'
 
-import { getDocumentByOwner } from '@/src/server/db/document.data'
+import { getDocumentByOwnerAndName } from '@/src/server/db/document.data'
 
 import { validateTeamMemberAction } from '../team/validateTeamMember'
 import { getUserBySessionAction } from '../user/getUserBySession'
@@ -11,7 +11,7 @@ export const getDocumentAction = async (username: string, idName: string) => {
     try {
         let userRole: TeamRoleType = 'NONE'
         let documentType = 'USER'
-        const doc = await getDocumentByOwner(username, idName)
+        const doc = await getDocumentByOwnerAndName(username, idName)
         if (doc?.userId == user?.id) userRole = 'OWNER'
         if (doc?.team) {
             documentType = 'TEAM'

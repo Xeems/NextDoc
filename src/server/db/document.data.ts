@@ -2,12 +2,12 @@
 
 import { NewDocumentWithCreatorType } from '@/@types/validators/document'
 import { prisma } from '@/src/lib/prisma'
-import { normilizeName } from '@/src/lib/utils'
+import { normalizeName } from '@/src/lib/utils'
 
 export const createDocument = async (data: NewDocumentWithCreatorType) => {
     const res = await prisma.document.create({
         data: {
-            idName: normilizeName(data.documentName),
+            idName: normalizeName(data.documentName),
             name: data.documentName,
             description: data.documentDescription,
             type: data.documentType,
@@ -25,11 +25,9 @@ export const getUserDocuments = async (name: string, userId?: string) => {
             team: null,
             OR: [
                 {
-                    // Если userId совпадает с id владельца документа
                     user: { id: userId },
                 },
                 {
-                    // Иначе, проверяем значение ispublic
                     type: 'public',
                 },
             ],
@@ -48,7 +46,7 @@ export const getUserDocuments = async (name: string, userId?: string) => {
     return res
 }
 
-export const getDocument = async (documentId: string) => {
+export const getDocumentById = async (documentId: string) => {
     const res = await prisma.document.findUnique({
         where: {
             id: documentId,
@@ -57,7 +55,10 @@ export const getDocument = async (documentId: string) => {
     return res
 }
 
-export const getDocumentByOwner = async (username: string, idName: string) => {
+export const getDocumentByOwnerAndName = async (
+    username: string,
+    idName: string,
+) => {
     const res = await prisma.document.findFirst({
         where: {
             OR: [
