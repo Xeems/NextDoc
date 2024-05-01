@@ -1,13 +1,13 @@
 'use server'
 
-import { getTeamMember } from '@/src/server/db/team.data'
+import { getWorkspaceMember } from '@/src/server/db/workspace.data'
 
-export const validateTeamMemberAction = async (
+export const validateWorkspaceMemberAction = async (
     userId: string,
     teamId: string,
 ) => {
     try {
-        const res = await getTeamMember(userId, teamId)
+        const res = await getWorkspaceMember(userId, teamId)
         return { data: res }
     } catch (error) {
         console.log(error)

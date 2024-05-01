@@ -17,7 +17,7 @@ type Props = {
 
 export default function DocumentCard({ document, withFooter = true }: Props) {
     let docOwner: string
-    if (document.team) docOwner = document.team.name
+    if (document.worksapce) docOwner = document.worksapce.name
     else docOwner = document.user?.username as string
 
     return (

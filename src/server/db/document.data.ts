@@ -11,36 +11,7 @@ export const createDocument = async (data: NewDocumentWithCreatorType) => {
             name: data.documentName,
             description: data.documentDescription,
             type: data.documentType,
-            userId: data.userId,
-            teamId: data.teamId,
-        },
-    })
-    return res
-}
-
-export const getUserDocuments = async (name: string, userId?: string) => {
-    const res = await prisma.document.findMany({
-        where: {
-            user: { username: name },
-            team: null,
-            OR: [
-                {
-                    user: { id: userId },
-                },
-                {
-                    type: 'public',
-                },
-            ],
-        },
-        include: {
-            user: {
-                select: {
-                    username: true,
-                    id: true,
-                    name: true,
-                    image: true,
-                },
-            },
+            workspaceId: data.workspaceId,
         },
     })
     return res
@@ -55,37 +26,32 @@ export const getDocumentById = async (documentId: string) => {
     return res
 }
 
+export const getWorkspaceDocuemnts = async (workspaceName: string) => {
+    const res = await prisma.document.findMany({
+        where: {
+            workspace: {
+                name: workspaceName,
+            },
+        },
+    })
+
+    return res
+}
+
 export const getDocumentByOwnerAndName = async (
-    username: string,
+    workspaceName: string,
     idName: string,
 ) => {
     const res = await prisma.document.findFirst({
         where: {
-            OR: [
-                {
-                    user: {
-                        username: username,
-                    },
-                },
-                {
-                    team: {
-                        name: username,
-                    },
-                },
-            ],
+            workspace: {
+                name: workspaceName,
+            },
 
             idName: idName,
         },
         include: {
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    username: true,
-                    image: true,
-                },
-            },
-            team: {
+            workspace: {
                 select: {
                     id: true,
                     name: true,
@@ -111,8 +77,7 @@ export const paginationDocumentsSearch = async (
             },
         },
         include: {
-            team: true,
-            user: true,
+            workspace: true,
         },
     })
 }

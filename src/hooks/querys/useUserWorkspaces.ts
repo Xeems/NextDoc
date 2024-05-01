@@ -1,13 +1,13 @@
 import getQueryClient from '@/src/lib/getQueryClient'
-import { getUserTeamsAction } from '@/src/server/actions/team/getUserTeams'
+import { getUserWorkspacesAction } from '@/src/server/actions/workspace/getUserWorkspaces'
 import { QueryClient, useQuery } from '@tanstack/react-query'
 
-export const useUserTeamsQuery = (username: string) => {
+export const useUserWorkspacesQuery = (username: string) => {
     return useQuery({
-        queryKey: ['user', username, 'teams'],
+        queryKey: ['user', username, 'workspaces'],
         enabled: !!username,
         queryFn: async () => {
-            const res = await getUserTeamsAction(username)
+            const res = await getUserWorkspacesAction(username)
             if (res.error || !res.data || !res)
                 throw new Error(res.error || 'No data received')
             return res.data
@@ -15,10 +15,10 @@ export const useUserTeamsQuery = (username: string) => {
     })
 }
 
-export const userTeamsQuery = (username: string) => {
+export const userWorkspacesQuery = (username: string) => {
     const queryClient = getQueryClient()
     return queryClient.fetchQuery({
-        queryKey: ['user', username, 'teams'],
-        queryFn: () => getUserTeamsAction(username),
+        queryKey: ['user', username, 'workspaces'],
+        queryFn: () => getUserWorkspacesAction(username),
     })
 }

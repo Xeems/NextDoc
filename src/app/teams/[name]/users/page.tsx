@@ -1,4 +1,4 @@
-import { getTeamMembersAction } from '@/src/server/actions/team/getTeamMembers'
+import { getWorkspaceMembersAction } from '@/src/server/actions/workspace/getWorkspaceMembers'
 import { QueryClient } from '@tanstack/react-query'
 
 import UsersTable from './UsersTable'
@@ -13,9 +13,9 @@ type Props = {
 export default async function UsersPage({ params }: Props) {
     const queryClient = new QueryClient()
     const { data, error } = await queryClient.fetchQuery({
-        queryKey: [params.name, 'teamUsers'],
+        queryKey: [params.name, 'workspaceUsers'],
         queryFn: async () => {
-            return await getTeamMembersAction(params.name)
+            return await getWorkspaceMembersAction(params.name)
         },
     })
 

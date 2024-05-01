@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 type Props = {
-    searchResult: UserType | DocType | TeamType
+    searchResult: UserType | DocType | WorspaceType
 }
 
 const DocumentSearchCard = lazy(() => import('./DocumentSearchCard'))
@@ -21,7 +21,7 @@ export default function SearchResultCard({ searchResult }: Props) {
             return <UserSearchCard user={user} />
         }
         case 'team': {
-            const team: TeamType = searchResult as TeamType
+            const team: WorspaceType = searchResult as WorspaceType
 
             return <TeamSearchCard team={team} />
         }

@@ -27,11 +27,12 @@ export default function DocumentSearchCard({ doc }: { doc: DocType }) {
                 )}
                 {doc.documentOwnerType == 'TEAM' && (
                     <div>
-                        <Link href={`teams/${doc.team?.name}`}>
-                            {doc.team?.name}
+                        <Link href={`teams/${doc.worksapce?.name}`}>
+                            {doc.worksapce?.name}
                         </Link>
                         /
-                        <Link href={`document/${doc.team?.name}/${doc.idName}`}>
+                        <Link
+                            href={`document/${doc.worksapce?.name}/${doc.idName}`}>
                             {doc.name}
                         </Link>
                     </div>

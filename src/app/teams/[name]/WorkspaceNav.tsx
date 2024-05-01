@@ -11,7 +11,7 @@ type Props = {
     basePath: string
 }
 
-export default function TeamNav({ links, basePath }: Props) {
+export default function WorkspaceNav({ links, basePath }: Props) {
     return (
         <div className="flex w-full items-center justify-center border-0 border-b border-solid bg-background-accent dark:bg-background">
             <div className="scroll mx-auto flex h-full w-full gap-x-1 overflow-x-auto lg:min-w-[64rem] lg:max-w-[70rem] ">
