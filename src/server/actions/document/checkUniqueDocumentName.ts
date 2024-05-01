@@ -20,7 +20,7 @@ export const checkUniqueDocumentNameAction = async (
 
     try {
         const res = await getDocumentByOwnerAndName(
-            data.documentOwner.name,
+            data.documentOwner,
             data.documentName,
         )
         if (res) {
