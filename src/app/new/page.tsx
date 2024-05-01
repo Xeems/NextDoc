@@ -29,7 +29,7 @@ import {
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
 import { Separator } from '@/src/components/shadCn/ui/separator'
-import { usePossibleDocumentOwnersQuery } from '@/src/hooks/querys/usePossibleDocumentOwnersQuery'
+import { usePossibleDocumentOwnersQuery } from '@/src/hooks/querys/usePossibleDocumentOwners'
 import useDebounce from '@/src/hooks/useDebounce'
 import { normalizeName } from '@/src/lib/utils'
 import { checkUniqueDocumentNameAction } from '@/src/server/actions/document/checkUniqueDocumentName'

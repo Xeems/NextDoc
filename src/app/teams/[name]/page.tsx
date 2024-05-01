@@ -2,7 +2,7 @@
 
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
-import { useTeamDocumentsQuery } from '@/src/hooks/querys/useTeamDocumentsQuery'
+import { useTeamDocumentsQuery } from '@/src/hooks/querys/useTeamDocuments'
 
 import { CreateDocumentModal } from './CreateDocumentModal'
 

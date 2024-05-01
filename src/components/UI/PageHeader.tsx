@@ -1,7 +1,7 @@
 'use client'
 
 import { CreateTeamModal } from '@/src/app/teams/CreateTeamModal'
-import { useUserTeamsQuery } from '@/src/hooks/querys/useUserTeamsQuery'
+import { useUserTeamsQuery } from '@/src/hooks/querys/useUserTeams'
 import { ChevronsUpDownIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'

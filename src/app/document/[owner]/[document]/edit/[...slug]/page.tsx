@@ -1,4 +1,4 @@
-import { articleQuery } from '@/src/hooks/querys/useArticleQuery'
+import { articleQuery } from '@/src/hooks/querys/useArticle'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
