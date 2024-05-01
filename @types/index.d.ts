@@ -13,11 +13,14 @@ type WorspaceType = {
     name: string
     imageLink?: string
     description?: string | null
+    workspaceType: WorkspaceType
     createdAt?: Date
     updatedAt?: Date
 
     documents?: DocType[]
 }
+
+type WorkspaceType = 'USER' | 'TEAM'
 
 type UserWorkspaceType = {
     id: string

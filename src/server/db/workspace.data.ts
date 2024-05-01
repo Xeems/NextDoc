@@ -1,12 +1,13 @@
 'use server'
 
 import {
-    newWorkspaceServerType,
-    newWorkspaceUserType,
+    NewWorkspaceServerType,
+    NewWorkspaceUserType,
+    UserWorkspacesQueryType,
 } from '@/@types/validators/workspace'
 import { prisma } from '@/src/lib/prisma'
 
-export const createWorkspace = async (data: newWorkspaceServerType) => {
+export const createWorkspace = async (data: NewWorkspaceServerType) => {
     const res = await prisma.workspace.create({
         data: {
             name: data.name,
@@ -22,14 +23,15 @@ export const createWorkspace = async (data: newWorkspaceServerType) => {
     return res
 }
 
-export const getUserWorkspaces = async (username: string) => {
+export const getUserWorkspaces = async (data: UserWorkspacesQueryType) => {
     const res = await prisma.workspace.findMany({
         where: {
-            workspaceType: 'TEAM',
+            workspaceType: data.onlyGroups ? 'TEAM' : undefined,
+
             workspaceUsers: {
                 every: {
                     user: {
-                        username,
+                        username: data.username,
                     },
                 },
             },
@@ -51,24 +53,7 @@ export const getUserWorkspacesByUserId = async (userId: string) => {
     return res
 }
 
-export const getUserworkspacesWhereAdminById = async (userId: string) => {
-    const res = await prisma.workspace.findMany({
-        where: {
-            workspaceUsers: {
-                every: {
-                    userId,
-                    role: 'OWNER' || 'ADMIN',
-                },
-            },
-            NOT: {
-                workspaceType: 'USER',
-            },
-        },
-    })
-    return res
-}
-
-export const getworkspaceMembers = async (workspaceName: string) => {
+export const getWorkspaceMembers = async (workspaceName: string) => {
     const res = await prisma.userWorkspace.findMany({
         where: {
             workspace: {
@@ -82,7 +67,7 @@ export const getworkspaceMembers = async (workspaceName: string) => {
     return res
 }
 
-export const getworkspaceMember = async (
+export const getWorkspaceMember = async (
     userId: string,
     workspaceId: string,
 ) => {
@@ -93,14 +78,11 @@ export const getworkspaceMember = async (
                 id: workspaceId,
             },
         },
-        select: {
-            role: true,
-        },
     })
     return res
 }
 
-export const getworkspace = async (workspaceName: string) => {
+export const getWorkspace = async (workspaceName: string) => {
     const res = await prisma.workspace.findUnique({
         where: {
             name: workspaceName,
@@ -141,7 +123,7 @@ export const paginationWorkspacesSearch = async (
     })
 }
 
-export const addUserToWorkspace = async (data: newWorkspaceUserType) => {
+export const addUserToWorkspace = async (data: NewWorkspaceUserType) => {
     const res = await prisma.userWorkspace.create({
         data: {
             workspaceId: data.workspaceId,

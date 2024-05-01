@@ -2,11 +2,11 @@
 
 import {
     newWorkspaceUserSchema,
-    newWorkspaceUserType,
+    NewWorkspaceUserType,
 } from '@/@types/validators/workspace'
 import { addUserToWorkspace } from '@/src/server/db/workspace.data'
 
-export const addUserToWorkspaceAction = async (data: newWorkspaceUserType) => {
+export const addUserToWorkspaceAction = async (data: NewWorkspaceUserType) => {
     const validationResult = await newWorkspaceUserSchema.safeParseAsync(data)
 
     if (!validationResult.success)

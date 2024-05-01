@@ -3,7 +3,7 @@
 import { getDocumentByOwnerAndName } from '@/src/server/db/document.data'
 
 import { getUserBySessionAction } from '../user/getUserBySession'
-import { validateWorkspaceMemberAction } from '../workspace/validateWorkspaceMember'
+import { getWorkspaceMemberAction } from '../workspace/validateWorkspaceMember'
 
 export const getDocumentAction = async (
     workspaceName: string,
@@ -17,7 +17,7 @@ export const getDocumentAction = async (
         if (doc?.userId == user?.id) userRole = 'OWNER'
         if (doc?.workspace) {
             if (user?.id) {
-                const res = await validateWorkspaceMemberAction(
+                const res = await getWorkspaceMemberAction(
                     user?.id,
                     doc.workspace.id,
                 )

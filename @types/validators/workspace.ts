@@ -15,7 +15,7 @@ export const newWorkspaceServerSchema = newWorkspaceSchema.extend({
     userId: z.string().min(1),
 })
 
-export type newWorkspaceServerType = z.infer<typeof newWorkspaceServerSchema>
+export type NewWorkspaceServerType = z.infer<typeof newWorkspaceServerSchema>
 
 export const newWorkspaceUserSchema = z.object({
     userId: z.string(),
@@ -23,4 +23,11 @@ export const newWorkspaceUserSchema = z.object({
     role: z.enum(['BASE', 'ADMIN']),
 })
 
-export type newWorkspaceUserType = z.infer<typeof newWorkspaceUserSchema>
+export type NewWorkspaceUserType = z.infer<typeof newWorkspaceUserSchema>
+
+export const userWorkspacesQuerySchema = z.object({
+    username: z.string(),
+    onlyGroups: z.boolean().default(true),
+})
+
+export type UserWorkspacesQueryType = z.infer<typeof userWorkspacesQuerySchema>

@@ -1,10 +1,10 @@
 'use server'
 
-import { NewDocumentWithCreatorType } from '@/@types/validators/document'
+import { NewDocumentType } from '@/@types/validators/document'
 import { prisma } from '@/src/lib/prisma'
 import { normalizeName } from '@/src/lib/utils'
 
-export const createDocument = async (data: NewDocumentWithCreatorType) => {
+export const createDocument = async (data: NewDocumentType, userId: string) => {
     const res = await prisma.document.create({
         data: {
             idName: normalizeName(data.documentName),
@@ -12,6 +12,7 @@ export const createDocument = async (data: NewDocumentWithCreatorType) => {
             description: data.documentDescription,
             type: data.documentType,
             workspaceId: data.workspaceId,
+            userId,
         },
     })
     return res

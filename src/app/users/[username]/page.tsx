@@ -26,7 +26,7 @@ export default async function UserPage({ params }: Props) {
     if (!userData.user) notFound()
 
     if (userData.error || workspacesData.error || documentsData.error) {
-        console.log(userData, workspacesData, documentsData)
+        //console.log(userData, workspacesData, documentsData)
 
         return <></>
         //throw new Error()
