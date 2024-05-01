@@ -18,7 +18,7 @@ type Props = {
 }
 export default async function UserPage({ params }: Props) {
     const [workspacesData, userData, documentsData] = await Promise.all([
-        userWorkspacesQuery(params.username),
+        userWorkspacesQuery({ username: params.username }),
         userQuery(params.username),
         workspaceDocumentsQuery(params.username),
     ])

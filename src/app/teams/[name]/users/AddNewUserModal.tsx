@@ -42,7 +42,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { WorkspaceContext } from '../workspaceContext'
+import { WorkspaceContext } from '../WorkspaceContext'
 
 const newWorkspaceUserSchemaWithUsername = newWorkspaceUserSchema.extend({
     username: z.string(),

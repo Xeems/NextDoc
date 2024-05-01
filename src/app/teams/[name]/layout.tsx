@@ -4,7 +4,7 @@ import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 
-import { WorkspaceContextProvider } from './workspaceContext'
+import { WorkspaceContextProvider } from './WorkspaceContext'
 import WorkspaceNav from './WorkspaceNav'
 
 const NavLinks = [

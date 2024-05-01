@@ -27,7 +27,7 @@ export type NewWorkspaceUserType = z.infer<typeof newWorkspaceUserSchema>
 
 export const userWorkspacesQuerySchema = z.object({
     username: z.string(),
-    onlyGroups: z.boolean().default(true),
+    onlyGroups: z.boolean().default(true).optional(),
 })
 
 export type UserWorkspacesQueryType = z.infer<typeof userWorkspacesQuerySchema>

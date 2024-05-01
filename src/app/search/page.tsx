@@ -8,7 +8,7 @@ import React from 'react'
 import SearchFrom from './SearchFrom'
 import SearchResultCard from './SearchResultCard'
 
-type TargetVariant = 'users' | 'documents' | 'teams'
+type TargetVariant = 'users' | 'documents' | 'workspaces'
 
 type Props = {
     searchParams?: {
@@ -47,12 +47,12 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
                     data.pages.map((value, index, array) => {
                         return (
                             <React.Fragment key={index}>
-                                {value.data?.map((el) => (
+                                {/* {value.data?.map((el) => (
                                     <SearchResultCard
                                         key={el.id}
                                         searchResult={el}
                                     />
-                                ))}
+                                ))} */}
                             </React.Fragment>
                         )
                     })}
