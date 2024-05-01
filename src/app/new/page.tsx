@@ -28,7 +28,7 @@ import {
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
 import { Separator } from '@/src/components/shadCn/ui/separator'
-import { usePossibleDocumentOwnersQuery } from '@/src/hooks/querys/usePossibleDocumentOwners'
+import { useUserWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import useDebounce from '@/src/hooks/useDebounce'
 import { normalizeName } from '@/src/lib/utils'
 import { checkUniqueDocumentNameAction } from '@/src/server/actions/document/checkUniqueDocumentName'
@@ -40,40 +40,43 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export default function CreateUserDocumentPage() {
-    const { data: possibleOwners } = usePossibleDocumentOwnersQuery()
-    const { data } = useSession()
+    const { data: session } = useSession()
+    const { data: possibleOwners } = useUserWorkspacesQuery({
+        username: session?.user.username,
+        onlyGroups: false,
+    })
     const form = useForm<NewDocumentType>({
         resolver: zodResolver(newDocumentSchema),
         defaultValues: {
             documentName: '',
-            documentOwner: '',
+            workspaceId: '',
             documentDescription: '',
             documentType: 'private',
         },
     })
 
-    const docNameDebounce = useDebounce(form.watch('documentName'), 300)
+    // const docNameDebounce = useDebounce(form.watch('documentName'), 300)
 
-    useEffect(() => {
-        ;(async () => {
-            if (docNameDebounce !== '') {
-                const res = await checkUniqueDocumentNameAction({
-                    documentOwner: form.getValues('documentOwner'),
-                    documentName: normalizeName(docNameDebounce),
-                })
-                if (res.data === false)
-                    form.setError('documentName', {
-                        message:
-                            'You already have a document with the same name',
-                    })
-                else form.clearErrors('documentName')
-            }
-        })()
-    }, [docNameDebounce, form.getValues('documentOwner')])
+    // useEffect(() => {
+    //     ;(async () => {
+    //         if (docNameDebounce !== '') {
+    //             const res = await checkUniqueDocumentNameAction({
+    //                 workspaceName: form.getValues('workspaceName'),
+    //                 documentName: normalizeName(docNameDebounce),
+    //             })
+    //             if (res.data === false)
+    //                 form.setError('documentName', {
+    //                     message:
+    //                         'You already have a document with the same name',
+    //                 })
+    //             else form.clearErrors('documentName')
+    //         }
+    //     })()
+    // }, [docNameDebounce, form.getValues('documentOwner')])
 
     async function newDoucumentSubmit(data: NewDocumentType) {
         console.log(data)
-        const res = await createDocumentAction({ data })
+        const res = await createDocumentAction(data)
         if (res?.data) {
             toast.success('Document successfully created')
         }
@@ -94,7 +97,7 @@ export default function CreateUserDocumentPage() {
                     <div className="inline-flex gap-x-4">
                         <FormField
                             control={form.control}
-                            name="documentOwner"
+                            name="workspaceId"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Owner</FormLabel>
@@ -112,7 +115,7 @@ export default function CreateUserDocumentPage() {
                                                             <SelectItem
                                                                 key={owner.name}
                                                                 value={
-                                                                    owner.name
+                                                                    owner.id
                                                                 }>
                                                                 {owner.name}
                                                             </SelectItem>

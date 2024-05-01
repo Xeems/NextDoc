@@ -1,8 +1,8 @@
 'use server'
 
 import {
-    documentNameAndOwnerSchema,
     DocumentNameAndOwnerType,
+    documentNameSchema,
 } from '@/@types/validators/document'
 
 import { getDocumentByOwnerAndName } from '../../db/document.data'
@@ -11,8 +11,7 @@ import { getUserBySessionAction } from '../user/getUserBySession'
 export const checkUniqueDocumentNameAction = async (
     data: DocumentNameAndOwnerType,
 ) => {
-    const validationResult =
-        await documentNameAndOwnerSchema.safeParseAsync(data)
+    const validationResult = await documentNameSchema.safeParseAsync(data)
 
     if (!validationResult.success) throw Error(`Validation failed`)
 

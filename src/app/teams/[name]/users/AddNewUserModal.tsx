@@ -2,7 +2,7 @@
 
 import {
     newWorkspaceUserSchema,
-    newWorkspaceUserType,
+    NewWorkspaceUserType,
 } from '@/@types/validators/workspace'
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
@@ -71,7 +71,7 @@ export function AddNewUserModal() {
         })
     }, [form.watch('username')])
 
-    async function newDoucumentSubmit(data: newWorkspaceUserType) {
+    async function newDoucumentSubmit(data: NewWorkspaceUserType) {
         console.log(data)
         const res = await addUserToWorkspaceAction(data)
         console.log(res)

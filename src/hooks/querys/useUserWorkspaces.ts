@@ -1,13 +1,13 @@
+import { UserWorkspacesQueryType } from '@/@types/validators/workspace'
 import getQueryClient from '@/src/lib/getQueryClient'
 import { getUserWorkspacesAction } from '@/src/server/actions/workspace/getUserWorkspaces'
-import { QueryClient, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
-export const useUserWorkspacesQuery = (username: string) => {
+export const useUserWorkspacesQuery = (data: UserWorkspacesQueryType) => {
     return useQuery({
-        queryKey: ['user', username, 'workspaces'],
-        enabled: !!username,
+        queryKey: ['user', data.username, 'workspaces'],
         queryFn: async () => {
-            const res = await getUserWorkspacesAction(username)
+            const res = await getUserWorkspacesAction(data)
             if (res.error || !res.data || !res)
                 throw new Error(res.error || 'No data received')
             return res.data
@@ -15,10 +15,10 @@ export const useUserWorkspacesQuery = (username: string) => {
     })
 }
 
-export const userWorkspacesQuery = (username: string) => {
+export const userWorkspacesQuery = (data: UserWorkspacesQueryType) => {
     const queryClient = getQueryClient()
     return queryClient.fetchQuery({
-        queryKey: ['user', username, 'workspaces'],
-        queryFn: () => getUserWorkspacesAction(username),
+        queryKey: ['user', data.username, 'workspaces'],
+        queryFn: () => getUserWorkspacesAction(data),
     })
 }

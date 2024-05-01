@@ -78,8 +78,8 @@ model VerificationRequest {
 model Document {
     id          String       @id @default(cuid())
     userId      String?
-    name        String       @unique
-    idName      String       @unique
+    name        String
+    idName      String
     description String
     type        DocumentType @default(private)
 

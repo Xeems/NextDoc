@@ -2,12 +2,12 @@
 
 import { getWorkspaceMember } from '@/src/server/db/workspace.data'
 
-export const validateWorkspaceMemberAction = async (
+export const getWorkspaceMemberAction = async (
     userId: string,
-    teamId: string,
+    workspaceId: string,
 ) => {
     try {
-        const res = await getWorkspaceMember(userId, teamId)
+        const res = await getWorkspaceMember(userId, workspaceId)
         return { data: res }
     } catch (error) {
         console.log(error)
