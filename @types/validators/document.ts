@@ -7,10 +7,7 @@ export const documentNameAndOwnerSchema = z.object({
         .regex(/^[a-zA-Z0-9\s\u0400-\u04FF-]*$/, {
             message: 'The string must not contain special characters',
         }),
-    documentOwner: z.object({
-        type: z.enum(['user', 'team']),
-        name: z.string(),
-    }),
+    documentOwner: z.string(),
 })
 
 export type DocumentNameAndOwnerType = z.infer<

@@ -12,10 +12,6 @@ export const getPossibleOwnersAction = async () => {
         const res = teams.map((team) => {
             return { name: team.name, type: 'team' }
         })
-        res.push({
-            name: user.username,
-            type: 'y=user',
-        })
 
         return { data: res }
     } catch (Error: unknown) {

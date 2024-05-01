@@ -5,7 +5,6 @@ import {
     NewDocumentType,
 } from '@/@types/validators/document'
 import { Button } from '@/src/components/shadCn/ui/button'
-import { ContextMenuRadioGroup } from '@/src/components/shadCn/ui/context-menu'
 import {
     Form,
     FormControl,
@@ -35,20 +34,19 @@ import { normalizeName } from '@/src/lib/utils'
 import { checkUniqueDocumentNameAction } from '@/src/server/actions/document/checkUniqueDocumentName'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export default function CreateUserDocumentPage() {
     const { data: possibleOwners } = usePossibleDocumentOwnersQuery()
+    const { data } = useSession()
     const form = useForm<NewDocumentType>({
         resolver: zodResolver(newDocumentSchema),
         defaultValues: {
             documentName: '',
-            documentOwner: {
-                name: '',
-                type: 'user',
-            },
+            documentOwner: '',
             documentDescription: '',
             documentType: 'private',
         },
@@ -75,13 +73,13 @@ export default function CreateUserDocumentPage() {
 
     async function newDoucumentSubmit(data: NewDocumentType) {
         console.log(data)
-        // const res = await createDocumentAction({ data })
-        // if (res?.data) {
-        //     toast.success('Document successfully created')
-        // }
-        // if (res?.error) {
-        //     toast.error(res.error)
-        // }
+        const res = await createDocumentAction({ data })
+        if (res?.data) {
+            toast.success('Document successfully created')
+        }
+        if (res?.error) {
+            toast.error(res.error)
+        }
     }
 
     return (
@@ -96,27 +94,31 @@ export default function CreateUserDocumentPage() {
                     <div className="inline-flex gap-x-4">
                         <FormField
                             control={form.control}
-                            name="documentOwner.name"
+                            name="documentOwner"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Owner</FormLabel>
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
-                                            defaultValue={field.value}>
+                                            value={field.value}>
                                             <SelectTrigger className="min-w-40">
                                                 <SelectValue placeholder="Select owner" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {possibleOwners?.map(
-                                                    (owner) => (
-                                                        <SelectItem
-                                                            key={owner.name}
-                                                            value={owner.name}>
-                                                            {owner.name}
-                                                        </SelectItem>
-                                                    ),
-                                                )}
+                                                <SelectGroup>
+                                                    {possibleOwners?.map(
+                                                        (owner) => (
+                                                            <SelectItem
+                                                                key={owner.name}
+                                                                value={
+                                                                    owner.name
+                                                                }>
+                                                                {owner.name}
+                                                            </SelectItem>
+                                                        ),
+                                                    )}
+                                                </SelectGroup>
                                             </SelectContent>
                                         </Select>
                                     </FormControl>
