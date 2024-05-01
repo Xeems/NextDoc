@@ -6,7 +6,7 @@ import {
 } from '@/src/components/shadCn/ui/card'
 import Link from 'next/link'
 
-export default function UserSearchCard({ team }: { team: TeamType }) {
+export default function UserSearchCard({ team }: { team: WorspaceType }) {
     return (
         <Card className="w-full space-y-1 py-2">
             <CardHeader className="font-bold text-lg text-foreground-link items-center gap-x-2 flex pt-1 pb-0  flex-row ">

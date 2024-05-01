@@ -1,6 +1,9 @@
 'use client'
 
-import { newTeamSchema, NewTeamType } from '@/@types/validators/team'
+import {
+    newWorkspaceSchema,
+    NewWorkspaceType,
+} from '@/@types/validators/workspace'
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
     Dialog,
@@ -20,7 +23,7 @@ import {
     FormMessage,
 } from '@/src/components/shadCn/ui/form'
 import { Input } from '@/src/components/shadCn/ui/input'
-import { createTeamAction } from '@/src/server/actions/team/createTeam'
+import { createWorkspaceAction } from '@/src/server/actions/workspace/createWorkspace'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
@@ -31,20 +34,20 @@ import { toast } from 'sonner'
 type Props = {
     children: React.ReactNode
 }
-export function CreateTeamModal({ children }: Props) {
+export function CreateWorkspaceModal({ children }: Props) {
     const queryClient = useQueryClient()
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
     const { data: session } = useSession()
 
-    const form = useForm<NewTeamType>({
-        resolver: zodResolver(newTeamSchema),
+    const form = useForm<NewWorkspaceType>({
+        resolver: zodResolver(newWorkspaceSchema),
         defaultValues: {
             name: '',
         },
     })
 
-    async function createTeamSubmit(data: NewTeamType) {
-        const res = await createTeamAction({
+    async function createWorkspaceSubmit(data: NewWorkspaceType) {
+        const res = await createWorkspaceAction({
             name: data.name,
             userId: session?.user.id,
         })
@@ -70,7 +73,7 @@ export function CreateTeamModal({ children }: Props) {
 
                 <Form {...form}>
                     <form
-                        onSubmit={form.handleSubmit(createTeamSubmit)}
+                        onSubmit={form.handleSubmit(createWorkspaceSubmit)}
                         className="flex flex-col gap-y-6">
                         <FormField
                             control={form.control}
@@ -78,7 +81,7 @@ export function CreateTeamModal({ children }: Props) {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="font-normal">
-                                        Team name
+                                        Workspace name
                                     </FormLabel>
                                     <FormControl>
                                         <Input

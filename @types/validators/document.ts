@@ -19,7 +19,7 @@ export const newDocumentSchema = documentNameAndOwnerSchema.extend({
         .string()
         .min(1, { message: 'At least 10 characters' }),
     documentType: z.enum(['public', 'private']),
-    teamId: z.string().optional(),
+    workspaceId: z.string().optional(),
 })
 
 export type NewDocumentType = z.infer<typeof newDocumentSchema>

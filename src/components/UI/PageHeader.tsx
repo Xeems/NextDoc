@@ -1,7 +1,7 @@
 'use client'
 
-import { CreateTeamModal } from '@/src/app/teams/CreateTeamModal'
-import { useUserTeamsQuery } from '@/src/hooks/querys/useUserTeams'
+import { CreateTeamModal } from '@/src/app/teams/CreateWorkspaceModal'
+import { useUserTeamsQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import { ChevronsUpDownIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Button } from '../shadCn/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '../shadCn/ui/popover'
 import { Separator } from '../shadCn/ui/separator'
-import TeamsList from './TeamsList'
+import WorkspacesList from './WorkspacesList'
 
 export default function PageHeader({ spaceName }: { spaceName: string }) {
     const { data: session } = useSession()
@@ -45,7 +45,7 @@ export default function PageHeader({ spaceName }: { spaceName: string }) {
                         <div className="text-sm text-muted-foreground">
                             Teams
                         </div>
-                        <TeamsList variant="popup" teams={teams} />
+                        <WorkspacesList variant="popup" teams={teams} />
                         <CreateTeamModal>
                             <Button>Create new team</Button>
                         </CreateTeamModal>

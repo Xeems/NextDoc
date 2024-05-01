@@ -12,7 +12,7 @@ import { ArrowUpDownIcon } from 'lucide-react'
 
 import TableRowActions from './TableRowActions'
 
-type propsDataType = Omit<UserTeamType, 'team'>
+type propsDataType = Omit<UserWorkspaceType, 'team'>
 
 type ColumnsProps = {
     data: propsDataType[]

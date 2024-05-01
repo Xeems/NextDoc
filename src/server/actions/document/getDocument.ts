@@ -2,29 +2,35 @@
 
 import { getDocumentByOwnerAndName } from '@/src/server/db/document.data'
 
-import { validateTeamMemberAction } from '../team/validateTeamMember'
 import { getUserBySessionAction } from '../user/getUserBySession'
+import { validateWorkspaceMemberAction } from '../workspace/validateWorkspaceMember'
 
-export const getDocumentAction = async (username: string, idName: string) => {
+export const getDocumentAction = async (
+    workspaceName: string,
+    idName: string,
+) => {
     const user = await getUserBySessionAction()
 
     try {
-        let userRole: TeamRoleType = 'NONE'
-        let documentType = 'USER'
-        const doc = await getDocumentByOwnerAndName(username, idName)
+        let userRole: WorkspaceRoleType = 'NONE'
+        const doc = await getDocumentByOwnerAndName(workspaceName, idName)
         if (doc?.userId == user?.id) userRole = 'OWNER'
-        if (doc?.team) {
-            documentType = 'TEAM'
+        if (doc?.workspace) {
             if (user?.id) {
-                const res = await validateTeamMemberAction(
+                const res = await validateWorkspaceMemberAction(
                     user?.id,
-                    doc.team.id,
+                    doc.workspace.id,
                 )
                 if (res.data) userRole = res.data.role
             }
         }
 
-        return { data: { doc, userRole } }
+        return {
+            data: {
+                document: doc,
+                role: userRole,
+            },
+        }
     } catch (err: unknown) {
         console.log(err)
         return { error: 'Failed to receive document' }

@@ -10,7 +10,7 @@ export const DocumentContext = createContext<DocumentContextInterface>({
     userRole: 'NONE',
 })
 
-type TeamContextProviderProps = {
+type WorkspaceContextProviderProps = {
     children: ReactNode
     initial: DocumentContextInterface
 }
@@ -18,8 +18,8 @@ type TeamContextProviderProps = {
 export const DocumentContextProvider = ({
     children,
     initial,
-}: TeamContextProviderProps) => {
-    const [userRole] = useState<TeamRoleType>(initial.userRole || 'NONE')
+}: WorkspaceContextProviderProps) => {
+    const [userRole] = useState<WorkspaceRoleType>(initial.userRole || 'NONE')
 
     return (
         <DocumentContext.Provider value={{ userRole }}>

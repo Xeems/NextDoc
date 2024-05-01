@@ -20,21 +20,21 @@ export default async function DocLayout({ children, params }: LayoutProps) {
         queryFn: async () =>
             await getDocumentAction(params.owner, params.document),
     })
-    if (error || !data?.doc) return <p>Some Error</p>
+    if (error || !data?.document) throw new Error('No document')
 
     const state = dehydrate(queryClient)
     return (
         <DocumentContextProvider
             initial={{
-                userRole: data.userRole,
+                userRole: data.role,
             }}>
             <HydrationBoundary state={state}>
                 <div className="flex w-fit flex-col gap-y-5">
                     <h1 className="mt-10 text-start text-4xl font-semibold">
-                        {data.doc.name}
+                        {data.document?.name}
                     </h1>
                     <div className="flex w-full items-start justify-center">
-                        <DocumentNav document={data.doc!} />
+                        <DocumentNav document={data.document} />
                         {children}
                     </div>
                 </div>

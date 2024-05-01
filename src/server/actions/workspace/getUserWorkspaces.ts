@@ -1,10 +1,10 @@
 'use server'
 
-import { getUserTeamsByUsername } from '@/src/server/db/team.data'
+import { getUserWorkspaces } from '@/src/server/db/workspace.data'
 
-export const getUserTeamsAction = async (username: string) => {
+export const getUserWorkspacesAction = async (username: string) => {
     try {
-        const res = await getUserTeamsByUsername(username)
+        const res = await getUserWorkspaces(username)
         if (!res) throw new Error('user teams db query failed')
 
         return { data: res }

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const searchTargetValues = ['users', 'teams', 'documents'] as const
+export const searchTargetValues = ['users', 'workspaces', 'documents'] as const
 
 export const searchSchema = z.object({
     searchQuery: z.string(),

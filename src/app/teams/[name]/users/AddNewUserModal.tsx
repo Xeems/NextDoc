@@ -1,6 +1,9 @@
 'use client'
 
-import { newTeamUserSchema, newTeamUserType } from '@/@types/validators/team'
+import {
+    newWorkspaceUserSchema,
+    newWorkspaceUserType,
+} from '@/@types/validators/workspace'
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
     Dialog,
@@ -30,8 +33,8 @@ import {
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
 import UserCard from '@/src/components/UI/UserCard'
-import { addUserToTeamAction } from '@/src/server/actions/team/addUserToTeam'
 import { getUserAction } from '@/src/server/actions/user/getUser'
+import { addUserToWorkspaceAction } from '@/src/server/actions/workspace/addUserToWorkspace'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus } from 'lucide-react'
 import { useSession } from 'next-auth/react'
@@ -39,19 +42,19 @@ import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { TeamContext } from '../TeamContext'
+import { WorkspaceContext } from '../workspaceContext'
 
-const newTeamUserSchemaWithUsername = newTeamUserSchema.extend({
+const newWorkspaceUserSchemaWithUsername = newWorkspaceUserSchema.extend({
     username: z.string(),
 })
 export function AddNewUserModal() {
-    const teamContext = useContext(TeamContext)
+    const workspaceContext = useContext(WorkspaceContext)
     const [user, setUser] = useState<UserType | null>(null)
-    const form = useForm<z.infer<typeof newTeamUserSchemaWithUsername>>({
-        resolver: zodResolver(newTeamUserSchemaWithUsername),
+    const form = useForm<z.infer<typeof newWorkspaceUserSchemaWithUsername>>({
+        resolver: zodResolver(newWorkspaceUserSchemaWithUsername),
         defaultValues: {
             userId: user?.id,
-            teamId: teamContext.teamId,
+            workspaceId: workspaceContext.workspaceId,
             role: 'BASE',
         },
     })
@@ -68,16 +71,16 @@ export function AddNewUserModal() {
         })
     }, [form.watch('username')])
 
-    async function newDoucumentSubmit(data: newTeamUserType) {
+    async function newDoucumentSubmit(data: newWorkspaceUserType) {
         console.log(data)
-        const res = await addUserToTeamAction(data)
+        const res = await addUserToWorkspaceAction(data)
         console.log(res)
     }
 
     if (
-        teamContext.userRole === 'BASE' ||
-        teamContext.userRole === 'NONE' ||
-        teamContext.userRole === undefined
+        workspaceContext.userRole === 'BASE' ||
+        workspaceContext.userRole === 'NONE' ||
+        workspaceContext.userRole === undefined
     )
         return <></>
 
@@ -94,7 +97,7 @@ export function AddNewUserModal() {
             </DialogTrigger>
             <DialogContent className="px-5">
                 <DialogHeader>
-                    <DialogTitle>Add user to team</DialogTitle>
+                    <DialogTitle>Add user to workspace</DialogTitle>
                     <DialogDescription></DialogDescription>
                 </DialogHeader>
 

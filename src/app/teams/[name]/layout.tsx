@@ -1,11 +1,11 @@
 import { authOptions } from '@/src/app/api/auth/[...nextauth]/options'
 import PageHeader from '@/src/components/UI/PageHeader'
-import { teamQuery } from '@/src/hooks/querys/useTeam'
+import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 
-import { TeamContextProvider } from './TeamContext'
-import TeamNav from './TeamNav'
+import { WorkspaceContextProvider } from './workspaceContext'
+import WorkspaceNav from './WorkspaceNav'
 
 const NavLinks = [
     {
@@ -29,28 +29,35 @@ type LayoutProps = {
     }
 }
 
-export default async function TeamLayout({ children, params }: LayoutProps) {
+export default async function WorkspaceLayout({
+    children,
+    params,
+}: LayoutProps) {
     const session = await getServerSession(authOptions)
-    const { data: team, error: error } = await teamQuery(
+    const { data: workspace, error: error } = await workspaceQuery(
         params.name,
         session?.user.id,
     )
 
-    if (!team) notFound()
+    if (!workspace) notFound()
 
-    const role = team?.userTeams.find(
+    const role = workspace?.workspaceUsers.find(
         (item) => item.userId === session?.user.id,
     )?.role
 
     return (
-        <TeamContextProvider initial={{ TeamTole: role, teamId: team.id }}>
+        <WorkspaceContextProvider
+            initial={{ WorkspaceRole: role, workspaceId: workspace.id }}>
             <div className="flex w-full flex-col">
                 <PageHeader spaceName={params.name} />
-                <TeamNav links={NavLinks} basePath={`/teams/${params.name}`} />
+                <WorkspaceNav
+                    links={NavLinks}
+                    basePath={`/workspaces/${params.name}`}
+                />
                 <div className="flex w-full items-stretch justify-center">
                     {children}
                 </div>
             </div>
-        </TeamContextProvider>
+        </WorkspaceContextProvider>
     )
 }

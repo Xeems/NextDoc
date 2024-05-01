@@ -1,13 +1,12 @@
 'use server'
 
-import { getTeamDocuments } from '@/src/server/db/team.data'
-
+import { getWorkspaceDocuemnts } from '../../db/document.data'
 import { getUserBySessionAction } from '../user/getUserBySession'
 
-export const getTeamDocumentsAction = async (name: string) => {
+export const getWorkspaceDocumentsAction = async (name: string) => {
     const user = getUserBySessionAction()
     try {
-        const res = await getTeamDocuments(name)
+        const res = await getWorkspaceDocuemnts(name)
         if (!res) throw new Error('Failed to get documents')
         return { data: res }
     } catch (Error: unknown) {

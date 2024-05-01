@@ -50,6 +50,50 @@ export const authOptions: NextAuthOptions = {
     },
 
     adapter: PrismaAdapter(prisma as any),
+
+    events: {
+        async createUser(data) {
+            await prisma.workspace.create({
+                data: {
+                    name: data.user.username,
+                    workspaceType: 'USER',
+                    workspaceUsers: {
+                        create: {
+                            role: 'OWNER',
+                            userId: data.user.id,
+                        },
+                    },
+                },
+            })
+        },
+
+        async signIn(data) {
+            const userWorkspace = await prisma.workspace.findFirst({
+                where: {
+                    workspaceUsers: {
+                        some: {
+                            userId: data.user.id,
+                        },
+                    },
+                },
+            })
+
+            if (userWorkspace == null) {
+                await prisma.workspace.create({
+                    data: {
+                        name: data.user.username,
+                        workspaceType: 'USER',
+                        workspaceUsers: {
+                            create: {
+                                role: 'OWNER',
+                                userId: data.user.id,
+                            },
+                        },
+                    },
+                })
+            }
+        },
+    },
 }
 
 export default NextAuth(authOptions)

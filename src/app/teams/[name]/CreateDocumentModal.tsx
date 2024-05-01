@@ -40,17 +40,17 @@ import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { TeamContext } from './TeamContext'
+import { WorkspaceContext } from './workspaceContext'
 
 export function CreateDocumentModal() {
-    const teamContext = useContext(TeamContext)
+    const workspaceContext = useContext(WorkspaceContext)
 
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
 
     const form = useForm<NewDocumentType>({
         resolver: zodResolver(newDocumentSchema),
         defaultValues: {
-            teamId: teamContext.teamId,
+            workspaceId: workspaceContext.workspaceId,
             documentName: '',
             documentDescription: '',
             documentType: 'private',
@@ -69,7 +69,10 @@ export function CreateDocumentModal() {
         }
     }
 
-    if (teamContext.userRole === 'BASE' || teamContext.userRole === 'NONE')
+    if (
+        workspaceContext.userRole === 'BASE' ||
+        workspaceContext.userRole === 'NONE'
+    )
         return <></>
 
     return (

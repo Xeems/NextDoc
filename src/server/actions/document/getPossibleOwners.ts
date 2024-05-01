@@ -1,16 +1,16 @@
 'use server'
 
-import { getUserTeamsWhereAdminById } from '@/src/server/db/team.data'
+import { getUserworkspacesWhereAdminById } from '@/src/server/db/workspace.data'
 
 import { getUserBySessionAction } from '../user/getUserBySession'
 
 export const getPossibleOwnersAction = async () => {
     const user = await getUserBySessionAction()
     try {
-        const teams = await getUserTeamsWhereAdminById(user.id)
+        const workspaces = await getUserworkspacesWhereAdminById(user.id)
 
-        const res = teams.map((team) => {
-            return { name: team.name, type: 'team' }
+        const res = workspaces.map((workspace) => {
+            return { name: workspace.name, type: 'workspace' }
         })
 
         return { data: res }

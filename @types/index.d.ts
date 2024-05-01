@@ -8,7 +8,7 @@ type UserType = {
     updatedAt?: Date
 }
 
-type TeamType = {
+type WorspaceType = {
     id: string
     name: string
     imageLink?: string
@@ -19,19 +19,19 @@ type TeamType = {
     documents?: DocType[]
 }
 
-type UserTeamType = {
+type UserWorkspaceType = {
     id: string
     userId: string
-    teamId: string
-    role: TeamRoleType
+    worksapceId: string
+    role: WorkspaceRoleType
     status?: string | null
     createdAt: Date
     updatedAt: Date
     user: UserType
-    team: TeamType
+    worksapce: WorspaceType
 }
 
-type TeamRoleType = 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
+type WorkspaceRoleType = 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
 
 type DocType = {
     id: string
@@ -39,18 +39,13 @@ type DocType = {
     name: string
     description?: string | null
     type: string
-    documentOwnerType: DocumentOwnerType
+
     createdAt: Date
     updatedAt: Date
 
-    userId?: string | null
-    user?: UserType | null
-
-    teamId?: string | null
-    team?: TeamType | null
+    worksapceId?: string | null
+    worksapce?: WorspaceType | null
 }
-
-type DocumentOwnerType = 'USER' | 'TEAM'
 
 type ArticleType = {
     id: string | null

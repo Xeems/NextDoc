@@ -3,8 +3,8 @@
 import { searchSchema, SearchType } from '@/@types/validators/search'
 
 import { paginationDocumentsSearch } from '../db/document.data'
-import { paginationTeamsSearch } from '../db/team.data'
 import { paginationUsersSearch } from '../db/user.data'
+import { paginationTeamsSearch } from '../db/workspace.data'
 
 type Props = {
     data: SearchType

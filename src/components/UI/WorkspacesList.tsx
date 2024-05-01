@@ -5,28 +5,39 @@ import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
 
 type Props = {
-    teams: TeamType[] | undefined
+    workspaces: WorspaceType[] | undefined
     variant?: 'default' | 'popup'
 }
 
-export default function TeamsList({ teams, variant = 'default' }: Props) {
-    if (!teams || !Array.isArray(teams) || teams == null) {
+export default function WorkspacesList({
+    workspaces,
+    variant = 'default',
+}: Props) {
+    if (!workspaces || !Array.isArray(workspaces) || workspaces == null) {
         return (
             <span className="mb-4 text-sm font-light text-muted-foreground">
-                No teams yet
+                No workspaces yet
             </span>
         )
     }
     return (
         <ul>
-            {teams &&
-                teams.map((team) => {
+            {workspaces &&
+                workspaces.map((workspace) => {
                     return (
-                        <li key={team.id}>
+                        <li key={workspace.id}>
                             {
                                 {
-                                    default: <TeamsListItemCard team={team} />,
-                                    popup: <TeamsListItemPopUp team={team} />,
+                                    default: (
+                                        <WorkspacesListItemCard
+                                            workspace={workspace}
+                                        />
+                                    ),
+                                    popup: (
+                                        <WorkspacesListItemPopUp
+                                            workspace={workspace}
+                                        />
+                                    ),
                                 }[variant]
                             }
                         </li>
@@ -36,40 +47,53 @@ export default function TeamsList({ teams, variant = 'default' }: Props) {
     )
 }
 
-export function TeamsListItemPopUp({ team }: { team: TeamType }) {
+export function WorkspacesListItemPopUp({
+    workspace,
+}: {
+    workspace: WorspaceType
+}) {
     return (
         <Link
             className="flex flex-row items-center gap-x-4 rounded-md p-2 hover:bg-accent"
-            href={`/teams/${team.name}`}>
+            href={`/workspaces/${workspace.name}`}>
             <Avatar className="h-5 w-5 bg-background">
-                <AvatarImage src={team.imageLink} className="bg-transparent" />
+                <AvatarImage
+                    src={workspace.imageLink}
+                    className="bg-transparent"
+                />
                 <AvatarFallback>
                     <CircleDashedIcon className="bg-transparen h-5 w-5 text-blue-600" />
                 </AvatarFallback>
             </Avatar>
-            {team.name}
+            {workspace.name}
         </Link>
     )
 }
 
-export function TeamsListItemCard({ team }: { team: TeamType }) {
+export function WorkspacesListItemCard({
+    workspace,
+}: {
+    workspace: WorspaceType
+}) {
     return (
-        <Link className="" href={`/teams/${team.name}`}>
+        <Link className="" href={`/workspaces/${workspace.name}`}>
             <Card className="my-2 max-w-[300px]">
                 <CardHeader className="flex flex-row items-center justify-between">
-                    <span className="text-xl font-semibold">{team.name}</span>
+                    <span className="text-xl font-semibold">
+                        {workspace.name}
+                    </span>
                     <Avatar className="size-10 bg-background">
                         <AvatarImage
-                            src={team.imageLink}
+                            src={workspace.imageLink}
                             className="bg-transparent"
                         />
                         <AvatarFallback></AvatarFallback>
                     </Avatar>
                 </CardHeader>
-                {team.description && (
+                {workspace.description && (
                     <CardContent>
                         <p className="text-muted-foreground">
-                            {team.description}123
+                            {workspace.description}123
                         </p>
                     </CardContent>
                 )}
