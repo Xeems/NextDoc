@@ -1,6 +1,6 @@
 import { authOptions } from '@/src/app/api/auth/[...nextauth]/options'
 import PageHeader from '@/src/components/UI/PageHeader'
-import { teamQuery } from '@/src/hooks/querys/useTeamQuery'
+import { teamQuery } from '@/src/hooks/querys/useTeam'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 

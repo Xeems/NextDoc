@@ -2,7 +2,7 @@
 
 import { Button } from '@/src/components/shadCn/ui/button'
 import TeamsList from '@/src/components/UI/TeamsList'
-import { useUserTeamsQuery } from '@/src/hooks/querys/useUserTeamsQuery'
+import { useUserTeamsQuery } from '@/src/hooks/querys/useUserTeams'
 import { useSession } from 'next-auth/react'
 import React from 'react'
 

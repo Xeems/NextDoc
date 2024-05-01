@@ -1,6 +1,6 @@
 'use client'
 
-import { useArticlesQuery } from '@/src/hooks/querys/useArticlesQuery'
+import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
 import { Edit } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
