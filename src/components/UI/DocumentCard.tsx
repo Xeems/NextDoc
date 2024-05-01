@@ -16,14 +16,10 @@ type Props = {
 }
 
 export default function DocumentCard({ document, withFooter = true }: Props) {
-    let docOwner: string
-    if (document.worksapce) docOwner = document.worksapce.name
-    else docOwner = document.user?.username as string
-
     return (
         <Link
             href={{
-                pathname: `/document/${docOwner}/${document.idName}`,
+                pathname: `/document/${document.worksapce?.name}/${document.idName}`,
             }}>
             <Card className="flex w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border p-5 shadow-md transition-all hover:border-input hover:shadow-sm  ">
                 <CardHeader className="flex-1 p-0">
@@ -34,7 +30,7 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
                         {document.description}
                     </CardDescription>
                 </CardContent>
-                {withFooter && (
+                {/* {withFooter && (
                     <CardFooter className="flex items-end p-0 pt-2">
                         <div className="flex flex-row items-center gap-x-2">
                             by
@@ -47,7 +43,7 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
                             </span>
                         </div>
                     </CardFooter>
-                )}
+                )} */}
             </Card>
         </Link>
     )

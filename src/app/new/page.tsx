@@ -23,7 +23,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
@@ -31,17 +30,20 @@ import { Separator } from '@/src/components/shadCn/ui/separator'
 import { useUserWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import useDebounce from '@/src/hooks/useDebounce'
 import { normalizeName } from '@/src/lib/utils'
-import { checkUniqueDocumentNameAction } from '@/src/server/actions/document/checkUniqueDocumentName'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
+import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { flattenBy } from '@tanstack/react-table'
+import { Loader2Icon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export default function CreateUserDocumentPage() {
     const { data: session } = useSession()
-    const { data: possibleOwners } = useUserWorkspacesQuery({
+    const [loading, setLoading] = useState(false)
+    const { data: workspaces } = useUserWorkspacesQuery({
         username: session?.user.username,
         onlyGroups: false,
     })
@@ -55,24 +57,30 @@ export default function CreateUserDocumentPage() {
         },
     })
 
-    // const docNameDebounce = useDebounce(form.watch('documentName'), 300)
+    const docNameDebounce = useDebounce(form.watch('documentName'), 300)
 
-    // useEffect(() => {
-    //     ;(async () => {
-    //         if (docNameDebounce !== '') {
-    //             const res = await checkUniqueDocumentNameAction({
-    //                 workspaceName: form.getValues('workspaceName'),
-    //                 documentName: normalizeName(docNameDebounce),
-    //             })
-    //             if (res.data === false)
-    //                 form.setError('documentName', {
-    //                     message:
-    //                         'You already have a document with the same name',
-    //                 })
-    //             else form.clearErrors('documentName')
-    //         }
-    //     })()
-    // }, [docNameDebounce, form.getValues('documentOwner')])
+    useEffect(() => {
+        setLoading(true)
+        ;(async () => {
+            const worksapce = workspaces?.find((el) => {
+                el.id == form.getValues('workspaceId')
+            })
+            const res = await getDocumentAction(
+                worksapce?.name!,
+                normalizeName(form.getValues('documentName')),
+            )
+            console.log(123)
+            if (res.data?.document)
+                form.setError('documentName', {
+                    message:
+                        'You already have a document in this workspace with the same name',
+                })
+            else {
+                form.clearErrors('documentName')
+            }
+            setLoading(false)
+        })()
+    }, [docNameDebounce, form.getValues('workspaceId')])
 
     async function newDoucumentSubmit(data: NewDocumentType) {
         console.log(data)
@@ -110,7 +118,7 @@ export default function CreateUserDocumentPage() {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
-                                                    {possibleOwners?.map(
+                                                    {workspaces?.map(
                                                         (owner) => (
                                                             <SelectItem
                                                                 key={owner.name}
@@ -148,6 +156,14 @@ export default function CreateUserDocumentPage() {
                         />
                     </div>
 
+                    <div className="inline-flex items-center text-sm gap-2 font-light">
+                        {' '}
+                        {loading && <Loader2Icon className="size-4 spin-in" />}
+                        This document will be have link:{' '}
+                        {!loading &&
+                            normalizeName(form.getValues('documentName'))}
+                    </div>
+
                     <FormField
                         control={form.control}
                         name="documentDescription"
@@ -164,9 +180,7 @@ export default function CreateUserDocumentPage() {
                             </FormItem>
                         )}
                     />
-
                     <Separator />
-
                     <FormField
                         control={form.control}
                         name="documentType"
@@ -212,7 +226,6 @@ export default function CreateUserDocumentPage() {
                         )}
                     />
                     <Separator />
-
                     <div className="space-x-2">
                         <Button variant="secondary" type="button">
                             Cancel

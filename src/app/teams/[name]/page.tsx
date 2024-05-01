@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@/src/components/shadCn/ui/button'
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
 import { useTeamDocumentsQuery } from '@/src/hooks/querys/useTeamDocuments'
-
-import { CreateDocumentModal } from './CreateDocumentModal'
+import Link from 'next/link'
 
 type Props = {
     params: {
@@ -24,7 +24,9 @@ export default function DashboardPage({ params }: Props) {
                     className="bg-background-accent text-base font-extralight"
                     placeholder="Sort documents"
                 />
-                <CreateDocumentModal />
+                <Link href="new">
+                    <Button>Create document</Button>
+                </Link>
             </div>
             <DocumentList documents={documents} />
         </div>

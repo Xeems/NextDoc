@@ -22,6 +22,7 @@ export default async function UsersPage({ params }: Props) {
     return (
         <div className="flex w-full flex-col items-center gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
             <UsersTable
+                //@ts-ignore
                 data={data!}
                 //@ts-ignore
                 columns={UserTableColumns}

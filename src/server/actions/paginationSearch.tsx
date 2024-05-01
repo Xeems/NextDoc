@@ -4,7 +4,7 @@ import { searchSchema, SearchType } from '@/@types/validators/search'
 
 import { paginationDocumentsSearch } from '../db/document.data'
 import { paginationUsersSearch } from '../db/user.data'
-import { paginationTeamsSearch } from '../db/workspace.data'
+import { paginationWorkspacesSearch } from '../db/workspace.data'
 
 type Props = {
     data: SearchType
@@ -29,8 +29,8 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
                 res = await paginationUsersSearch(data.searchQuery, page)
                 break
             }
-            case 'teams': {
-                res = await paginationTeamsSearch(data.searchQuery, page)
+            case 'workspaces': {
+                res = await paginationWorkspacesSearch(data.searchQuery, page)
                 break
             }
         }

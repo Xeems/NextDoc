@@ -1,6 +1,6 @@
 'use server'
 
-import { getWorkspacesMembers } from '@/src/server/db/workspace.data'
+import { getWorkspaceMembers } from '@/src/server/db/workspace.data'
 
 export const getWorkspaceMembersAction = async (workspaceName: string) => {
     try {
