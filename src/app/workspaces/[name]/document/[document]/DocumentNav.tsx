@@ -28,11 +28,11 @@ export default function DocumentNav({ document }: Props) {
                     return (
                         <li key={article.id}>
                             <Link
-                                href={`/document/${document.worksapce?.name}/${document.idName}/${article.idTitle}`}
+                                href={`/workspaces/${document.worksapce?.name}/document/${document.idName}/${article.idTitle}`}
                                 className="group text-sm my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden font-normal">
                                 {article.title}
                                 <Link
-                                    href={`/document/${document.worksapce?.name}/${document.idName}/edit/${article.idTitle}`}>
+                                    href={`/workspaces/${document.worksapce?.name}/document/${document.idName}/edit/${article.idTitle}`}>
                                     <Edit className="invisible ml-auto size-4 group-hover:visible" />
                                 </Link>
                             </Link>
@@ -47,11 +47,11 @@ export default function DocumentNav({ document }: Props) {
                                             <div className=" flex flex-row items-center justify-between w-full">
                                                 <Link
                                                     className="pl-7"
-                                                    href={`/document/${document.worksapce?.name}/${document.idName}/${article.idTitle}/${child.idTitle}`}>
+                                                    href={`/workspaces/${document.worksapce?.name}/document/${document.idName}/${article.idTitle}/${child.idTitle}`}>
                                                     {child.title}
                                                 </Link>
                                                 <Link
-                                                    href={`/document/${document.worksapce?.name}/${document.idName}/edit/${article.idTitle}/${child.idTitle}`}>
+                                                    href={`/workspaces/${document.worksapce?.name}/document/${document.idName}/edit/${article.idTitle}/${child.idTitle}`}>
                                                     <Edit className="invisible ml-auto  size-4 group-hover:visible" />
                                                 </Link>
                                             </div>

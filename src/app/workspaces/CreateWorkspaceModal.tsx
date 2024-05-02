@@ -51,10 +51,19 @@ export function CreateWorkspaceModal({ children }: Props) {
             name: data.name,
             userId: session?.user.id,
         })
-        if (res?.error) toast.error(res?.error)
-        queryClient.invalidateQueries({ queryKey: ['teams', session?.user.id] })
-        setDialog(false)
-        toast.success('Succesefuly created')
+        if (res?.error) {
+            toast.error(res?.error)
+            return
+        }
+
+        if (res?.data) {
+            queryClient.invalidateQueries({
+                queryKey: ['teams', session?.user.id],
+            })
+
+            toast.success('Workspace succesefuly created')
+            setDialog(false)
+        }
     }
 
     return (

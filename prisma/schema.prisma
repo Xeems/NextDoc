@@ -76,12 +76,11 @@ model VerificationRequest {
 }
 
 model Document {
-    id          String       @id @default(cuid())
-    userId      String?
-    name        String
-    idName      String
-    description String
-    type        DocumentType @default(private)
+    id                 String             @id @default(cuid())
+    name               String
+    idName             String
+    description        String
+    documentVisability DocumentVisability @default(private)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -92,6 +91,11 @@ model Document {
     workspace   Workspace? @relation(fields: [workspaceId], references: [id])
 
     @@map("documents")
+}
+
+enum DocumentVisability {
+    public
+    private
 }
 
 model Article {
@@ -117,6 +121,7 @@ model Article {
 model Workspace {
     id            String        @id @default(cuid())
     name          String        @unique
+    imageLink     String?
     description   String?
     workspaceType WorkspaceType
 
@@ -133,22 +138,18 @@ enum WorkspaceType {
 }
 
 model UserWorkspace {
-    id          String        @id @default(cuid())
-    userId      String
-    workspaceId String
-    status      String?
-    role        WorksapceRole
+    id     String        @id @default(cuid())
+    role   WorksapceRole
+    status String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    workspace Workspace @relation(fields: [workspaceId], references: [id])
-    user      User      @relation(fields: [userId], references: [id])
-}
+    workspaceId String
+    workspace   Workspace @relation(fields: [workspaceId], references: [id])
 
-enum DocumentType {
-    public
-    private
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
 }
 
 enum WorksapceRole {

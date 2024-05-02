@@ -58,7 +58,7 @@ export function WorkspacesListItemPopUp({
             href={`/workspaces/${workspace.name}`}>
             <Avatar className="h-5 w-5 bg-background">
                 <AvatarImage
-                    src={workspace.imageLink}
+                    src={workspace.imageLink || undefined}
                     className="bg-transparent"
                 />
                 <AvatarFallback>
@@ -84,7 +84,7 @@ export function WorkspacesListItemCard({
                     </span>
                     <Avatar className="size-10 bg-background">
                         <AvatarImage
-                            src={workspace.imageLink}
+                            src={workspace.imageLink || undefined}
                             className="bg-transparent"
                         />
                         <AvatarFallback></AvatarFallback>

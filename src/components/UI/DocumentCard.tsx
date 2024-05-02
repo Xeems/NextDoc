@@ -18,9 +18,7 @@ type Props = {
 export default function DocumentCard({ document, withFooter = true }: Props) {
     return (
         <Link
-            href={{
-                pathname: `/document/${document.worksapce?.name}/${document.idName}`,
-            }}>
+            href={`/workspaces/${document.worksapce?.name}/document/${document.idName}`}>
             <Card className="flex w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border p-5 shadow-md transition-all hover:border-input hover:shadow-sm  ">
                 <CardHeader className="flex-1 p-0">
                     <CardTitle className="text-lg">{document.name}</CardTitle>

@@ -83,6 +83,7 @@ export default function CreateUserDocumentPage() {
     }, [docNameDebounce, form.getValues('workspaceId')])
 
     async function newDoucumentSubmit(data: NewDocumentType) {
+        setLoading(true)
         console.log(data)
         const res = await createDocumentAction(data)
         if (res?.data) {
@@ -91,6 +92,7 @@ export default function CreateUserDocumentPage() {
         if (res?.error) {
             toast.error(res.error)
         }
+        setLoading(false)
     }
 
     return (
@@ -156,13 +158,16 @@ export default function CreateUserDocumentPage() {
                         />
                     </div>
 
-                    <div className="inline-flex items-center text-sm gap-2 font-light">
-                        {' '}
-                        {loading && <Loader2Icon className="size-4 spin-in" />}
-                        This document will be have link:{' '}
-                        {!loading &&
-                            normalizeName(form.getValues('documentName'))}
-                    </div>
+                    {docNameDebounce && form.getValues('workspaceId') && (
+                        <div className="inline-flex items-center text-sm gap-2 font-light">
+                            {' '}
+                            This document will be have link:{' '}
+                            {!loading && normalizeName(docNameDebounce)}
+                            {loading && (
+                                <Loader2Icon className="size-4 animate-spin" />
+                            )}
+                        </div>
+                    )}
 
                     <FormField
                         control={form.control}
@@ -230,7 +235,9 @@ export default function CreateUserDocumentPage() {
                         <Button variant="secondary" type="button">
                             Cancel
                         </Button>
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" disabled={loading}>
+                            Submit
+                        </Button>
                     </div>
                 </form>
             </Form>

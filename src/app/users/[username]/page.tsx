@@ -5,6 +5,7 @@ import WorkspacesList from '@/src/components/UI/WorkspacesList'
 import { userQuery } from '@/src/hooks/querys/useUser'
 import { userWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import { workspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
+import { WorkspaceType } from '@prisma/client'
 import { PlusSquareIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import React from 'react'
@@ -13,14 +14,14 @@ import ProfileCard from './ProfileCard'
 
 type Props = {
     params: {
-        name: string
+        username: string
     }
 }
 export default async function UserPage({ params }: Props) {
     const [workspacesData, userData, documentsData] = await Promise.all([
-        userWorkspacesQuery({ username: params.name }),
-        userQuery(params.name),
-        workspaceDocumentsQuery(params.name),
+        userWorkspacesQuery({ username: params.username }),
+        userQuery(params.username),
+        workspaceDocumentsQuery(params.username),
     ])
 
     if (!userData.user) notFound()
@@ -35,6 +36,7 @@ export default async function UserPage({ params }: Props) {
     const { user, isSameUser } = userData
     const { data: documents } = documentsData
     const { data: workspaces } = workspacesData
+
     return (
         <div className=" flex w-full flex-col lg:flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
             <div className="flex h-fit w-full lg:w-1/4 flex-col justify-stretch  p-2">
