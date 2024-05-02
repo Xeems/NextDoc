@@ -1,10 +1,9 @@
 'use server'
 
 import { getWorkspaceDocuemnts } from '../../db/document.data'
-import { getUserBySessionAction } from '../user/getUserBySession'
 
 export const getWorkspaceDocumentsAction = async (name: string) => {
-    const user = getUserBySessionAction()
+    if (!name) throw new Error('No workspace name')
     try {
         const res = await getWorkspaceDocuemnts(name)
         if (!res) throw new Error('Failed to get documents')

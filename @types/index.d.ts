@@ -4,6 +4,7 @@ type UserType = {
     username: string
     email?: string | null
     image: string | null
+
     createdAt?: Date | null
     updatedAt?: Date
 }
@@ -11,26 +12,31 @@ type UserType = {
 type WorspaceType = {
     id: string
     name: string
-    imageLink?: string
+    imageLink?: string | null
     description?: string | null
-    workspaceType: WorkspaceType
+    workspaceType: WorkspaceVariant
+
     createdAt?: Date
     updatedAt?: Date
 
+    users?: UserWorkspaceType[]
     documents?: DocType[]
 }
 
-type WorkspaceType = 'USER' | 'TEAM'
+type WorkspaceVariant = 'USER' | 'TEAM'
 
 type UserWorkspaceType = {
     id: string
-    userId: string
-    worksapceId: string
     role: WorkspaceRoleType
-    status?: string | null
+    status?: string
+
     createdAt: Date
     updatedAt: Date
+
+    userId: string
     user: UserType
+
+    worksapceId: string
     worksapce: WorspaceType
 }
 
@@ -38,17 +44,21 @@ type WorkspaceRoleType = 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
 
 type DocType = {
     id: string
-    idName: string
     name: string
-    description?: string | null
-    type: string
+    idName: string
+    description: string
+    documentVisability: DocumentVisavilityType
 
     createdAt: Date
     updatedAt: Date
 
+    articles?: ArticleType[]
+
     worksapceId?: string | null
     worksapce?: WorspaceType | null
 }
+
+type DocumentVisavilityType = 'public' | 'private'
 
 type ArticleType = {
     id: string | null

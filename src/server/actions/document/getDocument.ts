@@ -14,7 +14,6 @@ export const getDocumentAction = async (
     try {
         let userRole: WorkspaceRoleType = 'NONE'
         const doc = await getDocumentByOwnerAndName(workspaceName, idName)
-        if (doc?.userId == user?.id) userRole = 'OWNER'
         if (doc?.workspace) {
             if (user?.id) {
                 const res = await getWorkspaceMemberAction(

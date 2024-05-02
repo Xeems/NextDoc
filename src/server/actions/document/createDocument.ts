@@ -27,7 +27,7 @@ export const createDocumentAction = async (data: NewDocumentType) => {
             workspaceMember.data?.role === 'OWNER' ||
             workspaceMember.data?.role === 'ADMIN'
         ) {
-            const res = await createDocument(data, user.id)
+            const res = await createDocument(data)
             console.log(res)
             if (res) return { data: res }
         }

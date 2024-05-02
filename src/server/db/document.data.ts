@@ -4,15 +4,14 @@ import { NewDocumentType } from '@/@types/validators/document'
 import { prisma } from '@/src/lib/prisma'
 import { normalizeName } from '@/src/lib/utils'
 
-export const createDocument = async (data: NewDocumentType, userId: string) => {
+export const createDocument = async (data: NewDocumentType) => {
     const res = await prisma.document.create({
         data: {
             idName: normalizeName(data.documentName),
             name: data.documentName,
             description: data.documentDescription,
-            type: data.documentType,
+            documentVisability: data.documentType,
             workspaceId: data.workspaceId,
-            userId,
         },
     })
     return res
