@@ -1,4 +1,4 @@
-import { CreateWorkspaceModal } from '@/src/app/teams/CreateWorkspaceModal'
+import { CreateWorkspaceModal } from '@/src/app/workspaces/CreateWorkspaceModal'
 import { Button } from '@/src/components/shadCn/ui/button'
 import DocumentList from '@/src/components/UI/DocumentList'
 import WorkspacesList from '@/src/components/UI/WorkspacesList'
@@ -13,14 +13,14 @@ import ProfileCard from './ProfileCard'
 
 type Props = {
     params: {
-        username: string
+        name: string
     }
 }
 export default async function UserPage({ params }: Props) {
     const [workspacesData, userData, documentsData] = await Promise.all([
-        userWorkspacesQuery({ username: params.username }),
-        userQuery(params.username),
-        workspaceDocumentsQuery(params.username),
+        userWorkspacesQuery({ username: params.name }),
+        userQuery(params.name),
+        workspaceDocumentsQuery(params.name),
     ])
 
     if (!userData.user) notFound()
