@@ -16,7 +16,7 @@ type Props = {
         username: string
     }
 }
-export const UserPage = async ({ params }: Props) => {
+const UserPage = async ({ params }: Props) => {
     const [workspacesData, userData, documentsData] = await Promise.all([
         userWorkspacesQuery({ username: params.username }),
         userQuery(params.username),
