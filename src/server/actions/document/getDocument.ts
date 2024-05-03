@@ -3,7 +3,7 @@
 import { getDocumentByOwnerAndName } from '@/src/server/db/document.data'
 
 import { getUserBySessionAction } from '../user/getUserBySession'
-import { getWorkspaceMemberAction } from '../workspace/validateWorkspaceMember'
+import { getWorkspaceMemberAction } from '../workspace/getWorkspaceMember'
 
 export const getDocumentAction = async (
     workspaceName: string,

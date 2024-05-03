@@ -7,7 +7,7 @@ import {
 import { createDocument } from '@/src/server/db/document.data'
 
 import { getUserBySessionAction } from '../user/getUserBySession'
-import { getWorkspaceMemberAction } from '../workspace/validateWorkspaceMember'
+import { getWorkspaceMemberAction } from '../workspace/getWorkspaceMember'
 
 export const createDocumentAction = async (data: NewDocumentType) => {
     const validationResult = await newDocumentSchema.safeParseAsync(data)

@@ -2,12 +2,12 @@
 
 import React, { createContext, ReactNode, useState } from 'react'
 
-interface WorkspaceContextType {
+interface IWorkspaceContext {
     userRole: 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
     workspaceId: string
 }
 
-export const WorkspaceContext = createContext<WorkspaceContextType>({
+export const WorkspaceContext = createContext<IWorkspaceContext>({
     userRole: 'NONE',
     workspaceId: '',
 })
