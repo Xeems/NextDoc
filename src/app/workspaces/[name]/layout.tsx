@@ -5,21 +5,6 @@ import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import { WorkspaceContextProvider } from './WorkspaceContext'
 import WorkspaceNav from './WorkspaceNav'
 
-const NavLinks = [
-    {
-        href: '/',
-        title: 'Documents',
-    },
-    {
-        href: 'users',
-        title: 'Users',
-    },
-    {
-        href: 'settings',
-        title: 'Settings',
-    },
-]
-
 type LayoutProps = {
     children: React.ReactNode
     params: {
@@ -42,10 +27,7 @@ export default async function WorkspaceLayout({
                 workspaceId: data?.workspace.id,
             }}>
             <div className="flex w-full flex-col">
-                <WorkspaceNav
-                    links={NavLinks}
-                    basePath={`/workspaces/${params.name}`}
-                />
+                <WorkspaceNav basePath={`/workspaces/${params.name}`} />
                 <div className="flex w-full items-stretch justify-center">
                     {children}
                 </div>

@@ -19,31 +19,20 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
     return (
         <Link
             href={`/workspaces/${document.workspace?.name}/document/${document.idName}`}>
-            <Card className="flex w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border p-5 shadow-md transition-all hover:border-input hover:shadow-sm  ">
+            <Card className="flex h-full w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border px-5 py-4 shadow-md transition-all hover:border-input hover:shadow-sm  ">
                 <CardHeader className="flex-1 p-0">
                     <CardTitle className="line-clamp-2 overflow-clip text-lg">
                         {document.name}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 p-0 py-2">
-                    <CardDescription className="line-clamp-3 text-wrap text-justify">
+                    <CardDescription className="line-clamp-2 text-wrap text-justify">
                         {document.description}
                     </CardDescription>
                 </CardContent>
-                {/* {withFooter && (
-                    <CardFooter className="flex items-end p-0 pt-2">
-                        <div className="flex flex-row items-center gap-x-2">
-                            by
-                            <Avatar className="size-5">
-                                <AvatarImage src={document.user?.image!} />
-                                <AvatarFallback />
-                            </Avatar>
-                            <span className="text-center font-light">
-                                {document.user?.username}
-                            </span>
-                        </div>
-                    </CardFooter>
-                )} */}
+                <CardFooter className="p-0 text-xs font-light text-muted-foreground">
+                    {`Created at: ${document.createdAt.toLocaleDateString().toString()}`}
+                </CardFooter>
             </Card>
         </Link>
     )
