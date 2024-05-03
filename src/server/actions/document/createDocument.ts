@@ -19,6 +19,7 @@ export const createDocumentAction = async (data: NewDocumentType) => {
 
     try {
         const user = await getUserBySessionAction()
+        if (!user) throw new Error('User seesion not found')
         const workspaceMember = await getWorkspaceMemberAction(
             user.id,
             data.workspaceId,
