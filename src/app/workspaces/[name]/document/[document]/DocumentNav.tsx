@@ -6,20 +6,22 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { useContext } from 'react'
 
-import { DocumentContext } from './DocumentContext'
 import NewArticle from './newArticle'
+import { WorkspaceContext } from '../../WorkspaceContext'
 
 type Props = {
     document: DocType
 }
 
 export default function DocumentNav({ document }: Props) {
-    const documentContext = useContext(DocumentContext)
+    const documentContext = useContext(WorkspaceContext)
     const { data, error } = useArticlesQuery(document.id)
     if (error) {
         notFound()
     }
     const articles = data
+
+    console.log(documentContext)
 
     return (
         <nav className="w-72 transition-all delay-150 duration-300">
@@ -29,7 +31,7 @@ export default function DocumentNav({ document }: Props) {
                         <li key={article.id}>
                             <Link
                                 href={`/workspaces/${document.workspace?.name}/document/${document.idName}/${article.idTitle}`}
-                                className="group text-sm my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden font-normal">
+                                className="group my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden text-sm font-normal">
                                 {article.title}
                                 <Link
                                     href={`/workspaces/${document.workspace?.name}/document/${document.idName}/edit/${article.idTitle}`}>
@@ -42,9 +44,9 @@ export default function DocumentNav({ document }: Props) {
                                     return (
                                         <li
                                             key={child.title}
-                                            className="group relative text-sm flex items-center py-2 font-light text-muted-foreground hover:text-foreground">
+                                            className="group relative flex items-center py-2 text-sm font-light text-muted-foreground hover:text-foreground">
                                             <span className="absolute bottom-0 left-2 top-0 w-px bg-border" />
-                                            <div className=" flex flex-row items-center justify-between w-full">
+                                            <div className=" flex w-full flex-row items-center justify-between">
                                                 <Link
                                                     className="pl-7"
                                                     href={`/workspaces/${document.workspace?.name}/document/${document.idName}/${article.idTitle}/${child.idTitle}`}>

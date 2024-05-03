@@ -1,7 +1,6 @@
-import { authOptions } from '@/src/app/api/auth/[...nextauth]/options'
 import PageHeader from '@/src/components/UI/PageHeader'
 import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
-import { getServerSession } from 'next-auth'
+
 import { notFound } from 'next/navigation'
 
 import { WorkspaceContextProvider } from './WorkspaceContext'
@@ -33,21 +32,16 @@ export default async function WorkspaceLayout({
     children,
     params,
 }: LayoutProps) {
-    const session = await getServerSession(authOptions)
-    const { data: workspace, error: error } = await workspaceQuery(
-        params.name,
-        session?.user.id,
-    )
+    const { data, error: error } = await workspaceQuery(params.name)
 
-    if (!workspace) notFound()
-
-    const role = workspace?.workspaceUsers.find(
-        (item) => item.userId === session?.user.id,
-    )?.role
+    if (!data) notFound()
 
     return (
         <WorkspaceContextProvider
-            initial={{ WorkspaceRole: role, workspaceId: workspace.id }}>
+            initial={{
+                WorkspaceRole: data.userRole,
+                workspaceId: data?.workspace.id,
+            }}>
             <div className="flex w-full flex-col">
                 <PageHeader spaceName={params.name} />
                 <WorkspaceNav

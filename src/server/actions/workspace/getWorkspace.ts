@@ -1,17 +1,31 @@
 'use server'
 
 import { getWorkspace } from '@/src/server/db/workspace.data'
+import { getUserBySessionAction } from '../user/getUserBySession'
+import { getWorkspaceMemberAction } from './getWorkspaceMember'
 
-type Props = {
-    userId: string
-    workspaceName: string
-}
+export const getWorkspaceAction = async (workspaceName: string) => {
+    const user = await getUserBySessionAction()
 
-export const getWorkspaceAction = async ({ workspaceName, userId }: Props) => {
     try {
-        const res = await getWorkspace(workspaceName)
-        if (!res) throw new Error('User workspace db query failed')
-        return { data: res }
+        const workspace = await getWorkspace(workspaceName)
+        if (!workspace) throw new Error('Workspace not found')
+
+        let role: WorkspaceRoleType = 'NONE'
+        if (user) {
+            const workspaceUser = await getWorkspaceMemberAction(
+                user.id,
+                workspace?.id,
+            )
+            role = workspaceUser.data?.role || 'NONE'
+        }
+
+        return {
+            data: {
+                workspace: workspace,
+                userRole: role,
+            },
+        }
     } catch (error) {
         console.log(error)
         return { error: 'Failed to get user workspaces' }

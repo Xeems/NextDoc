@@ -2,7 +2,6 @@ import getQueryClient from '@/src/lib/getQueryClient'
 import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
-import { DocumentContextProvider } from './DocumentContext'
 import DocumentNav from './DocumentNav'
 
 type LayoutProps = {
@@ -24,21 +23,16 @@ export default async function DocLayout({ children, params }: LayoutProps) {
 
     const state = dehydrate(queryClient)
     return (
-        <DocumentContextProvider
-            initial={{
-                userRole: data.role,
-            }}>
-            <HydrationBoundary state={state}>
-                <div className="flex w-fit flex-col gap-y-5">
-                    <h1 className="mt-10 text-start text-4xl font-semibold">
-                        {data.document?.name}
-                    </h1>
-                    <div className="flex w-full items-start justify-center">
-                        <DocumentNav document={data.document} />
-                        {children}
-                    </div>
+        <HydrationBoundary state={state}>
+            <div className="flex w-fit flex-col gap-y-5">
+                <h1 className="mt-10 text-start text-4xl font-semibold">
+                    {data.document?.name}
+                </h1>
+                <div className="flex w-full items-start justify-center">
+                    <DocumentNav document={data.document} />
+                    {children}
                 </div>
-            </HydrationBoundary>
-        </DocumentContextProvider>
+            </div>
+        </HydrationBoundary>
     )
 }
