@@ -1,3 +1,6 @@
+import { PlusSquareIcon } from 'lucide-react'
+import { notFound } from 'next/navigation'
+
 import { CreateWorkspaceModal } from '@/src/app/workspaces/CreateWorkspaceModal'
 import { Button } from '@/src/components/shadCn/ui/button'
 import DocumentList from '@/src/components/UI/DocumentList'
@@ -5,10 +8,6 @@ import WorkspacesList from '@/src/components/UI/WorkspacesList'
 import { userQuery } from '@/src/hooks/querys/useUser'
 import { userWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import { workspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
-import { WorkspaceType } from '@prisma/client'
-import { PlusSquareIcon } from 'lucide-react'
-import { notFound } from 'next/navigation'
-import React from 'react'
 
 import ProfileCard from './ProfileCard'
 
@@ -17,7 +16,7 @@ type Props = {
         username: string
     }
 }
-export default async function UserPage({ params }: Props) {
+export const UserPage = async ({ params }: Props) => {
     const [workspacesData, userData, documentsData] = await Promise.all([
         userWorkspacesQuery({ username: params.username }),
         userQuery(params.username),
@@ -38,8 +37,8 @@ export default async function UserPage({ params }: Props) {
     const { data: workspaces } = workspacesData
 
     return (
-        <div className=" flex w-full flex-col lg:flex-row  gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
-            <div className="flex h-fit w-full lg:w-1/4 flex-col justify-stretch  p-2">
+        <div className=" flex w-full flex-col gap-y-5  bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem] lg:flex-row">
+            <div className="flex h-fit w-full flex-col justify-stretch p-2  lg:w-1/4">
                 <ProfileCard user={user} />
                 <span className="my-4 text-xl font-semibold">Workspaces</span>
                 <WorkspacesList variant="popup" workspaces={workspaces} />
@@ -55,7 +54,7 @@ export default async function UserPage({ params }: Props) {
                 )}
             </div>
 
-            <div className="flex h-fit lg:w-3/4 flex-col pb-4">
+            <div className="flex h-fit flex-col pb-4 lg:w-3/4">
                 <div className="mb-4 flex items-center justify-between">
                     <span className="m-2 text-xl font-semibold">Documents</span>
                     {isSameUser && (
@@ -73,3 +72,5 @@ export default async function UserPage({ params }: Props) {
         </div>
     )
 }
+
+export default UserPage

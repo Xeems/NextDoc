@@ -1,5 +1,12 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2Icon } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { toast } from 'sonner'
+
 import {
     newDocumentSchema,
     NewDocumentType,
@@ -32,13 +39,6 @@ import useDebounce from '@/src/hooks/useDebounce'
 import { normalizeName } from '@/src/lib/utils'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
 import { getDocumentAction } from '@/src/server/actions/document/getDocument'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { flattenBy } from '@tanstack/react-table'
-import { Loader2Icon } from 'lucide-react'
-import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 
 export default function CreateUserDocumentPage() {
     const { data: session } = useSession()
@@ -96,14 +96,14 @@ export default function CreateUserDocumentPage() {
     }
 
     return (
-        <div className="w-full md:max-w-[40rem] p-5 h-[calc(100% - 60px)] flex items-center flex-col justify-stretch">
-            <h1 className="w-full text-2xl my-5 font-bold">
+        <div className="h-[calc(100% - 60px)] flex w-full flex-col items-center justify-stretch p-5 md:max-w-[40rem]">
+            <h1 className="my-5 w-full text-2xl font-bold">
                 Create new document
             </h1>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(newDoucumentSubmit)}
-                    className="space-y-6 w-full">
+                    className="w-full space-y-6">
                     <div className="inline-flex gap-x-4">
                         <FormField
                             control={form.control}
@@ -159,7 +159,7 @@ export default function CreateUserDocumentPage() {
                     </div>
 
                     {docNameDebounce && form.getValues('workspaceId') && (
-                        <div className="inline-flex items-center text-sm gap-2 font-light">
+                        <div className="inline-flex items-center gap-2 text-sm font-light">
                             {' '}
                             This document will be have link:{' '}
                             {!loading && normalizeName(docNameDebounce)}
@@ -205,7 +205,7 @@ export default function CreateUserDocumentPage() {
                                             </FormControl>
                                             <FormLabel className="font-medium">
                                                 Public
-                                                <p className="text-muted-foreground text-sm font-light">
+                                                <p className="text-sm font-light text-muted-foreground">
                                                     This document can be seen by
                                                     anyone on the Internet
                                                 </p>
@@ -218,7 +218,7 @@ export default function CreateUserDocumentPage() {
                                             </FormControl>
                                             <FormLabel className="font-medium ">
                                                 Private
-                                                <p className="text-muted-foreground text-sm font-light">
+                                                <p className="text-sm font-light text-muted-foreground">
                                                     This document will only be
                                                     available to you
                                                 </p>

@@ -1,32 +1,52 @@
 module.exports = {
-    extends: ['prettier', 'plugin:@next/next/recommended'],
+    extends: [
+        'prettier',
+        'plugin:@next/next/recommended',
+        'plugin:prettier/recommended',
+    ],
     env: {
         browser: true,
         es2021: true,
     },
     overrides: [
         {
-            files: ['*.ts', '*.tsx'],
+            files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
             parserOptions: {
-                project: ['tsconfig.json'],
+                project: './tsconfig.json',
+                ecmaFeatures: {
+                    jsx: true,
+                },
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+            },
+            rules: {
+                'simple-import-sort/imports': [
+                    'error',
+                    {
+                        groups: [
+                            // Packages `react` related packages come first.
+                            ['^react', '^@?\\w'],
+                            // Internal packages.
+                            ['^(@|components)(/.*|$)'],
+                            // Side effect imports.
+                            ['^\\u0000'],
+                            // Parent imports. Put `..` last.
+                            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+                            // Other relative imports. Put same-folder imports and `.` last.
+                            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+                            // Style imports.
+                            ['^.+\\.?(css)$'],
+                        ],
+                    },
+                ],
             },
         },
     ],
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
-        project: './tsconfig.json',
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-    },
     parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-    },
-    plugins: ['@typescript-eslint', 'react'],
+    plugins: ['@typescript-eslint', 'react', 'simple-import-sort'],
     rules: {
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
         'consistent-return': 1,
         'jsx-a11y/label-has-associated-control': 0,
         'react-hooks/exhaustive-deps': 0,
@@ -46,33 +66,6 @@ module.exports = {
             {
                 namedComponents: 'arrow-function',
                 unnamedComponents: 'arrow-function',
-            },
-        ],
-        'import/order': [
-            2,
-            {
-                groups: [
-                    'builtin',
-                    'external',
-                    'internal',
-                    'parent',
-                    'sibling',
-                    'index',
-                ],
-                'newlines-between': 'always',
-                pathGroups: [
-                    {
-                        pattern: '~/**',
-                        group: 'internal',
-                    },
-                    {
-                        pattern: './**',
-                        group: 'index',
-                    },
-                ],
-                alphabetize: {
-                    order: 'asc',
-                },
             },
         ],
     },

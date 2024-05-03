@@ -20,9 +20,6 @@
     ],
     "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
     "importOrderTypeScriptVersion": "5.0.0",
-    "plugins": [
-        "prettier-plugin-tailwindcss",
-        "prettier-plugin-prisma",
-        "@ianvs/prettier-plugin-sort-imports"
-    ]
+
+    "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-prisma"]
 }
