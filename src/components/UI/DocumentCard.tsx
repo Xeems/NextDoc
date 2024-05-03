@@ -21,10 +21,12 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
             href={`/workspaces/${document.workspace?.name}/document/${document.idName}`}>
             <Card className="flex w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border p-5 shadow-md transition-all hover:border-input hover:shadow-sm  ">
                 <CardHeader className="flex-1 p-0">
-                    <CardTitle className="text-lg">{document.name}</CardTitle>
+                    <CardTitle className="line-clamp-2 overflow-clip text-lg">
+                        {document.name}
+                    </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 p-0 py-2">
-                    <CardDescription className=" text-wrap">
+                    <CardDescription className="line-clamp-3 text-wrap text-justify">
                         {document.description}
                     </CardDescription>
                 </CardContent>

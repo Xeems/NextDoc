@@ -1,5 +1,11 @@
 'use client'
 
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ChevronDown, ChevronDownIcon, SearchIcon } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
 import {
     searchSchema,
     searchTargetValues,
@@ -17,11 +23,6 @@ import {
 } from '@/src/components/shadCn/ui/dropdown-menu'
 import { Form, FormControl, FormField } from '@/src/components/shadCn/ui/form'
 import { Input } from '@/src/components/shadCn/ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ChevronDown, ChevronDownIcon, SearchIcon } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
-import { useForm } from 'react-hook-form'
 
 export const SearchFrom = () => {
     const searchParams = useSearchParams()
@@ -48,14 +49,14 @@ export const SearchFrom = () => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(searchSubmit)}
-                className="w-full flex flex-row gap-x-2 ">
+                className="flex w-full flex-row gap-x-2 ">
                 <FormField
                     control={form.control}
                     name="searchQuery"
                     render={({ field }) => (
                         <FormControl className="w-full">
                             <Input
-                                className="bg-background-accent w-full "
+                                className="w-full bg-background-accent "
                                 placeholder="Enter query"
                                 {...field}
                             />

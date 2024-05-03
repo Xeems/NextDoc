@@ -1,10 +1,11 @@
 'use client'
 
+import Link from 'next/link'
+
 import { Button } from '@/src/components/shadCn/ui/button'
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
-import { useTeamDocumentsQuery } from '@/src/hooks/querys/useTeamDocuments'
-import Link from 'next/link'
+import { useWorkspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
 
 type Props = {
     params: {
@@ -12,8 +13,10 @@ type Props = {
     }
 }
 
-export default function DashboardPage({ params }: Props) {
-    const { data: documents, isLoading } = useTeamDocumentsQuery(params.name)
+export const WorkspacePage = ({ params }: Props) => {
+    const { data: documents, isLoading } = useWorkspaceDocumentsQuery(
+        params.name,
+    )
 
     if (isLoading) return <div>Loading</div>
 
@@ -24,7 +27,7 @@ export default function DashboardPage({ params }: Props) {
                     className="bg-background-accent text-base font-extralight"
                     placeholder="Sort documents"
                 />
-                <Link href="new">
+                <Link href="/new">
                     <Button>Create document</Button>
                 </Link>
             </div>
@@ -32,3 +35,5 @@ export default function DashboardPage({ params }: Props) {
         </div>
     )
 }
+
+export default WorkspacePage

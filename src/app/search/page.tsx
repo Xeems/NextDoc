@@ -1,9 +1,10 @@
 'use client'
 
+import React from 'react'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+
 import { Button } from '@/src/components/shadCn/ui/button'
 import { paginationSearchAction } from '@/src/server/actions/paginationSearch'
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
-import React from 'react'
 
 import SearchFrom from './SearchFrom'
 import SearchResultCard from './SearchResultCard'

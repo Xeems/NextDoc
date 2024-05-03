@@ -1,9 +1,10 @@
+import React from 'react'
+
 import {
     Avatar,
     AvatarFallback,
     AvatarImage,
 } from '@/src/components/shadCn/ui/avatar'
-import React from 'react'
 
 export default function ProfileCard({ user }: { user: UserType }) {
     return (

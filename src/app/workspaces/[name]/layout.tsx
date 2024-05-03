@@ -1,7 +1,6 @@
-import PageHeader from '@/src/components/UI/PageHeader'
-import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
-
 import { notFound } from 'next/navigation'
+
+import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 
 import { WorkspaceContextProvider } from './WorkspaceContext'
 import WorkspaceNav from './WorkspaceNav'
@@ -43,7 +42,6 @@ export default async function WorkspaceLayout({
                 workspaceId: data?.workspace.id,
             }}>
             <div className="flex w-full flex-col">
-                <PageHeader spaceName={params.name} />
                 <WorkspaceNav
                     links={NavLinks}
                     basePath={`/workspaces/${params.name}`}
