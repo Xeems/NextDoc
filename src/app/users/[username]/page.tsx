@@ -1,7 +1,7 @@
 import { PlusSquareIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
-import { CreateWorkspaceModal } from '@/src/app/workspaces/CreateWorkspaceModal'
+import { CreateWorkspaceModal } from '@/src/components/UI/CreateWorkspaceModal'
 import { Button } from '@/src/components/shadCn/ui/button'
 import DocumentList from '@/src/components/UI/DocumentList'
 import WorkspacesList from '@/src/components/UI/WorkspacesList'
