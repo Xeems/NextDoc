@@ -1,11 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-
-import { Button } from '@/src/components/shadCn/ui/button'
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
 import { useWorkspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
+
+import { CreateNewDocumentButton } from './CreateNewDocumentButton'
 
 type Props = {
     params: {
@@ -27,10 +26,9 @@ export default function WorkspacePage({ params }: Props) {
                     className="bg-background-accent text-base font-extralight"
                     placeholder="Sort documents"
                 />
-                <Link href="new">
-                    <Button>Create document</Button>
-                </Link>
+                <CreateNewDocumentButton />
             </div>
+
             <DocumentList documents={documents} />
         </div>
     )
