@@ -55,7 +55,7 @@ type DocType = {
     articles?: ArticleType[]
 
     worksapceId?: string | null
-    workspace?: WorspaceType | null
+    workspace?: Partial<WorspaceType> | null
 }
 
 type DocumentVisavilityType = 'public' | 'private'
