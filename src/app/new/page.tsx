@@ -40,7 +40,7 @@ import { normalizeName } from '@/src/lib/utils'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
 import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 
-export default function CreateUserDocumentPage() {
+export const CreateDocumentPage = () => {
     const { data: session } = useSession()
     const [loading, setLoading] = useState(false)
     const { data: workspaces } = useUserWorkspacesQuery({
@@ -244,3 +244,5 @@ export default function CreateUserDocumentPage() {
         </div>
     )
 }
+
+export default CreateDocumentPage

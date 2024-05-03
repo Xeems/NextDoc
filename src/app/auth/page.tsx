@@ -3,7 +3,7 @@ import SignGoogleBtn from '@/src/components/UI/SignGoogleBtn'
 
 function LoginPage() {
     return (
-        <div className="flex h-fit flex-col items-center self-center p-5 gap-5">
+        <div className="flex h-fit flex-col items-center gap-5 self-center p-5">
             <SignGithubBtn />
             <SignGoogleBtn />
         </div>
