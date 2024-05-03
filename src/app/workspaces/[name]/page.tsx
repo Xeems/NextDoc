@@ -13,7 +13,7 @@ type Props = {
     }
 }
 
-export const WorkspacePage = ({ params }: Props) => {
+export default function WorkspacePage({ params }: Props) {
     const { data: documents, isLoading } = useWorkspaceDocumentsQuery(
         params.name,
     )
@@ -27,7 +27,7 @@ export const WorkspacePage = ({ params }: Props) => {
                     className="bg-background-accent text-base font-extralight"
                     placeholder="Sort documents"
                 />
-                <Link href="/new">
+                <Link href="new">
                     <Button>Create document</Button>
                 </Link>
             </div>
@@ -35,5 +35,3 @@ export const WorkspacePage = ({ params }: Props) => {
         </div>
     )
 }
-
-export default WorkspacePage

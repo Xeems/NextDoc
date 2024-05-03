@@ -1,7 +1,8 @@
 'use client'
 
-import DocumentCard from './DocumentCard'
 import { FilePlus2Icon } from 'lucide-react'
+
+import DocumentCard from './DocumentCard'
 
 type Props = {
     documents?: DocType[]
@@ -29,7 +30,7 @@ export default function DocumentList({ documents, withFooter = true }: Props) {
 
     return (
         <div className="w-full @container">
-            <div className="grid w-full grid-cols-1 gap-5 @[500px]:grid-cols-2  @[1000px]:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-5 @[500px]:grid-cols-2 @[1000px]:grid-cols-3">
                 {documents?.map((document) => {
                     return (
                         <DocumentCard
