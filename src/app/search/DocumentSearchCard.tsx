@@ -13,13 +13,13 @@ export default function DocumentSearchCard({ doc }: { doc: DocType }) {
                 <div>
                     <Link
                         className="my-0"
-                        href={`users/${doc.worksapce?.name}`}>
-                        {doc.worksapce?.name}
+                        href={`users/${doc.workspace?.name}`}>
+                        {doc.workspace?.name}
                     </Link>
                     {' / '}
                     <Link
                         className="my-0"
-                        href={`document/${doc.worksapce?.name}/${doc.idName}`}>
+                        href={`document/${doc.workspace?.name}/${doc.idName}`}>
                         {doc.name}
                     </Link>
                 </div>

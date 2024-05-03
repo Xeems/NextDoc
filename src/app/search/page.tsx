@@ -37,12 +37,12 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
         })
 
     return (
-        <div className="w-full flex flex-col items-center ">
-            <div className="w-full  lg:max-w-[70rem] justify-stretch flex my-10 px-5">
+        <div className="flex w-full flex-col items-center ">
+            <div className="my-10  flex w-full justify-stretch px-5 lg:max-w-[70rem]">
                 <SearchFrom />
             </div>
 
-            <div className="w-full flex-col gap-4 lg:max-w-[70rem] justify-stretch flex px-5 mb-4">
+            <div className="mb-4 flex w-full flex-col justify-stretch gap-4 px-5 lg:max-w-[70rem]">
                 {data.pages &&
                     data.pages.map((value, index, array) => {
                         return (
@@ -58,7 +58,7 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
                     })}
             </div>
             {(isLoading || isFetchingNextPage) && (
-                <div className="w-full h-40">Loading...</div>
+                <div className="h-40 w-full">Loading...</div>
             )}
             <Button
                 disabled={!hasNextPage || isFetchingNextPage || isLoading}

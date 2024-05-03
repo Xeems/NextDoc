@@ -33,8 +33,10 @@ export const getWorkspaceDocuemnts = async (workspaceName: string) => {
                 name: workspaceName,
             },
         },
+        include: {
+            workspace: true,
+        },
     })
-
     return res
 }
 
