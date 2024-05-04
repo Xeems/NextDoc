@@ -18,13 +18,11 @@ export default async function DocumentPage({ params }: Props) {
     })
 
     return (
-        <>
-            <div className="flex flex-col items-center md:w-full lg:w-[700px] lg:min-w-[500px]">
-                <div className="w-full flex-initial flex-col items-center justify-stretch gap-y-7 p-3 text-start">
-                    <h1 className="my-2 text-4xl">{article?.title}</h1>
-                    <ReactMarkdown markdown={article?.content} />
-                </div>
-            </div>
-        </>
+        <div className="flex w-full flex-col items-center">
+            <title className="my-2 w-full text-start text-4xl">
+                {article?.title}
+            </title>
+            <ReactMarkdown markdown={article?.content} />
+        </div>
     )
 }
