@@ -27,13 +27,14 @@ export default async function DocLayout({ children, params }: LayoutProps) {
     return (
         <HydrationBoundary state={state}>
             <div className="w-full max-w-[60rem] px-2 ">
-                <h1 className="my-5 text-start text-4xl font-semibold">
+                <h1 className=" my-5 hidden text-start text-2xl font-semibold md:block">
                     {data.document?.name}
                 </h1>
                 <div className="flex w-full flex-col items-start justify-center gap-x-5 md:flex-row">
                     <NavMobileDrawer>
                         <DocumentNav document={data.document} />
                     </NavMobileDrawer>
+
                     {children}
                 </div>
             </div>
