@@ -1,6 +1,7 @@
-import { articleQuery } from '@/src/hooks/querys/useArticle'
-import { notFound } from 'next/navigation'
 import React from 'react'
+import { notFound } from 'next/navigation'
+
+import { articleQuery } from '@/src/hooks/querys/useArticle'
 
 import ArticleEditForm from './ArticleEditForm'
 
@@ -24,7 +25,7 @@ export default async function DocumentPage({ params }: Props) {
 
     return (
         <div className="flex flex-col items-center">
-            <div className="flex flex-initial flex-row items-start justify-stretch gap-7 p-3 text-start w-[700px]">
+            <div className="flex w-[700px] flex-initial flex-row items-start justify-stretch gap-7 p-3 text-start">
                 <ArticleEditForm article={article} />
             </div>
         </div>

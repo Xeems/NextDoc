@@ -1,7 +1,9 @@
 'use server'
 
 import { getWorkspace } from '@/src/server/db/workspace.data'
+
 import { getUserBySessionAction } from '../user/getUserBySession'
+
 import { getWorkspaceMemberAction } from './getWorkspaceMember'
 
 export const getWorkspaceAction = async (workspaceName: string) => {
