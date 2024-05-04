@@ -1,13 +1,15 @@
 'use client'
 
-import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
+import { useContext } from 'react'
 import { Edit } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { useContext } from 'react'
+
+import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
+
+import { WorkspaceContext } from '../../WorkspaceContext'
 
 import NewArticle from './newArticle'
-import { WorkspaceContext } from '../../WorkspaceContext'
 
 type Props = {
     document: DocType
@@ -20,8 +22,6 @@ export default function DocumentNav({ document }: Props) {
         notFound()
     }
     const articles = data
-
-    console.log(documentContext)
 
     return (
         <nav className="w-72 transition-all delay-150 duration-300">

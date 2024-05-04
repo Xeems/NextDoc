@@ -1,5 +1,6 @@
-import { getDocumentArticlesAction } from '@/src/server/actions/article/getDocumentArticles'
 import { useQuery } from '@tanstack/react-query'
+
+import { getDocumentArticlesAction } from '@/src/server/actions/article/getDocumentArticles'
 
 export const useArticlesQuery = (documentId: string) => {
     return useQuery({

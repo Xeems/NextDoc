@@ -1,6 +1,7 @@
+import React from 'react'
+
 import ReactMarkdown from '@/src/components/TextEditor/ReactMarkdown'
 import { articleQuery } from '@/src/hooks/querys/useArticle'
-import React from 'react'
 
 type Props = {
     params: {

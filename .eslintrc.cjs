@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 module.exports = {
     extends: ['next', 'prettier', 'plugin:prettier/recommended'],
+    ignores: ['.config/*'],
     env: {
         browser: true,
         es2021: true,
@@ -8,6 +9,7 @@ module.exports = {
     overrides: [
         {
             files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+
             parserOptions: {
                 project: './tsconfig.json',
                 ecmaFeatures: {

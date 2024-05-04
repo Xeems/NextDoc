@@ -23,7 +23,7 @@ type Props = {
 
 export default function WorkspaceNav({ basePath }: Props) {
     return (
-        <nav className="flex w-full items-center justify-center border-0 border-b border-solid bg-background-accent dark:bg-background">
+        <nav className="flex w-full items-center justify-center border-0 border-b border-solid bg-background-accent">
             <div className="mx-5 flex h-full w-full gap-x-1 overflow-x-auto lg:mx-20">
                 {links.map((link) => {
                     return (

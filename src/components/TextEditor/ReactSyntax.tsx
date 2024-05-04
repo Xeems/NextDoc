@@ -6,15 +6,14 @@ type Props = {
     className?: string
     rest: any
 }
+
+//to-do dark them color schema
 function ReactSyntax({ className, children, rest }: Props) {
     const match = /language-(\w+)/.exec(className || '')
     return match ? (
-        <SyntaxHighlighter
-            {...rest}
-            PreTag="div"
-            children={String(children).replace(/\n$/, '')}
-            language={match[1]}
-        />
+        <SyntaxHighlighter {...rest} PreTag="div" language={match[1]}>
+            {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
     ) : (
         <code {...rest} className={className}>
             {children}
