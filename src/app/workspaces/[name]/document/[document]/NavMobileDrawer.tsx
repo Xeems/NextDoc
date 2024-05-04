@@ -12,7 +12,7 @@ import {
     DrawerTrigger,
 } from '@/src/components/shadCn/ui/drawer'
 import useMediaQuery from '@/src/hooks/useMediaQuery'
-import { ChevronRightIcon } from 'lucide-react'
+import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react'
 import React from 'react'
 
 export const NavMobileDrawer = ({
@@ -36,9 +36,18 @@ export const NavMobileDrawer = ({
                     <ChevronRightIcon className="size-4" /> Document content
                 </Button>
             </DrawerTrigger>
-            <DrawerContent className="p-5">
+            <DrawerContent className="h-full max-w-72 p-5">
                 <DrawerHeader className="text-left">
-                    <DrawerTitle>Document content</DrawerTitle>
+                    <DrawerClose
+                        asChild
+                        className="m-0 flex w-full justify-start p-0">
+                        <Button
+                            variant="ghost"
+                            className="w-full justify-start gap-x-4 px-2">
+                            <ChevronDownIcon className="size-4" /> Document
+                            content
+                        </Button>
+                    </DrawerClose>
                 </DrawerHeader>
                 {children}
             </DrawerContent>
