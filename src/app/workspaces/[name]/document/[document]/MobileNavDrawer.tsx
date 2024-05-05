@@ -5,17 +5,14 @@ import {
     Drawer,
     DrawerClose,
     DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
     DrawerHeader,
-    DrawerTitle,
     DrawerTrigger,
 } from '@/src/components/shadCn/ui/drawer'
 import useMediaQuery from '@/src/hooks/useMediaQuery'
 import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react'
 import React from 'react'
 
-export const NavMobileDrawer = ({
+export const MobileNavDrawer = ({
     children,
 }: {
     children: React.ReactNode
@@ -29,10 +26,10 @@ export const NavMobileDrawer = ({
 
     return (
         <Drawer open={open} onOpenChange={setOpen} direction="left">
-            <DrawerTrigger asChild>
+            <DrawerTrigger asChild className="mx-0 px-0">
                 <Button
                     variant="ghost"
-                    className="w-full justify-start gap-x-4 px-2">
+                    className="mx-0 w-full justify-start gap-x-4">
                     <ChevronRightIcon className="size-4" /> Document content
                 </Button>
             </DrawerTrigger>
@@ -55,4 +52,4 @@ export const NavMobileDrawer = ({
     )
 }
 
-export default NavMobileDrawer
+export default MobileNavDrawer

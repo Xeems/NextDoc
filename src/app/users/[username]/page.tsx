@@ -65,9 +65,7 @@ const UserPage = async ({ params }: Props) => {
                         </a>
                     )}
                 </div>
-                {documents && (
-                    <DocumentList documents={documents} withFooter={false} />
-                )}
+                {documents && <DocumentList documents={documents} />}
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
+'use client'
 import Link from 'next/link'
 
-import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import {
     Card,
     CardContent,
@@ -9,13 +9,19 @@ import {
     CardHeader,
     CardTitle,
 } from '../shadCn/ui/card'
+import { useEffect, useState } from 'react'
 
 type Props = {
     document: DocType
-    withFooter?: boolean
 }
 
-export default function DocumentCard({ document, withFooter = true }: Props) {
+export default function DocumentCard({ document }: Props) {
+    const [date, setDate] = useState('')
+
+    useEffect(() => {
+        setDate(document.createdAt.toLocaleDateString('default').toString())
+    }, [])
+
     return (
         <Link
             href={`/workspaces/${document.workspace?.name}/document/${document.idName}`}>
@@ -31,7 +37,7 @@ export default function DocumentCard({ document, withFooter = true }: Props) {
                     </CardDescription>
                 </CardContent>
                 <CardFooter className="p-0 text-xs font-light text-muted-foreground">
-                    {`Created at: ${document.createdAt.toLocaleDateString().toString()}`}
+                    {`Created at: ${date}`}
                 </CardFooter>
             </Card>
         </Link>

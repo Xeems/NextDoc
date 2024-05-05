@@ -26,7 +26,7 @@ export default function DocumentNav({ document }: Props) {
     const articles = data
 
     return (
-        <nav className="w-72 transition-all delay-150 duration-300">
+        <nav className="w-80 transition-all delay-150 duration-300">
             <ul>
                 {articles?.map((article) => {
                     return (
