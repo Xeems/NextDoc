@@ -1,24 +1,19 @@
 'use client'
 
 import { useContext } from 'react'
-import { Edit, EditIcon } from 'lucide-react'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 
 import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
 
 import { WorkspaceContext } from '../../WorkspaceContext'
 
-import NewArticle from './newArticle'
 import { cn } from '@/src/lib/utils'
-import useMediaQuery from '@/src/hooks/useMediaQuery'
 
 type Props = {
     document: DocType
 }
 
 export default function DocumentNav({ document }: Props) {
-    const documentContext = useContext(WorkspaceContext)
     const { data, error } = useArticlesQuery(document.id)
 
     if (error) throw new Error('Something went wrong')

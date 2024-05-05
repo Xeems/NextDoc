@@ -15,7 +15,7 @@ export const WorkspaceContext = createContext<IWorkspaceContext>({
 type WorkspaceContextProviderProps = {
     children: ReactNode
     initial: {
-        WorkspaceRole?: WorkspaceRoleType
+        workspaceRole?: WorkspaceRoleType
         workspaceId: string
     }
 }
@@ -24,8 +24,9 @@ export const WorkspaceContextProvider = ({
     children,
     initial,
 }: WorkspaceContextProviderProps) => {
+    console.log('initial set context')
     const [userRole] = useState<WorkspaceRoleType>(
-        initial.WorkspaceRole || 'NONE',
+        initial.workspaceRole || 'NONE',
     )
     const [workspaceId] = useState<string>(initial.workspaceId)
     return (

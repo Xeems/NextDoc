@@ -5,6 +5,8 @@ import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import { WorkspaceContextProvider } from './WorkspaceContext'
 import WorkspaceNav from './WorkspaceNav'
 import { Separator } from '@/src/components/shadCn/ui/separator'
+import { Suspense, cache } from 'react'
+import Loading from './loading'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -17,14 +19,14 @@ export default async function WorkspaceLayout({
     children,
     params,
 }: LayoutProps) {
-    const { data, error: error } = await workspaceQuery(params.name)
+    const { data, error } = await workspaceQuery(params.name)
 
-    if (!data) notFound()
+    if (!data || error) notFound()
 
     return (
         <WorkspaceContextProvider
             initial={{
-                WorkspaceRole: data.userRole,
+                workspaceRole: data.userRole,
                 workspaceId: data?.workspace.id,
             }}>
             <div className="flex w-full flex-col">
@@ -36,7 +38,7 @@ export default async function WorkspaceLayout({
                 )}
 
                 <div className="flex w-full items-stretch justify-center">
-                    {children}
+                    <Suspense fallback={<Loading />}>{children}</Suspense>
                 </div>
             </div>
         </WorkspaceContextProvider>
