@@ -3,12 +3,13 @@ import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 import DocumentNav from './DocumentNav'
-import NavMobileDrawer from './NavMobileDrawer'
+import MobileNavDrawer from './MobileNavDrawer'
+import { DocumentBreadcrumb } from './Breadcrumb'
 
 type LayoutProps = {
     children: React.ReactNode
     params: {
-        owner: string
+        name: string
         document: string
     }
 }
@@ -16,9 +17,9 @@ type LayoutProps = {
 export default async function DocLayout({ children, params }: LayoutProps) {
     const queryClient = getQueryClient()
     const { data: data, error: error } = await queryClient.fetchQuery({
-        queryKey: ['document', params.owner, params.document],
+        queryKey: ['document', params.name, params.document],
         queryFn: async () =>
-            await getDocumentAction(params.owner, params.document),
+            await getDocumentAction(params.name, params.document),
     })
 
     if (error || !data?.document) throw new Error('No document')
@@ -31,11 +32,16 @@ export default async function DocLayout({ children, params }: LayoutProps) {
                     {data.document?.name}
                 </h1>
                 <div className="flex w-full flex-col items-start justify-center gap-x-5 md:flex-row">
-                    <NavMobileDrawer>
+                    <MobileNavDrawer>
                         <DocumentNav document={data.document} />
-                    </NavMobileDrawer>
+                    </MobileNavDrawer>
 
-                    {children}
+                    <div className="w-full">
+                        <DocumentBreadcrumb
+                            ignoredSegments={['document', 'workspaces']}
+                        />
+                        {children}
+                    </div>
                 </div>
             </div>
         </HydrationBoundary>

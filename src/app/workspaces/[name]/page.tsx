@@ -1,8 +1,6 @@
-'use client'
-
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
-import { useWorkspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
+import { workspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
 
 import { CreateNewDocumentButton } from './CreateNewDocumentButton'
 
@@ -12,12 +10,8 @@ type Props = {
     }
 }
 
-export default function WorkspacePage({ params }: Props) {
-    const { data: documents, isLoading } = useWorkspaceDocumentsQuery(
-        params.name,
-    )
-
-    if (isLoading) return <div>Loading</div>
+const WorkspacePage = async ({ params }: Props) => {
+    const { data: documents } = await workspaceDocumentsQuery(params.name)
 
     return (
         <div className="flex w-full flex-col items-center gap-y-5 bg-background px-2 py-5 lg:min-w-[64rem] lg:max-w-[70rem]">
@@ -33,3 +27,5 @@ export default function WorkspacePage({ params }: Props) {
         </div>
     )
 }
+
+export default WorkspacePage

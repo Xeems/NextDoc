@@ -4,6 +4,7 @@ import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 
 import { WorkspaceContextProvider } from './WorkspaceContext'
 import WorkspaceNav from './WorkspaceNav'
+import { Separator } from '@/src/components/shadCn/ui/separator'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -27,7 +28,13 @@ export default async function WorkspaceLayout({
                 workspaceId: data?.workspace.id,
             }}>
             <div className="flex w-full flex-col">
-                <WorkspaceNav basePath={`/workspaces/${params.name}`} />
+                {data.userRole !== 'NONE' ||
+                data.workspace.workspaceType == 'USER' ? (
+                    <WorkspaceNav basePath={`/workspaces/${params.name}`} />
+                ) : (
+                    <Separator />
+                )}
+
                 <div className="flex w-full items-stretch justify-center">
                     {children}
                 </div>
