@@ -6,7 +6,7 @@ const nextConfig = {
 }
 
 module.exports = {
-    //reactStrictMode: false,
+    reactStrictMode: false,
     ...nextConfig,
     images: {
         remotePatterns: [
@@ -17,4 +17,14 @@ module.exports = {
             },
         ],
     },
+    // async redirects() {
+    //     return [
+    //         // Basic redirect
+    //         {
+    //             source: '/worksapces/:slug/document',
+    //             destination: '/worksapces/:slug',
+    //             permanent: true,
+    //         },
+    //     ]
+    // },
 }

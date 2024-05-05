@@ -23,17 +23,18 @@ export const DocumentBreadcrumb = ({ ignoredSegments }: Props) => {
         <Breadcrumb className="my-5">
             <BreadcrumbList>
                 {segments.map((segment, index) => {
-                    if (ignoredSegments?.includes(segment)) return <></>
+                    if (ignoredSegments?.includes(segment)) return null // Return null for ignored segments
                     return (
-                        <>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem key={segment}>
+                        <React.Fragment key={index}>
+                            <BreadcrumbSeparator key={`separator-${index}`} />
+                            <BreadcrumbItem key={`item-${index}`}>
                                 <BreadcrumbLink
-                                    href={`/${segments.slice(0, index + 1).join('/')}`}>
+                                    href={`/${segments.slice(0, index + 1).join('/')}`}
+                                    key={`link-${index}`}>
                                     {segment}
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </BreadcrumbList>
