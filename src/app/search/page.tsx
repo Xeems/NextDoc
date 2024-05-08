@@ -57,6 +57,7 @@ function SearchPage({ searchParams = { t: 'documents' } }: Props) {
                                     //     key={el.id}
                                     //     searchResult={el}
                                     // />
+                                    //@ts-ignore
                                     <DocumentSearchCard doc={el} />
                                 ))}
                             </React.Fragment>
