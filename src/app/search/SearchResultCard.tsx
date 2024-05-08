@@ -20,11 +20,11 @@ export default function SearchResultCard({ searchResult }: Props) {
             const user: UserType = searchResult as UserType
             return <UserSearchCard user={user} />
         }
-        case 'team': {
-            const team: WorspaceType = searchResult as WorspaceType
+        // case 'team': {
+        //     const team: WorspaceType = searchResult as WorspaceType
 
-            return <TeamSearchCard team={team} />
-        }
+        //     return <TeamSearchCard team={team} />
+        // }
     }
 }
 
@@ -34,9 +34,10 @@ function checkSearchResultType({ searchResult }: Props) {
             return 'user'
         } else if ('type' in searchResult) {
             return 'document'
-        } else if ('documents' || 'description' in searchResult) {
-            return 'team'
         }
+        // else if ('documents' || 'description' in searchResult) {
+        //     return 'team'
+        // }
     }
     return undefined
 }

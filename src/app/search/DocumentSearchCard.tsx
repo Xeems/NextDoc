@@ -27,7 +27,7 @@ export default function DocumentSearchCard({ doc }: { doc: DocType }) {
             </CardHeader>
             <CardContent className=" py-1">{doc.description}</CardContent>
             <CardFooter className="py-1 text-xs  text-muted-foreground">
-                Created at {doc.createdAt.toLocaleDateString()}
+                Created at {doc.createdAt.toLocaleDateString()}{' '}
             </CardFooter>
         </Card>
     )

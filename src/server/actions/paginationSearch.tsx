@@ -5,6 +5,7 @@ import { searchSchema, SearchType } from '@/@types/validators/search'
 import { paginationDocumentsSearch } from '../db/document.data'
 import { paginationUsersSearch } from '../db/user.data'
 import { paginationWorkspacesSearch } from '../db/workspace.data'
+import { getUserBySessionAction } from './user/getUserBySession'
 
 type Props = {
     data: SearchType
@@ -18,11 +19,16 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
             `Server side validation failed ${validationResult.error.issues[0].message}`,
         )
 
+    const user = await getUserBySessionAction()
     try {
         let res
         switch (data.searchTarget) {
             case 'documents': {
-                res = await paginationDocumentsSearch(data.searchQuery, page)
+                res = await paginationDocumentsSearch(
+                    data.searchQuery,
+                    page,
+                    user?.id,
+                )
                 break
             }
             case 'users': {
@@ -34,6 +40,7 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
                 break
             }
         }
+        console.log(res)
 
         return { data: res }
     } catch (error) {
