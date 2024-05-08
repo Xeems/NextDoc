@@ -68,11 +68,32 @@ export const getDocumentByOwnerAndName = async (
 export const paginationDocumentsSearch = async (
     searchQuery: string,
     page: number,
+    userId?: string,
 ) => {
+    console.log(userId)
     return await prisma.document.findMany({
         skip: (page - 1) * 10 || 0,
         take: 10,
         where: {
+            OR: [
+                {
+                    ...(userId && {
+                        documentVisability: 'private',
+                        workspace: {
+                            workspaceUsers: {
+                                some: {
+                                    userId: {
+                                        equals: userId,
+                                    },
+                                },
+                            },
+                        },
+                    }),
+                },
+                {
+                    documentVisability: 'public',
+                },
+            ],
             name: {
                 contains: searchQuery,
                 mode: 'insensitive',

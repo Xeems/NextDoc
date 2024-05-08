@@ -76,11 +76,11 @@ model VerificationRequest {
 }
 
 model Document {
-    id                 String             @id @default(cuid())
+    id                 String     @id @default(cuid())
     name               String
     idName             String
     description        String
-    documentVisability DocumentVisability @default(private)
+    documentVisability visability @default(private)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -93,7 +93,7 @@ model Document {
     @@map("documents")
 }
 
-enum DocumentVisability {
+enum visability {
     public
     private
 }

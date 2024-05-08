@@ -38,10 +38,10 @@ export const SearchFrom = () => {
 
     function searchSubmit(data: SearchType) {
         const params = new URLSearchParams()
-        params.delete('query')
-        params.delete('target')
-        params.append('query', data.searchQuery)
-        params.append('target', data.searchTarget)
+        params.delete('q')
+        params.delete('t')
+        params.append('q', data.searchQuery)
+        params.append('t', data.searchTarget)
         replace(`${pathname}?${params.toString()}`)
     }
 

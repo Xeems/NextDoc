@@ -8,31 +8,35 @@ import { paginationSearchAction } from '@/src/server/actions/paginationSearch'
 
 import SearchFrom from './SearchFrom'
 import SearchResultCard from './SearchResultCard'
+import DocumentSearchCard from './DocumentSearchCard'
 
 type TargetVariant = 'users' | 'documents' | 'workspaces'
 
 type Props = {
     searchParams?: {
-        query?: string
-        target?: TargetVariant
+        q?: string
+        t?: TargetVariant
     }
 }
-function SearchPage({ searchParams = { target: 'documents' } }: Props) {
+
+function SearchPage({ searchParams = { t: 'documents' } }: Props) {
     const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
         useSuspenseInfiniteQuery({
-            queryKey: ['search', searchParams.target, searchParams?.query],
+            queryKey: ['search', searchParams.t, searchParams?.q],
             queryFn: (getNextPageParam) =>
                 paginationSearchAction({
                     data: {
-                        searchQuery: searchParams.query || '',
-                        searchTarget: searchParams.target || 'documents',
+                        searchQuery: searchParams.q || '',
+                        searchTarget: searchParams.t || 'documents',
                     },
                     page: getNextPageParam.pageParam,
                 }),
             initialPageParam: 1,
             getNextPageParam: (lastPage, allPages) => {
                 const nextPage =
-                    lastPage.data?.length == 10 ? allPages.length + 1 : 0
+                    lastPage.data?.length == 10
+                        ? allPages.length + 1
+                        : undefined
                 return nextPage
             },
         })
@@ -48,12 +52,13 @@ function SearchPage({ searchParams = { target: 'documents' } }: Props) {
                     data.pages.map((value, index, array) => {
                         return (
                             <React.Fragment key={index}>
-                                {/* {value.data?.map((el) => (
-                                    <SearchResultCard
-                                        key={el.id}
-                                        searchResult={el}
-                                    />
-                                ))} */}
+                                {value.data?.map((el) => (
+                                    // <SearchResultCard
+                                    //     key={el.id}
+                                    //     searchResult={el}
+                                    // />
+                                    <DocumentSearchCard doc={el} />
+                                ))}
                             </React.Fragment>
                         )
                     })}
