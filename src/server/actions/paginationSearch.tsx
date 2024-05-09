@@ -40,7 +40,6 @@ export const paginationSearchAction = async ({ data, page }: Props) => {
                 break
             }
         }
-        console.log(res)
 
         return { data: res }
     } catch (error) {
