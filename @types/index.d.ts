@@ -47,7 +47,7 @@ type DocType = {
     name: string
     idName: string
     description: string
-    documentVisability: DocumentVisavilityType
+    documentVisability: VisavilityType
 
     createdAt: Date
     updatedAt: Date
@@ -58,7 +58,7 @@ type DocType = {
     workspace?: Partial<WorspaceType> | null
 }
 
-type DocumentVisavilityType = 'public' | 'private'
+type VisavilityType = 'public' | 'private'
 
 type ArticleType = {
     id: string | null

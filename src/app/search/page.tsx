@@ -9,6 +9,7 @@ import { paginationSearchAction } from '@/src/server/actions/paginationSearch'
 import SearchFrom from './SearchFrom'
 import SearchResultCard from './SearchResultCard'
 import DocumentSearchCard from './DocumentSearchCard'
+import { Separator } from '@/src/components/shadCn/ui/separator'
 
 type TargetVariant = 'users' | 'documents' | 'workspaces'
 

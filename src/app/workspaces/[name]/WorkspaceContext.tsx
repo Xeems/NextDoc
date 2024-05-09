@@ -24,7 +24,6 @@ export const WorkspaceContextProvider = ({
     children,
     initial,
 }: WorkspaceContextProviderProps) => {
-    console.log('initial set context')
     const [userRole] = useState<WorkspaceRoleType>(
         initial.workspaceRole || 'NONE',
     )

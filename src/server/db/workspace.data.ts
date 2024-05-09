@@ -133,3 +133,18 @@ export const addUserToWorkspace = async (data: NewWorkspaceUserType) => {
     })
     return res
 }
+
+export const updateWorkspaceName = async (
+    workspaceId: string,
+    name: string,
+) => {
+    const res = await prisma.workspace.update({
+        where: {
+            id: workspaceId,
+        },
+        data: {
+            name,
+        },
+    })
+    return res
+}

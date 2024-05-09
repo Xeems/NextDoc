@@ -16,10 +16,10 @@ export const getWorkspaceAction = async (workspaceName: string) => {
         let role: WorkspaceRoleType = 'NONE'
         if (user) {
             const workspaceUser = await getWorkspaceMemberAction(
-                user.id,
                 workspace?.id,
+                user.id,
             )
-            role = workspaceUser.data?.role || 'NONE'
+            role = workspaceUser?.data?.role || 'NONE'
         }
 
         return {
