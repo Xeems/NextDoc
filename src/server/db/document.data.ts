@@ -70,7 +70,6 @@ export const paginationDocumentsSearch = async (
     page: number,
     userId?: string,
 ) => {
-    console.log(userId)
     return await prisma.document.findMany({
         skip: (page - 1) * 10 || 0,
         take: 10,

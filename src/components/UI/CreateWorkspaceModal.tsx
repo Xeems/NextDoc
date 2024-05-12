@@ -1,8 +1,8 @@
 'use client'
 
 import {
-    newWorkspaceSchema,
-    NewWorkspaceType,
+    workspaceNameSchema,
+    WorkspaceNameType,
 } from '@/@types/validators/workspace'
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
@@ -39,14 +39,14 @@ export function CreateWorkspaceModal({ children }: Props) {
     const [isDialog, setDialog] = useState<boolean | undefined>(false)
     const { data: session } = useSession()
 
-    const form = useForm<NewWorkspaceType>({
-        resolver: zodResolver(newWorkspaceSchema),
+    const form = useForm<WorkspaceNameType>({
+        resolver: zodResolver(workspaceNameSchema),
         defaultValues: {
             name: '',
         },
     })
 
-    async function createWorkspaceSubmit(data: NewWorkspaceType) {
+    async function createWorkspaceSubmit(data: WorkspaceNameType) {
         const res = await createWorkspaceAction({
             name: data.name,
             userId: session?.user.id,
