@@ -69,7 +69,6 @@ export default function CreateDocumentPage() {
                 worksapce?.name!,
                 normalizeName(form.getValues('documentName')),
             )
-            console.log(123)
             if (res.data?.document)
                 form.setError('documentName', {
                     message:

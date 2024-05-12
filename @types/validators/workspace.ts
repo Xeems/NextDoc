@@ -1,17 +1,18 @@
 import { z } from 'zod'
 
-export const newWorkspaceSchema = z.object({
+export const workspaceNameSchema = z.object({
     name: z
         .string()
         .regex(/^\S+$/, { message: 'The name must not contain spaces' })
         .min(5, {
             message: 'The workspace name must contain at least 5 characters.',
-        }),
+        })
+        .max(30, { message: '30 characters maximum' }),
 })
 
-export type NewWorkspaceType = z.infer<typeof newWorkspaceSchema>
+export type WorkspaceNameType = z.infer<typeof workspaceNameSchema>
 
-export const newWorkspaceServerSchema = newWorkspaceSchema.extend({
+export const newWorkspaceServerSchema = workspaceNameSchema.extend({
     userId: z.string().min(1),
 })
 

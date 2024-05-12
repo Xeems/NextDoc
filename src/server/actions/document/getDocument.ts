@@ -20,7 +20,7 @@ export const getDocumentAction = async (
                     user?.id,
                     doc.workspace.id,
                 )
-                if (res.data) userRole = res.data.role
+                if (res?.data) userRole = res.data.role
             }
         }
 
