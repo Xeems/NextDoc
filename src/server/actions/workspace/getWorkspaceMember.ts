@@ -9,6 +9,7 @@ export const getWorkspaceMemberAction = async (
 ) => {
     try {
         if (!userId) {
+            // if userId is not provided, get user from session
             const user = await getUserBySessionAction()
             if (!user) return null
             const res = await getWorkspaceMember(user?.id, workspaceId)

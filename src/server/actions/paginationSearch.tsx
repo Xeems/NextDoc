@@ -12,12 +12,7 @@ type Props = {
     page: number
 }
 export const paginationSearchAction = async ({ data, page }: Props) => {
-    const validationResult = await searchSchema.safeParseAsync(data)
-
-    if (!validationResult.success)
-        throw new Error(
-            `Server side validation failed ${validationResult.error.issues[0].message}`,
-        )
+    const validationResult = await searchSchema.parseAsync(data)
 
     const user = await getUserBySessionAction()
     try {

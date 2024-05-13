@@ -17,7 +17,7 @@ export default function DocumentNav({ document }: Props) {
     const { data, error } = useArticlesQuery(document.id)
 
     if (error) throw new Error('Something went wrong')
-    const documentUrl = `/workspaces/${document.workspace?.name}/document/${document.idName}`
+    const documentUrl = `/workspaces/${document.workspace?.name}/document/${document.urlName}`
     const articles = data
 
     return (
@@ -64,7 +64,7 @@ const DocumentNavLink = ({
 }: LinkProps) => {
     return (
         <Link
-            href={`${documentUrl}/${article.idTitle}`}
+            href={`${documentUrl}/${article.urlName}`}
             className={cn(
                 'group my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden font-medium',
                 isChild &&

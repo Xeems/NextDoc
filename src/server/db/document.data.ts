@@ -7,7 +7,7 @@ import { normalizeName } from '@/src/lib/utils'
 export const createDocument = async (data: NewDocumentType) => {
     const res = await prisma.document.create({
         data: {
-            idName: normalizeName(data.documentName),
+            urlName: normalizeName(data.documentName),
             name: data.documentName,
             description: data.documentDescription,
             documentVisability: data.documentType,
@@ -42,7 +42,7 @@ export const getWorkspaceDocuemnts = async (workspaceName: string) => {
 
 export const getDocumentByOwnerAndName = async (
     workspaceName: string,
-    idName: string,
+    urlName: string,
 ) => {
     const res = await prisma.document.findFirst({
         where: {
@@ -50,7 +50,7 @@ export const getDocumentByOwnerAndName = async (
                 name: workspaceName,
             },
 
-            idName: idName,
+            urlName: urlName,
         },
         include: {
             workspace: {

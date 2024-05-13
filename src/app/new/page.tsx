@@ -85,6 +85,7 @@ export default function CreateDocumentPage() {
         setLoading(true)
         console.log(data)
         const res = await createDocumentAction(data)
+        console.log(res)
         if (res?.data) {
             toast.success('Document successfully created')
         }

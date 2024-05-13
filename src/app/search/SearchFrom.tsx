@@ -73,13 +73,16 @@ export const SearchFrom = () => {
                                     <Button
                                         className="capitalize"
                                         variant={'outline'}>
-                                        Search target{' '}
+                                        {field.value
+                                            ? field.value
+                                            : 'Search target'}
+
                                         <ChevronDownIcon className="size-4" />
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
                                     <DropdownMenuLabel>
-                                        Panel Position
+                                        Target
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuRadioGroup
