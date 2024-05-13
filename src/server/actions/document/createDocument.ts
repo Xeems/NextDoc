@@ -20,15 +20,14 @@ export const createDocumentAction = async (data: NewDocumentType) => {
     try {
         const user = await getUserBySessionAction()
         if (!user) throw new Error('User seesion not found')
-        const workspaceMember = await getWorkspaceMemberAction(
-            user.id,
-            data.workspaceId,
-        )
+        const workspaceMember = await getWorkspaceMemberAction(data.workspaceId)
+
         if (
             workspaceMember?.data?.role === 'OWNER' ||
             workspaceMember?.data?.role === 'ADMIN'
         ) {
             const res = await createDocument(data)
+            console.log(res)
             if (res) return { data: res }
         }
     } catch (error) {

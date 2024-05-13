@@ -45,7 +45,7 @@ type WorkspaceRoleType = 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
 type DocType = {
     id: string
     name: string
-    idName: string
+    urlName: string
     description: string
     documentVisability: VisavilityType
 
@@ -63,7 +63,7 @@ type VisavilityType = 'public' | 'private'
 type ArticleType = {
     id: string | null
     title: string
-    idTitle: string
+    urlName: string
     content?: null | string
 
     documentId: string

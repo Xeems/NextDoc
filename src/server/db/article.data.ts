@@ -11,7 +11,7 @@ export const createArticle = async (
     const res = await prisma.article.create({
         data: {
             title: article.title,
-            idTitle: normalizeName(article.title),
+            urlName: normalizeName(article.title),
             documentId: documentId,
             parentId: article.parentArticleId as string,
         },
@@ -23,7 +23,7 @@ export const getFirstArticle = async (documentName: string) => {
     return await prisma.article.findFirst({
         where: {
             document: {
-                idName: documentName,
+                urlName: documentName,
             },
         },
     })
@@ -36,9 +36,9 @@ export const getArticleByTitle = async (
     const res = await prisma.article.findFirst({
         where: {
             document: {
-                idName: documentName,
+                urlName: documentName,
             },
-            idTitle: articleTitle,
+            urlName: articleTitle,
         },
     })
     return res
@@ -53,13 +53,13 @@ export const getDocumentArticles = async (documentId: string) => {
         select: {
             id: true,
             title: true,
-            idTitle: true,
+            urlName: true,
             documentId: true,
             childs: {
                 select: {
                     id: true,
                     title: true,
-                    idTitle: true,
+                    urlName: true,
                     documentId: true,
                     parentId: true,
                 },

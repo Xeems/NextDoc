@@ -24,7 +24,7 @@ export default function DocumentCard({ document }: Props) {
 
     return (
         <Link
-            href={`/workspaces/${document.workspace?.name}/document/${document.idName}`}>
+            href={`/workspaces/${document.workspace?.name}/document/${document.urlName}`}>
             <Card className="flex h-full w-full flex-col gap-y-1 place-self-stretch rounded-md border border-solid border-border px-5 py-4 shadow-md transition-all hover:border-input hover:shadow-sm  ">
                 <CardHeader className="flex-1 p-0">
                     <CardTitle className="line-clamp-2 overflow-clip text-lg">
