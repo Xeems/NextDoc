@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
 import { Button } from '@/src/components/shadCn/ui/button'
 import { paginationSearchAction } from '@/src/server/actions/paginationSearch'
@@ -20,9 +20,9 @@ type Props = {
     }
 }
 
-function SearchPage({ searchParams = { t: 'documents' } }: Props) {
+const SearchPage = ({ searchParams = { t: 'documents' } }: Props) => {
     const { data, fetchNextPage, isLoading, hasNextPage, isFetchingNextPage } =
-        useSuspenseInfiniteQuery({
+        useInfiniteQuery({
             queryKey: ['search', searchParams.t, searchParams?.q],
             queryFn: (getNextPageParam) =>
                 paginationSearchAction({
@@ -49,7 +49,7 @@ function SearchPage({ searchParams = { t: 'documents' } }: Props) {
             </div>
 
             <div className="mb-4 flex w-full flex-col justify-stretch gap-4 px-5 lg:max-w-[70rem]">
-                {data.pages &&
+                {data?.pages &&
                     data.pages.map((value, index, array) => {
                         return (
                             <React.Fragment key={index}>
@@ -59,7 +59,7 @@ function SearchPage({ searchParams = { t: 'documents' } }: Props) {
                                     //     searchResult={el}
                                     // />
                                     //@ts-ignore
-                                    <DocumentSearchCard doc={el} />
+                                    <DocumentSearchCard doc={el} key={el.id} />
                                 ))}
                             </React.Fragment>
                         )
