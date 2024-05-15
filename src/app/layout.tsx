@@ -43,7 +43,7 @@ export default async function RootLayout({
                                 {children}
                             </main>
 
-                            <ReactQueryDevtools initialIsOpen={false} />
+                            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                             <SpeedInsights />
                         </ThemeProvider>
                     </body>
