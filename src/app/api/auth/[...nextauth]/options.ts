@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
                 data: {
                     name: data.user.username,
                     workspaceType: 'USER',
+                    imageLink: data.user.image,
                     workspaceUsers: {
                         create: {
                             role: 'OWNER',

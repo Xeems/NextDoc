@@ -23,6 +23,12 @@ function Header() {
                         {session.data ? (
                             <>
                                 <Link
+                                    className=" px-1 text-sm font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
+                                    href={`/new`}>
+                                    New Document
+                                </Link>
+
+                                <Link
                                     className="mr-6 px-1 text-sm font-normal text-muted-foreground transition-all hover:text-secondary-foreground"
                                     href={`/users/${session.data?.user.username}`}>
                                     Account
