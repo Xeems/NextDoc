@@ -148,3 +148,18 @@ export const updateWorkspaceName = async (
     })
     return res
 }
+
+export const updateWorkspaceAvatar = async (
+    workspaceId: string,
+    url: string,
+) => {
+    const res = await prisma.workspace.update({
+        where: {
+            id: workspaceId,
+        },
+        data: {
+            imageLink: url,
+        },
+    })
+    return res
+}

@@ -15,6 +15,11 @@ module.exports = {
                 hostname: 'res.cloudinary.com',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'NextDocBlob.public.blob.vercel-storage.com',
+                port: '',
+            },
         ],
     },
     // async redirects() {
