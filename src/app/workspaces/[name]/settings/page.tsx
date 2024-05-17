@@ -1,11 +1,9 @@
-import {
-    useWorkspaceQuery,
-    workspaceQuery,
-} from '@/src/hooks/querys/useWorkspace'
+import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import React from 'react'
-import NameForm from './NameFrom'
+import NameForm from './_components/NameFrom'
 import { notFound } from 'next/navigation'
-import WorkspaceAvatar from './WorkspaceAvatar'
+import WorkspaceAvatar from './_components/WorkspaceAvatar'
+import DeleteWorkspace from './_components/DeleteWorkspace'
 
 type Props = {
     params: {
@@ -16,9 +14,8 @@ type Props = {
 const WorkspaceSettingsPage = async ({ params: { name } }: Props) => {
     const { data, error } = await workspaceQuery(name)
 
-    if (data?.userRole == 'NONE') notFound()
+    if (!data || error || data?.userRole == 'NONE') notFound()
 
-    if (!data || error) notFound()
     return (
         <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="flex h-24 w-full items-center ">
@@ -29,7 +26,8 @@ const WorkspaceSettingsPage = async ({ params: { name } }: Props) => {
                     workspaceId={data.workspace.id}
                     workspaceName={data.workspace.name}
                 />
-                <WorkspaceAvatar />
+                <WorkspaceAvatar avatarUrl={data.workspace.imageLink} />
+                <DeleteWorkspace />
             </div>
         </div>
     )

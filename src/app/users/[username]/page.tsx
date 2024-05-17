@@ -10,6 +10,7 @@ import { userWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import { workspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
 
 import ProfileCard from './ProfileCard'
+import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
     params: {
@@ -58,7 +59,7 @@ const UserPage = async ({ params }: Props) => {
                 <div className="mb-4 flex items-center justify-between">
                     <span className="m-2 text-xl font-semibold">Documents</span>
                     {isSameUser && (
-                        <a href={`/new`}>
+                        <a href={ROUTES.NEW}>
                             <Button variant={'secondary'}>
                                 Create new document
                             </Button>

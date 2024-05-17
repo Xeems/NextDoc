@@ -14,12 +14,14 @@ import {
     CardTitle,
 } from '@/src/components/shadCn/ui/card'
 import { toast } from 'sonner'
-import { WorkspaceContext } from '../WorkspaceContext'
+import { WorkspaceContext } from '../../_components/WorkspaceContext'
 import { upload } from '@vercel/blob/client'
 import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
 
-const WorkspaceAvatar = () => {
-    const [avatar, setAvatar] = React.useState<string | null>(null)
+type Props = {
+    avatarUrl: string | null
+}
+const WorkspaceAvatar = ({ avatarUrl }: Props) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const workspaceContext = useContext(WorkspaceContext)
 
@@ -41,15 +43,12 @@ const WorkspaceAvatar = () => {
             })
 
             if (newBlob) {
-                setAvatar(newBlob.url)
                 const res = await updateWorkspaceAvatar(
                     workspaceContext.workspaceId,
                     newBlob.url,
                 )
-                console.log(res)
             }
         } catch (error) {
-            console.log(error)
             toast.error('Failed to upload avatar')
         }
     }
@@ -71,7 +70,7 @@ const WorkspaceAvatar = () => {
                 <Avatar
                     className="row-span-2 mr-10 size-20 hover:cursor-pointer"
                     onClick={handleAvatarClick}>
-                    <AvatarImage src={avatar!} />
+                    <AvatarImage src={avatarUrl ?? undefined} />
                     <AvatarFallback className="bg-blue-300" />
                 </Avatar>
 

@@ -6,6 +6,7 @@ import {
     CardFooter,
     CardHeader,
 } from '@/src/components/shadCn/ui/card'
+import { ROUTES } from '@/src/lib/routes'
 
 export default function DocumentSearchCard({ doc }: { doc: DocType }) {
     return (
@@ -14,13 +15,16 @@ export default function DocumentSearchCard({ doc }: { doc: DocType }) {
                 <div>
                     <Link
                         className="my-0"
-                        href={`workspaces/${doc.workspace?.name}`}>
+                        href={ROUTES.WORKSPACE(doc.workspace?.name!)}>
                         {doc.workspace?.name}
                     </Link>
                     {' / '}
                     <Link
                         className="my-0"
-                        href={`workspaces/${doc.workspace?.name}/document/${doc.urlName}`}>
+                        href={ROUTES.DOCUMENT(
+                            doc.workspace?.name!,
+                            doc.urlName,
+                        )}>
                         {doc.name}
                     </Link>
                 </div>
