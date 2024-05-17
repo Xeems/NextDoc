@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
+import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
     workspaces: WorspaceType[] | undefined
@@ -55,7 +56,7 @@ export function WorkspacesListItemPopUp({
     return (
         <Link
             className="flex flex-row items-center gap-x-4 rounded-md p-2 hover:bg-accent"
-            href={`/workspaces/${workspace.name}`}>
+            href={ROUTES.WORKSPACE(workspace.name)}>
             <Avatar className="h-5 w-5 bg-background">
                 <AvatarImage
                     src={workspace.imageLink || undefined}
@@ -76,7 +77,7 @@ export function WorkspacesListItemCard({
     workspace: WorspaceType
 }) {
     return (
-        <Link className="" href={`/workspaces/${workspace.name}`}>
+        <Link className="" href={ROUTES.WORKSPACE(workspace.name)}>
             <Card className="my-2 max-w-[300px]">
                 <CardHeader className="flex flex-row items-center justify-between">
                     <span className="text-xl font-semibold">

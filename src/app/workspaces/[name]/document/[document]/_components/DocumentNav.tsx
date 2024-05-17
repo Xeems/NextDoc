@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
 
-import { WorkspaceContext } from '../../WorkspaceContext'
+import { WorkspaceContext } from '../../../_components/WorkspaceContext'
 
 import { cn } from '@/src/lib/utils'
 

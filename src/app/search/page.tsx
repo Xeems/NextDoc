@@ -6,10 +6,9 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { Button } from '@/src/components/shadCn/ui/button'
 import { paginationSearchAction } from '@/src/server/actions/paginationSearch'
 
-import SearchFrom from './SearchFrom'
-import SearchResultCard from './SearchResultCard'
-import DocumentSearchCard from './DocumentSearchCard'
-import { Separator } from '@/src/components/shadCn/ui/separator'
+import SearchFrom from './_components/SearchFrom'
+
+import DocumentSearchCard from './_components/DocumentSearchCard'
 
 type TargetVariant = 'users' | 'documents' | 'workspaces'
 

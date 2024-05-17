@@ -2,9 +2,9 @@ import getQueryClient from '@/src/lib/getQueryClient'
 import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
-import DocumentNav from './DocumentNav'
-import MobileNavDrawer from './MobileNavDrawer'
-import { DocumentBreadcrumb } from './Breadcrumb'
+import DocumentNav from './_components/DocumentNav'
+import MobileNavDrawer from './_components/MobileNavDrawer'
+import { DocumentBreadcrumb } from './_components/Breadcrumb'
 
 type LayoutProps = {
     children: React.ReactNode

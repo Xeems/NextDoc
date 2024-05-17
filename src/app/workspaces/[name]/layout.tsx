@@ -1,15 +1,14 @@
 import { notFound } from 'next/navigation'
 
-import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
-
-import { WorkspaceContextProvider } from './WorkspaceContext'
-import WorkspaceNav from './WorkspaceNav'
+import { WorkspaceContextProvider } from './_components/WorkspaceContext'
+import WorkspaceNav from './_components/WorkspaceNav'
 import { Separator } from '@/src/components/shadCn/ui/separator'
-import { Suspense, cache } from 'react'
+import { Suspense } from 'react'
 import Loading from './loading'
 import getQueryClient from '@/src/lib/getQueryClient'
 import { getWorkspaceAction } from '@/src/server/actions/workspace/getWorkspace'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { ROUTES } from '@/src/lib/routes'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -42,7 +41,9 @@ export default async function WorkspaceLayout({
                 <div className="flex w-full flex-col">
                     {data.userRole !== 'NONE' ||
                     data.workspace.workspaceType == 'USER' ? (
-                        <WorkspaceNav basePath={`/workspaces/${params.name}`} />
+                        <WorkspaceNav
+                            basePath={ROUTES.WORKSPACE(params.name)}
+                        />
                     ) : (
                         <Separator />
                     )}

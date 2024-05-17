@@ -15,10 +15,8 @@ import {
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from '@/src/components/shadCn/ui/form'
 import { Input } from '@/src/components/shadCn/ui/input'
@@ -66,6 +64,9 @@ const NameForm = ({ workspaceName, workspaceId }: Props) => {
                                 <FormItem>
                                     <FormControl>
                                         <Input
+                                            disabled={
+                                                form.formState.isSubmitting
+                                            }
                                             className="my-4 max-w-[300px] bg-background"
                                             {...field}
                                         />
@@ -78,7 +79,11 @@ const NameForm = ({ workspaceName, workspaceId }: Props) => {
                     </form>
                 </Form>
             </CardContent>
-            <CardFooter className="items-center justify-end border-0 border-t bg-background">
+            <CardFooter className="items-center justify-between border-0 border-t bg-background">
+                <CardDescription className="text-muted-foreground">
+                    The name must contain between 5 and 30 characters.
+                </CardDescription>
+
                 <Button
                     type="submit"
                     form="nameForm"

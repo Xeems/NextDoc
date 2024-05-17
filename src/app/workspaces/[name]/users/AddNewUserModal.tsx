@@ -37,12 +37,11 @@ import { getUserAction } from '@/src/server/actions/user/getUser'
 import { addUserToWorkspaceAction } from '@/src/server/actions/workspace/addUserToWorkspace'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { WorkspaceContext } from '../WorkspaceContext'
+import { WorkspaceContext } from '../_components/WorkspaceContext'
 
 const newWorkspaceUserSchemaWithUsername = newWorkspaceUserSchema.extend({
     username: z.string(),
@@ -71,7 +70,7 @@ export function AddNewUserModal() {
         })
     }, [form.watch('username')])
 
-    async function newDoucumentSubmit(data: NewWorkspaceUserType) {
+    async function newUserSubmit(data: NewWorkspaceUserType) {
         console.log(data)
         const res = await addUserToWorkspaceAction(data)
         console.log(res)
@@ -103,7 +102,7 @@ export function AddNewUserModal() {
 
                 <Form {...form}>
                     <form
-                        onSubmit={form.handleSubmit(newDoucumentSubmit)}
+                        onSubmit={form.handleSubmit(newUserSubmit)}
                         className="flex flex-col gap-y-6">
                         <FormField
                             control={form.control}

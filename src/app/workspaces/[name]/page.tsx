@@ -1,7 +1,7 @@
 import { Input } from '@/src/components/shadCn/ui/input'
 import DocumentList from '@/src/components/UI/DocumentList'
 
-import { CreateNewDocumentButton } from './CreateNewDocumentButton'
+import { CreateNewDocumentButton } from './_components/CreateNewDocumentButton'
 import { getWorkspaceDocumentsAction } from '@/src/server/actions/document/getWorksapceDocuments'
 
 type Props = {

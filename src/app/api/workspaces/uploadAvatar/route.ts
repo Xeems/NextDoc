@@ -2,6 +2,7 @@ import { getUserBySessionAction } from '@/src/server/actions/user/getUserBySessi
 import { getWorkspaceMemberAction } from '@/src/server/actions/workspace/getWorkspaceMember'
 import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
+import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -46,7 +47,12 @@ export async function POST(request: Request): Promise<NextResponse> {
                     // await db.update({ avatar: blob.url, userId });
 
                     const { workspaceId } = JSON.parse(tokenPayload!)
-                    await updateWorkspaceAvatar(workspaceId, blob.url)
+                    const workspace = await updateWorkspaceAvatar(
+                        workspaceId,
+                        blob.url,
+                    )
+                    if (workspace)
+                        revalidatePath(`/workspaces/${workspace.name}`)
                 } catch (error) {
                     throw new Error('Could not update user')
                 }
