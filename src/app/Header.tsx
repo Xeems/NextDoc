@@ -9,7 +9,7 @@ import { ROUTES } from '../lib/routes'
 function Header() {
     const session = useSession()
     return (
-        <header className="sticky top-0 z-30 flex h-[50px] border-0 border-b border-solid bg-background-accent p-0 filter backdrop-blur-md">
+        <header className="sticky top-0 z-10 flex h-[50px] border-0 border-b border-solid bg-background-accent p-0 filter backdrop-blur-md">
             <div className=" mx-5 flex w-full items-center justify-between bg-transparent lg:mx-20 ">
                 <div className="text-3xl font-semibold">Logo</div>
 

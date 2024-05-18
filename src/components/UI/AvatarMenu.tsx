@@ -34,8 +34,8 @@ export default function AvatarMenu() {
                 </div>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="z-[9999] mt-2 w-fit min-w-52 rounded-md border border-solid bg-white px-1 py-2 dark:bg-black">
-                <DropdownMenuLabel className="font-normal">
+            <DropdownMenuContent className="z-50 mt-2 w-fit min-w-52 rounded-md border border-solid bg-white px-1 py-2 dark:bg-black">
+                <DropdownMenuLabel className="z-50 font-normal">
                     {session?.user?.name}
                 </DropdownMenuLabel>
 
