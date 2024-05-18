@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { WorkspaceNavLink } from './WorkspaceNavLink'
 
 const links = [
@@ -23,7 +21,7 @@ type Props = {
 
 export default function WorkspaceNav({ basePath }: Props) {
     return (
-        <nav className="z-50 -mt-[1px] flex w-full items-center justify-center border-0 border-b border-solid bg-background-accent">
+        <nav className=" -mt-[1px] flex w-full items-center justify-center border-0 border-b  bg-background-accent">
             <div className="mx-5 flex h-full w-full gap-x-1 overflow-x-auto lg:mx-20">
                 {links.map((link) => {
                     return (

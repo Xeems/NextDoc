@@ -10,6 +10,7 @@ import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from '@/src/components/shadCn/ui/card'
@@ -54,35 +55,39 @@ const WorkspaceAvatar = ({ avatarUrl }: Props) => {
     }
 
     return (
-        <Card className="flex flex-row items-center justify-between">
-            <div>
-                <CardHeader className="col-start-1">
-                    <CardTitle>Workspace avatar</CardTitle>
-                </CardHeader>
-                <CardContent className="col-start-2">
-                    <CardDescription>
-                        This is your team's avatar. <br /> Click on the avatar
-                        to upload a custom one from your files.
-                    </CardDescription>
-                </CardContent>
-            </div>
-            <div>
-                <Avatar
-                    className="row-span-2 mr-10 size-20 hover:cursor-pointer"
-                    onClick={handleAvatarClick}>
-                    <AvatarImage src={avatarUrl ?? undefined} />
-                    <AvatarFallback className="bg-blue-300" />
-                </Avatar>
+        <Card className="">
+            <div className="flex w-full flex-row items-center justify-between">
+                <div>
+                    <CardHeader className="col-start-1">
+                        <CardTitle>Workspace avatar</CardTitle>
+                    </CardHeader>
+                    <CardContent className="col-start-2">
+                        <CardDescription>
+                            This is your team's avatar. <br />
+                        </CardDescription>
+                    </CardContent>
+                </div>
+                <div>
+                    <Avatar
+                        className="row-span-2 mr-10 size-20 hover:cursor-pointer"
+                        onClick={handleAvatarClick}>
+                        <AvatarImage src={avatarUrl ?? undefined} />
+                        <AvatarFallback className="bg-blue-300" />
+                    </Avatar>
 
-                <input
-                    hidden
-                    type="file"
-                    id="avatar"
-                    accept="image/png, image/jpeg"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                />
+                    <input
+                        hidden
+                        type="file"
+                        id="avatar"
+                        accept="image/png, image/jpeg"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                    />
+                </div>
             </div>
+            <CardFooter className="w-full border-t bg-background text-sm font-light text-muted-foreground">
+                Click on the avatar to upload a custom one from your files.
+            </CardFooter>
         </Card>
     )
 }

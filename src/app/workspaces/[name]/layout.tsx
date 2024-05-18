@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 import { WorkspaceContextProvider } from './_components/WorkspaceContext'
 import WorkspaceNav from './_components/WorkspaceNav'
@@ -31,22 +31,24 @@ export default async function WorkspaceLayout({
 
     if (!data || error) notFound()
 
+    if (data.userRole !== 'OWNER' && data.workspace.workspaceType === 'USER') {
+        redirect(ROUTES.USER(data.workspace.name))
+    }
+
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <WorkspaceContextProvider
                 initial={{
                     workspaceRole: data.userRole,
-                    workspaceId: data?.workspace.id,
+                    workspaceId: data.workspace.id,
                 }}>
                 <div className="flex w-full flex-col">
-                    {data.userRole !== 'NONE' ||
-                    data.workspace.workspaceType == 'USER' ? (
-                        <WorkspaceNav
-                            basePath={ROUTES.WORKSPACE(params.name)}
-                        />
-                    ) : (
-                        <Separator />
-                    )}
+                    {data.userRole !== 'NONE' &&
+                        data.workspace.workspaceType === 'TEAM' && (
+                            <WorkspaceNav
+                                basePath={ROUTES.WORKSPACE(params.name)}
+                            />
+                        )}
 
                     <div className="flex w-full items-stretch justify-center">
                         <Suspense fallback={<Loading />}>{children}</Suspense>
