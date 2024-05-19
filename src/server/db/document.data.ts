@@ -40,17 +40,21 @@ export const getWorkspaceDocuemnts = async (workspaceName: string) => {
     return res
 }
 
-export const getDocumentByOwnerAndName = async (
+export const getDocumentByWorkspaceNameAndName = async (
     workspaceName: string,
     urlName: string,
 ) => {
     const res = await prisma.document.findFirst({
         where: {
-            workspace: {
-                name: workspaceName,
-            },
+            OR: [
+                {
+                    workspace: {
+                        name: workspaceName,
+                    },
 
-            urlName: urlName,
+                    urlName: urlName,
+                },
+            ],
         },
         include: {
             workspace: {
@@ -63,6 +67,18 @@ export const getDocumentByOwnerAndName = async (
     })
 
     return res
+}
+
+export const getDocumentByWorkspaceIdAndName = async (
+    workspaceId: string,
+    documentName: string,
+) => {
+    return await prisma.document.findFirst({
+        where: {
+            workspaceId,
+            name: documentName,
+        },
+    })
 }
 
 export const paginationDocumentsSearch = async (
