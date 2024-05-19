@@ -9,7 +9,7 @@ type UserType = {
     updatedAt?: Date
 }
 
-type WorspaceType = {
+type WorkspaceType = {
     id: string
     name: string
     imageLink?: string | null
@@ -37,7 +37,7 @@ type UserWorkspaceType = {
     user: UserType
 
     worksapceId: string
-    worksapce: WorspaceType
+    worksapce: WorkspaceType
 }
 
 type WorkspaceRoleType = 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
@@ -55,7 +55,7 @@ type DocType = {
     articles?: ArticleType[]
 
     worksapceId?: string | null
-    workspace?: Partial<WorspaceType> | null
+    workspace?: Partial<WorkspaceType> | null
 }
 
 type VisavilityType = 'public' | 'private'

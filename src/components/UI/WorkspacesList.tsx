@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
 import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
-    workspaces: WorspaceType[] | undefined
+    workspaces: WorkspaceType[] | undefined
     variant?: 'default' | 'popup'
 }
 
@@ -51,7 +51,7 @@ export default function WorkspacesList({
 export function WorkspacesListItemPopUp({
     workspace,
 }: {
-    workspace: WorspaceType
+    workspace: WorkspaceType
 }) {
     return (
         <Link
@@ -74,7 +74,7 @@ export function WorkspacesListItemPopUp({
 export function WorkspacesListItemCard({
     workspace,
 }: {
-    workspace: WorspaceType
+    workspace: WorkspaceType
 }) {
     return (
         <Link className="" href={ROUTES.WORKSPACE(workspace.name)}>

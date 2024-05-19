@@ -4,22 +4,27 @@ import {
     newDocumentSchema,
     NewDocumentType,
 } from '@/@types/validators/document'
-import { createDocument } from '@/src/server/db/document.data'
+import {
+    createDocument,
+    getDocumentByWorkspaceIdAndName,
+} from '@/src/server/db/document.data'
 
 import { getUserBySessionAction } from '../user/getUserBySession'
 import { getWorkspaceMemberAction } from '../workspace/getWorkspaceMember'
 
 export const createDocumentAction = async (data: NewDocumentType) => {
-    const validationResult = await newDocumentSchema.safeParseAsync(data)
-
-    if (!validationResult.success)
-        throw Error(
-            `Validation failed ${validationResult.error.issues[0].message}`,
-        )
+    const validationResult = await newDocumentSchema.parseAsync(data)
 
     try {
+        const document = await getDocumentByWorkspaceIdAndName(
+            data.workspaceId,
+            data.documentName,
+        )
+        if (document) throw new Error('Document already exists')
+
         const user = await getUserBySessionAction()
         if (!user) throw new Error('User seesion not found')
+
         const workspaceMember = await getWorkspaceMemberAction(data.workspaceId)
 
         if (

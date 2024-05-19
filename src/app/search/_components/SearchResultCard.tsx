@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 type Props = {
-    searchResult: UserType | DocType | WorspaceType
+    searchResult: UserType | DocType | WorkspaceType
 }
 
 const DocumentSearchCard = lazy(() => import('./DocumentSearchCard'))
