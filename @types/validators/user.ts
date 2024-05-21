@@ -1,5 +1,10 @@
 import { z } from 'zod'
 
+export const usernameSchema = z
+    .string()
+    .min(5, { message: 'At least 5 characters' })
+    .max(30, { message: '30 characters maximum' })
+
 export const newUserSchema = z.object({
     email: z
         .string()

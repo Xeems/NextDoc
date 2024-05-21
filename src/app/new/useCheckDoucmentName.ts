@@ -1,6 +1,4 @@
 import useDebounce from '@/src/hooks/useDebounce'
-
-import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { getDocumentByWorkspaceIdAndName } from '@/src/server/db/document.data'
 import { useEffect, useState } from 'react'
 
@@ -18,7 +16,7 @@ const useCheckDoucmentName = ({ name, workspaceId }: Props) => {
         ;(async () => {
             const res = await getDocumentByWorkspaceIdAndName(
                 workspaceId,
-                debouncedName,
+                debouncedName.trim(),
             )
             if (res)
                 setError(

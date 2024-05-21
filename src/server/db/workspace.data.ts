@@ -24,19 +24,28 @@ export const createWorkspace = async (data: NewWorkspaceServerType) => {
 }
 
 export const getUserWorkspaces = async (data: UserWorkspacesQueryType) => {
+    console.log(data)
     const res = await prisma.workspace.findMany({
         where: {
-            workspaceType: data.onlyGroups ? 'TEAM' : undefined,
+            workspaceType: data.teamsOnly ? 'TEAM' : undefined,
 
             workspaceUsers: {
                 every: {
                     user: {
-                        username: data.username,
+                        OR: [
+                            {
+                                username: data.username,
+                            },
+                            {
+                                id: data.userId,
+                            },
+                        ],
                     },
                 },
             },
         },
     })
+    console.log(res)
     return res
 }
 
