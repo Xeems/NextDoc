@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { usernameSchema } from './user'
 
 export const workspaceNameSchema = z.object({
     name: z
@@ -27,8 +28,9 @@ export const newWorkspaceUserSchema = z.object({
 export type NewWorkspaceUserType = z.infer<typeof newWorkspaceUserSchema>
 
 export const userWorkspacesQuerySchema = z.object({
-    username: z.string(),
-    onlyGroups: z.boolean().default(true).optional(),
+    username: usernameSchema.optional(),
+    userId: z.string().cuid().optional(),
+    teamsOnly: z.boolean().default(true).optional(),
 })
 
 export type UserWorkspacesQueryType = z.infer<typeof userWorkspacesQuerySchema>
