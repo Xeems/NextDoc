@@ -1,6 +1,6 @@
 'use client'
 
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2Icon } from 'lucide-react'
 import { toast } from 'sonner'
@@ -24,14 +24,14 @@ import {
     RadioGroupItem,
 } from '@/src/components/shadCn/ui/radio-group'
 import { Separator } from '@/src/components/shadCn/ui/separator'
-import { normalizeName } from '@/src/lib/utils'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
-import useCheckDoucmentName from './useCheckDoucmentName'
+import useCheckDocumentName from './useCheckDocumentName'
 import RHFSelect from './RHFSelect'
 
 type Props = {
     workspaces: WorkspaceType[]
 }
+
 const NewDocumentForm = ({ workspaces }: Props) => {
     const form = useForm<NewDocumentType>({
         resolver: zodResolver(newDocumentSchema),
@@ -43,17 +43,18 @@ const NewDocumentForm = ({ workspaces }: Props) => {
         },
     })
 
-    const { loading, error } = useCheckDoucmentName({
-        name: form.watch('documentName'),
-        workspaceId: workspaces?.find(
-            (el) => el.id == form.getValues('workspaceId'),
-        )?.id!,
+    const nameWatch = useWatch({ name: 'documentName', control: form.control })
+    const workspaceId = form.watch('workspaceId')
+
+    const { loading, debouncedName, error } = useCheckDocumentName({
+        name: nameWatch,
+        workspaceId: workspaceId || '',
     })
 
     const isSubmitDisabled =
         form.formState.isSubmitting || loading || error ? true : false
 
-    async function newDoucumentSubmit(data: NewDocumentType) {
+    async function newDocumentSubmit(data: NewDocumentType) {
         const res = await createDocumentAction(data)
 
         if (res?.data) toast.success('Document successfully created')
@@ -69,7 +70,7 @@ const NewDocumentForm = ({ workspaces }: Props) => {
             <FormProvider {...form}>
                 <Form {...form}>
                     <form
-                        onSubmit={form.handleSubmit(newDoucumentSubmit)}
+                        onSubmit={form.handleSubmit(newDocumentSubmit)}
                         className="w-full space-y-6">
                         <div className="flex h-fit w-full flex-row items-start gap-x-4">
                             <RHFSelect
@@ -100,12 +101,10 @@ const NewDocumentForm = ({ workspaces }: Props) => {
                             form.getValues('workspaceId') && (
                                 <div className="inline-flex items-center gap-2 text-sm font-light">
                                     This document will be have link:{' '}
-                                    {!loading &&
-                                        normalizeName(
-                                            form.getValues('documentName'),
-                                        )}
-                                    {loading && (
+                                    {loading ? (
                                         <Loader2Icon className="size-4 animate-spin" />
+                                    ) : (
+                                        debouncedName
                                     )}
                                 </div>
                             )}

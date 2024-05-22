@@ -13,7 +13,7 @@ import { getUserBySessionAction } from '../user/getUserBySession'
 import { getWorkspaceMemberAction } from '../workspace/getWorkspaceMember'
 
 export const createDocumentAction = async (data: NewDocumentType) => {
-    const validationResult = await newDocumentSchema.parseAsync(data)
+    await newDocumentSchema.parseAsync(data)
 
     try {
         const document = await getDocumentByWorkspaceIdAndName(
@@ -28,13 +28,12 @@ export const createDocumentAction = async (data: NewDocumentType) => {
         const workspaceMember = await getWorkspaceMemberAction(data.workspaceId)
 
         if (
-            workspaceMember?.data?.role === 'OWNER' ||
-            workspaceMember?.data?.role === 'ADMIN'
-        ) {
-            const res = await createDocument(data)
-            console.log(res)
-            if (res) return { data: res }
-        }
+            workspaceMember?.data?.role === 'BASE' ||
+            workspaceMember?.data?.role === null
+        )
+            throw new Error('No permission to create document')
+        const res = await createDocument(data)
+        if (res) return { data: res }
     } catch (error) {
         console.log(error)
         return { error: "Can't create document" }
