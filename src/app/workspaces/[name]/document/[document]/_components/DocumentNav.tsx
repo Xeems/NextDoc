@@ -8,17 +8,17 @@ import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
 import { WorkspaceContext } from '../../../_components/WorkspaceContext'
 
 import { cn } from '@/src/lib/utils'
+import NewArticleForm from './NewArticleForm'
 
 type Props = {
     document: DocType
 }
 
 export default function DocumentNav({ document }: Props) {
-    const { data, error } = useArticlesQuery(document.id)
+    const { data: articles, error } = useArticlesQuery(document.id)
 
     if (error) throw new Error('Something went wrong')
     const documentUrl = `/workspaces/${document.workspace?.name}/document/${document.urlName}`
-    const articles = data
 
     return (
         <nav className="w-80 transition-all delay-150 duration-300">
@@ -47,6 +47,7 @@ export default function DocumentNav({ document }: Props) {
                     )
                 })}
             </ul>
+            <NewArticleForm articles={articles} document={document} />
         </nav>
     )
 }

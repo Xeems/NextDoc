@@ -42,7 +42,7 @@ type Props = {
     document: DocType
 }
 
-export default function NewArticle({ articles, document }: Props) {
+export default function NewArticleForm({ articles, document }: Props) {
     const form = useForm<newArticleType>({
         resolver: zodResolver(newArticleSchema),
         defaultValues: {
@@ -76,6 +76,9 @@ export default function NewArticle({ articles, document }: Props) {
                 </DialogHeader>
 
                 <Form {...form}>
+                    <h2 className="text-2xl font-semibold leading-none tracking-tight">
+                        New artcile
+                    </h2>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-8">
