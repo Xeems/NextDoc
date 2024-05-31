@@ -48,7 +48,7 @@ const UserPage = async ({ params }: Props) => {
                         <Button
                             variant={'ghost'}
                             className="justify-start gap-x-2">
-                            <PlusSquareIcon className="h-4 w-4" />
+                            <PlusSquareIcon className="h-4 w-4 " />
                             Create workspace
                         </Button>
                     </CreateWorkspaceModal>

@@ -24,6 +24,7 @@ export const getUserById = async (userId: string) => {
             id: userId,
         },
     })
+
     return user
 }
 

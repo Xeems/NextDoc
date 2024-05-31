@@ -22,14 +22,4 @@ module.exports = {
             },
         ],
     },
-    // async redirects() {
-    //     return [
-    //         // Basic redirect
-    //         {
-    //             source: '/worksapces/:slug/document',
-    //             destination: '/worksapces/:slug',
-    //             permanent: true,
-    //         },
-    //     ]
-    // },
 }
