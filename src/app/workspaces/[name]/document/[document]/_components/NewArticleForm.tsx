@@ -1,5 +1,11 @@
 'use client'
 
+import React, { useContext } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { PlusIcon } from 'lucide-react'
+import { toast } from 'sonner'
+
 import { newArticleSchema, newArticleType } from '@/@types/validators/article'
 import { Button } from '@/src/components/shadCn/ui/button'
 import { Checkbox } from '@/src/components/shadCn/ui/checkbox'
@@ -31,11 +37,8 @@ import {
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
 import { createArticleAction } from '@/src/server/actions/article/createArticle'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { PlusIcon } from 'lucide-react'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+
+import { WorkspaceContext } from '../../../_components/WorkspaceContext'
 
 type Props = {
     articles: ArticleType[] | undefined
@@ -43,6 +46,7 @@ type Props = {
 }
 
 export default function NewArticleForm({ articles, document }: Props) {
+    const context = useContext(WorkspaceContext)
     const form = useForm<newArticleType>({
         resolver: zodResolver(newArticleSchema),
         defaultValues: {
@@ -51,6 +55,10 @@ export default function NewArticleForm({ articles, document }: Props) {
             parentArticleId: undefined,
         },
     })
+
+    if (context.userRole !== 'OWNER' && context.userRole !== 'ADMIN')
+        return <></>
+
     const haveParent = form.watch('haveParent')
 
     const onSubmit = async (data: newArticleType) => {
@@ -64,8 +72,12 @@ export default function NewArticleForm({ articles, document }: Props) {
 
     return (
         <Dialog>
-            <DialogTrigger className="mx-auto flex items-center justify-between gap-x-2">
-                New artcile <PlusIcon className="h-4 w-4" />
+            <DialogTrigger
+                asChild
+                className="mx-auto flex items-center justify-between gap-x-2">
+                <Button size={'sm'}>
+                    New artcile <PlusIcon className="h-4 w-4" />
+                </Button>
             </DialogTrigger>
             <DialogContent className="bg-background-accent">
                 <DialogHeader>
