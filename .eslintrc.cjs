@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 module.exports = {
     extends: ['next', 'prettier', 'plugin:prettier/recommended'],
-    ignores: ['.config/*'],
+    ignorePatterns: ['.config/*'],
     env: {
         browser: true,
         es2021: true,

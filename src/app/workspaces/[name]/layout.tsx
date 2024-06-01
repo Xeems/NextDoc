@@ -1,14 +1,14 @@
+import { Suspense } from 'react'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { notFound, redirect } from 'next/navigation'
+
+import getQueryClient from '@/src/lib/getQueryClient'
+import { ROUTES } from '@/src/lib/routes'
+import { getWorkspaceAction } from '@/src/server/actions/workspace/getWorkspace'
 
 import { WorkspaceContextProvider } from './_components/WorkspaceContext'
 import WorkspaceNav from './_components/WorkspaceNav'
-import { Separator } from '@/src/components/shadCn/ui/separator'
-import { Suspense } from 'react'
 import Loading from './loading'
-import getQueryClient from '@/src/lib/getQueryClient'
-import { getWorkspaceAction } from '@/src/server/actions/workspace/getWorkspace'
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import { ROUTES } from '@/src/lib/routes'
 
 type LayoutProps = {
     children: React.ReactNode

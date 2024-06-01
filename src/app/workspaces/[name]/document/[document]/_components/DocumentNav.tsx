@@ -1,13 +1,11 @@
 'use client'
 
-import { useContext } from 'react'
 import Link from 'next/link'
 
 import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
-
-import { WorkspaceContext } from '../../../_components/WorkspaceContext'
-
+import { ROUTES } from '@/src/lib/routes'
 import { cn } from '@/src/lib/utils'
+
 import NewArticleForm from './NewArticleForm'
 
 type Props = {
@@ -18,14 +16,17 @@ export default function DocumentNav({ document }: Props) {
     const { data: articles, error } = useArticlesQuery(document.id)
 
     if (error) throw new Error('Something went wrong')
-    const documentUrl = `/workspaces/${document.workspace?.name}/document/${document.urlName}`
+    const documentUrl = ROUTES.DOCUMENT(
+        document.workspace?.name!,
+        document.urlName,
+    )
 
     return (
-        <nav className="w-80 transition-all delay-150 duration-300">
+        <nav className="w-full transition-all delay-150 duration-300 md:w-80">
             <ul>
                 {articles?.map((article) => {
                     return (
-                        <div key={article.id}>
+                        <li key={article.id}>
                             <DocumentNavLink
                                 article={article}
                                 documentUrl={documentUrl}
@@ -43,7 +44,7 @@ export default function DocumentNav({ document }: Props) {
                                     )
                                 })}
                             </ul>
-                        </div>
+                        </li>
                     )
                 })}
             </ul>
