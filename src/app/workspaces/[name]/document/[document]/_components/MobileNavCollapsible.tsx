@@ -10,6 +10,7 @@ import {
     CollapsibleTrigger,
 } from '@/src/components/shadCn/ui/collapsible'
 import useMediaQuery from '@/src/hooks/useMediaQuery'
+import { cn } from '@/src/lib/utils'
 
 export const MobileNavCollapsible = ({
     children,
@@ -28,14 +29,17 @@ export const MobileNavCollapsible = ({
             open={open}
             onOpenChange={setOpen}
             className="w-full rounded-none">
-            <CollapsibleTrigger asChild className="mx-0 px-0">
+            <CollapsibleTrigger asChild className="">
                 <Button
                     variant="ghost"
-                    className="mx-0 w-full justify-start gap-x-4 rounded-none">
-                    <ChevronRightIcon className="size-4" /> Document content
+                    className="w-full justify-start gap-x-4 rounded-none text-base">
+                    <ChevronRightIcon
+                        className={cn('size-4', open && 'rotate-90')}
+                    />
+                    Navigation
                 </Button>
             </CollapsibleTrigger>
-            <CollapsibleContent className="absolute h-full w-full rounded-none border bg-background p-5 ">
+            <CollapsibleContent className="absolute h-full w-full rounded-none bg-background p-5 ">
                 {children}
             </CollapsibleContent>
         </Collapsible>

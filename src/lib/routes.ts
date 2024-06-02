@@ -8,5 +8,6 @@ export const ROUTES = {
     WORKSPACE_SETTINGS: (workspace: string) =>`/workspaces/${workspace}/settings`,
     WORKSPACE_USERS: (workspace: string) => `/workspaces/${workspace}/users`,
     DOCUMENT: (workspace: string, document: string) =>`/workspaces/${workspace}/document/${document}`,
-    DOCUMENT_ARTICLE: (workspace: string, document: string, article:string) =>`/workspaces/${workspace}/document/${document}/${article}`,
+    DOCUMENT_ARTICLE: (workspace: string, document: string, articles:string[]) =>
+        `/workspaces/${workspace}/document/${document}/${articles.map(article => article).join('/')}`,
 } as const
