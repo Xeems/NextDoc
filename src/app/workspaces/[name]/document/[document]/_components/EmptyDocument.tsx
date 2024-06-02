@@ -1,5 +1,5 @@
-import { CircleOffIcon } from 'lucide-react'
 import React from 'react'
+import { CircleOffIcon } from 'lucide-react'
 
 export default function EmptyDocument() {
     return (

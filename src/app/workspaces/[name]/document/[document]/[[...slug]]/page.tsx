@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Separator } from '@/src/components/shadCn/ui/separator'
 import ReactMarkdown from '@/src/components/TextEditor/ReactMarkdown'
 import { articleQuery } from '@/src/hooks/querys/useArticle'
 
@@ -18,10 +19,11 @@ export default async function DocumentPage({ params }: Props) {
     })
 
     return (
-        <div className="flex w-full flex-col items-center">
-            <title className="my-2 w-full text-start text-4xl">
+        <div className="flex h-fit w-full flex-col items-center">
+            <h1 className="my-2 w-full text-start text-4xl font-semibold">
                 {article?.title}
-            </title>
+            </h1>
+            <Separator className="my-4" />
             <ReactMarkdown markdown={article?.content} />
         </div>
     )

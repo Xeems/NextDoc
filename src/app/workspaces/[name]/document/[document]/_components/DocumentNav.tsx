@@ -1,44 +1,48 @@
-'use client'
-
-import Link from 'next/link'
-
-import { useArticlesQuery } from '@/src/hooks/querys/useArticles'
 import { ROUTES } from '@/src/lib/routes'
-import { cn } from '@/src/lib/utils'
+import { getDocumentArticlesAction } from '@/src/server/actions/article/getDocumentArticles'
 
+import { DocumentNavLink } from './DocumentNavLink'
 import NewArticleForm from './NewArticleForm'
 
 type Props = {
     document: DocType
+    workspaceName: string
 }
 
-export default function DocumentNav({ document }: Props) {
-    const { data: articles, error } = useArticlesQuery(document.id)
-
-    if (error) throw new Error('Something went wrong')
-    const documentUrl = ROUTES.DOCUMENT(
-        document.workspace?.name!,
-        document.urlName,
+const DocumentNav = async ({ document, workspaceName }: Props) => {
+    const { data: articles, error } = await getDocumentArticlesAction(
+        document.id,
     )
-
+    if (error || !articles) throw new Error()
     return (
-        <nav className="w-full transition-all delay-150 duration-300 md:w-80">
+        <nav className="w-full  transition-all md:w-80">
             <ul>
                 {articles?.map((article) => {
                     return (
                         <li key={article.id}>
                             <DocumentNavLink
-                                article={article}
-                                documentUrl={documentUrl}
+                                title={article.title}
+                                href={ROUTES.DOCUMENT_ARTICLE(
+                                    workspaceName,
+                                    document.urlName,
+                                    [article.urlName],
+                                )}
                             />
                             <ul>
                                 {article.childs?.map((child) => {
                                     return (
                                         <li key={child.title}>
                                             <DocumentNavLink
-                                                documentUrl={documentUrl}
+                                                href={ROUTES.DOCUMENT_ARTICLE(
+                                                    workspaceName,
+                                                    document.urlName,
+                                                    [
+                                                        article.urlName,
+                                                        child.urlName,
+                                                    ],
+                                                )}
                                                 isChild
-                                                article={child}
+                                                title={child.title}
                                             />
                                         </li>
                                     )
@@ -53,26 +57,4 @@ export default function DocumentNav({ document }: Props) {
     )
 }
 
-type LinkProps = {
-    article: ArticleType
-    documentUrl: string
-    isChild?: boolean
-}
-
-const DocumentNavLink = ({
-    article,
-    documentUrl,
-    isChild = false,
-}: LinkProps) => {
-    return (
-        <Link
-            href={`${documentUrl}/${article.urlName}`}
-            className={cn(
-                'group my-2 flex flex-row items-center justify-between gap-x-2 overflow-hidden font-medium',
-                isChild &&
-                    'bprder my-0 ml-3 border-0 border-l py-1 pl-3 text-sm font-extralight text-muted-foreground',
-            )}>
-            {article.title}
-        </Link>
-    )
-}
+export default DocumentNav

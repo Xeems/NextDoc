@@ -34,7 +34,10 @@ export default async function DocLayout({ children, params }: LayoutProps) {
                 </h1>
                 <div className="flex w-full flex-col items-start justify-center gap-x-5 md:flex-row">
                     <MobileNavCollapsible>
-                        <DocumentNav document={data} />
+                        <DocumentNav
+                            document={data}
+                            workspaceName={params.name}
+                        />
                     </MobileNavCollapsible>
 
                     <div className="w-full">
