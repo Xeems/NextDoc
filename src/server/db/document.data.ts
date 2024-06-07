@@ -27,7 +27,7 @@ export const getDocumentById = async (documentId: string) => {
 }
 
 export const getWorkspaceDocuemnts = async (workspaceName: string) => {
-    const res = await prisma.document.findMany({
+    return await prisma.document.findMany({
         where: {
             workspace: {
                 name: workspaceName,
@@ -37,8 +37,9 @@ export const getWorkspaceDocuemnts = async (workspaceName: string) => {
             workspace: true,
         },
     })
-    return res
 }
+// SELECT d.*, w.* FROM documents d JOIN workspaces w
+//ON d.workspace_id = w.id WHERE w.name = 'workspaceName';
 
 export const getDocumentByWorkspaceNameAndName = async (
     workspaceName: string,

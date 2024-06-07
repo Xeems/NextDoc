@@ -8,7 +8,7 @@ import {
 import { prisma } from '@/src/lib/prisma'
 
 export const createWorkspace = async (data: NewWorkspaceServerType) => {
-    const res = await prisma.workspace.create({
+    return await prisma.workspace.create({
         data: {
             name: data.name,
             workspaceUsers: {
@@ -20,32 +20,24 @@ export const createWorkspace = async (data: NewWorkspaceServerType) => {
             workspaceType: 'TEAM',
         },
     })
-    return res
 }
+// INSERT INTO workspaces (name, workspace_type, created_at, updated_at)
+// VALUES ('New Project', 'TEAM', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 export const getUserWorkspaces = async (data: UserWorkspacesQueryType) => {
-    const res = await prisma.workspace.findMany({
+    return await prisma.workspace.findMany({
         where: {
             workspaceType: data.teamsOnly ? 'TEAM' : undefined,
 
             workspaceUsers: {
                 every: {
                     user: {
-                        OR: [
-                            {
-                                username: data.username,
-                            },
-                            {
-                                id: data.userId,
-                            },
-                        ],
+                        OR: [{ username: data.username }, { id: data.userId }],
                     },
                 },
             },
         },
     })
-
-    return res
 }
 
 export const getUserWorkspacesByUserId = async (userId: string) => {

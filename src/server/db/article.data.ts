@@ -45,7 +45,7 @@ export const getArticleByTitle = async (
 }
 
 export const getDocumentArticles = async (documentId: string) => {
-    const res = await prisma.article.findMany({
+    return await prisma.article.findMany({
         where: {
             documentId,
             parentId: null,
@@ -65,8 +65,10 @@ export const getDocumentArticles = async (documentId: string) => {
                 },
             },
         },
+        orderBy: {
+            createdAt: 'asc',
+        },
     })
-    return res
 }
 
 export const updateAricleContent = async (

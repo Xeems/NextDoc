@@ -31,9 +31,8 @@ export default function ArticleEditForm({ article }: Props) {
     })
 
     const onSubmit = async (data: z.infer<typeof formData>) => {
-        console.log(data)
         const res = await updateAricleContentAction(article.id!, data.content)
-        if (res.data) toast.success('123')
+        if (res.data) toast.success('Article updated')
         else toast.error(res.error)
     }
 
