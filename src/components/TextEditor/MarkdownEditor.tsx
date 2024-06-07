@@ -23,7 +23,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, Props>(
         return (
             <Tabs
                 defaultValue="editor"
-                className="flex flex-col w-[700px] justify-center">
+                className="flex w-[700px] flex-col justify-center">
                 <div className="flex flex-row gap-x-4">
                     <TabsList className="w-fit">
                         <TabsTrigger value="editor">Editor</TabsTrigger>
@@ -36,7 +36,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, Props>(
                     <textarea
                         ref={ref}
                         {...props}
-                        className="min-h-40 outline-none w-full border bg-background-accent rounded-md p-2"
+                        className="min-h-40 w-full rounded-md border bg-background-accent p-2 outline-none"
                     />
                 </TabsContent>
                 <TabsContent value="preview" className="">
