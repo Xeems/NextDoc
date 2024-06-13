@@ -66,7 +66,11 @@ type ArticleType = {
     urlName: string
     content?: null | string
 
-    documentId: string
-    parrent?: ArticleType
-    childs?: ArticleType[]
+    createdAt?: Date
+    updatedAt?: Date
+
+    documentId?: string
+    document?: DocType
+    parent?: Partial<ArticleType>
+    childs?: Partial<ArticleType[]>
 }

@@ -1,6 +1,9 @@
 'use client'
 
-import React, { useRef, useContext } from 'react'
+import React, { useContext, useRef } from 'react'
+import { upload } from '@vercel/blob/client'
+import { toast } from 'sonner'
+
 import {
     Avatar,
     AvatarFallback,
@@ -14,10 +17,9 @@ import {
     CardHeader,
     CardTitle,
 } from '@/src/components/shadCn/ui/card'
-import { toast } from 'sonner'
-import { WorkspaceContext } from '../../_components/WorkspaceContext'
-import { upload } from '@vercel/blob/client'
 import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
+
+import { WorkspaceContext } from '../../_components/WorkspaceContext'
 
 type Props = {
     avatarUrl: string | null
@@ -40,12 +42,12 @@ const WorkspaceAvatar = ({ avatarUrl }: Props) => {
             const newBlob = await upload(file.name, file, {
                 access: 'public',
                 handleUploadUrl: '/api/workspaces/uploadAvatar',
-                clientPayload: `${workspaceContext.workspaceId}`,
+                clientPayload: `${workspaceContext.workspace}`,
             })
 
             if (newBlob) {
                 const res = await updateWorkspaceAvatar(
-                    workspaceContext.workspaceId,
+                    workspaceContext.workspace.id,
                     newBlob.url,
                 )
             }
@@ -63,7 +65,7 @@ const WorkspaceAvatar = ({ avatarUrl }: Props) => {
                     </CardHeader>
                     <CardContent className="col-start-2">
                         <CardDescription>
-                            This is your team's avatar. <br />
+                            This is your teams avatar. <br />
                         </CardDescription>
                     </CardContent>
                 </div>

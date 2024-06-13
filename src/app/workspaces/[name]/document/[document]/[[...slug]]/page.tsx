@@ -23,7 +23,7 @@ export default async function DocumentPage({ params, searchParams }: Props) {
         articleTitle: params.slug ? params.slug.slice(-1)[0] : undefined,
     })
 
-    if (!article) notFound()
+    if (!article) return <div>There is no articles in this document</div>
 
     return (
         <div className="flex h-fit w-full flex-col items-center">
