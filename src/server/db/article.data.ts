@@ -29,7 +29,7 @@ export const getFirstArticle = async (documentName: string) => {
     })
 }
 
-export const getArticleByTitle = async (
+export const getArticleByDocumentUrlAndTitle = async (
     documentName: string,
     articleTitle: string,
 ) => {
@@ -54,17 +54,10 @@ export const getDocumentArticles = async (documentId: string) => {
             id: true,
             title: true,
             urlName: true,
-            documentId: true,
-            childs: {
-                select: {
-                    id: true,
-                    title: true,
-                    urlName: true,
-                    documentId: true,
-                    parentId: true,
-                },
-            },
+
+            childs: true,
         },
+
         orderBy: {
             createdAt: 'asc',
         },

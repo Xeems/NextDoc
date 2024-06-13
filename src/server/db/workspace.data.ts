@@ -21,8 +21,6 @@ export const createWorkspace = async (data: NewWorkspaceServerType) => {
         },
     })
 }
-// INSERT INTO workspaces (name, workspace_type, created_at, updated_at)
-// VALUES ('New Project', 'TEAM', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 export const getUserWorkspaces = async (data: UserWorkspacesQueryType) => {
     return await prisma.workspace.findMany({

@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import {
     EllipsisVerticalIcon,
     FilePenLineIcon,
@@ -6,6 +7,7 @@ import {
     Trash2Icon,
 } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import {
     DropdownMenu,
@@ -14,33 +16,52 @@ import {
     DropdownMenuTrigger,
 } from '@/src/components/shadCn/ui/dropdown-menu'
 import { useActivePath } from '@/src/hooks/useActivePath'
+import { ROUTES } from '@/src/lib/routes'
 import { cn } from '@/src/lib/utils'
 
 type LinkProps = {
-    title: string
-    href: string
-    isChild?: boolean
+    article: ArticleType
+    document: DocType
+    workspaceName: string
+    parent?: ArticleType
 }
 
 export const DocumentNavLink = ({
-    title,
-    href,
-    isChild = false,
+    article,
+    document,
+    workspaceName,
+    parent = undefined,
 }: LinkProps) => {
+    const href = ROUTES.DOCUMENT_ARTICLE(workspaceName, document.urlName, [
+        parent?.urlName!,
+        article.urlName,
+    ])
+    const [open, setOpen] = useState(false)
     const path = useActivePath()
     const isActive = path(href)
+
+    const pa = usePathname()
+    console.log(pa, href, pa === href)
+
     return (
         <Link
             href={href}
             className={cn(
                 'group flex flex-row items-center justify-between gap-x-2 overflow-hidden py-2 text-sm font-light ',
-                isChild &&
+                parent &&
                     'ml-1 border-0 border-l  pl-3 text-muted-foreground hover:text-foreground',
                 isActive && 'font-medium text-blue-600',
             )}>
-            {title}
-            <DropdownMenu>
-                <DropdownMenuContent className="group peer w-40">
+            {article.title}
+            <DropdownMenu onOpenChange={() => setOpen(!open)}>
+                <DropdownMenuTrigger
+                    className={cn(
+                        'invisible group-hover:visible',
+                        open && 'visible',
+                    )}>
+                    <EllipsisVerticalIcon className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40">
                     <DropdownMenuItem className="gap-x-3  pl-4">
                         <FolderPenIcon className="size-4" />
                         Rename
@@ -56,9 +77,6 @@ export const DocumentNavLink = ({
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>
-                <DropdownMenuTrigger className="peer-hover:visible peer-data-[state=open]:text-red-600">
-                    <EllipsisVerticalIcon className="h-4 w-4" />
-                </DropdownMenuTrigger>
             </DropdownMenu>
         </Link>
     )

@@ -9,5 +9,7 @@ export const ROUTES = {
     WORKSPACE_USERS: (workspace: string) => `/workspaces/${workspace}/users`,
     DOCUMENT: (workspace: string, document: string) =>`/workspaces/${workspace}/document/${document}`,
     DOCUMENT_ARTICLE: (workspace: string, document: string, articles:string[]) =>
-        `/workspaces/${workspace}/document/${document}/${articles.map(article => article).join('/')}`,
+       `/workspaces/${workspace}/document/${document}/${mapLinks(articles)}`,
 } as const
+
+const mapLinks = (arr: string[]) => {}

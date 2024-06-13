@@ -1,5 +1,11 @@
 'use client'
 
+import { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Plus } from 'lucide-react'
+import { z } from 'zod'
+
 import {
     newWorkspaceUserSchema,
     NewWorkspaceUserType,
@@ -35,11 +41,6 @@ import {
 import UserCard from '@/src/components/UI/UserCard'
 import { getUserAction } from '@/src/server/actions/user/getUser'
 import { addUserToWorkspaceAction } from '@/src/server/actions/workspace/addUserToWorkspace'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus } from 'lucide-react'
-import { useContext, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { WorkspaceContext } from '../_components/WorkspaceContext'
 
@@ -53,7 +54,7 @@ export function AddNewUserModal() {
         resolver: zodResolver(newWorkspaceUserSchemaWithUsername),
         defaultValues: {
             userId: user?.id,
-            workspaceId: workspaceContext.workspaceId,
+            workspaceId: workspaceContext.workspace.id,
             role: 'BASE',
         },
     })

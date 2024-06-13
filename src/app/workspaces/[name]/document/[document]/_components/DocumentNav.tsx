@@ -1,6 +1,5 @@
 import { ScrollArea } from '@/src/components/shadCn/ui/scroll-area'
-import { ROUTES } from '@/src/lib/routes'
-import { getDocumentArticlesAction } from '@/src/server/actions/article/getDocumentArticles'
+import { getDocumentArticlesAction } from '@/src/server/data-layer/article'
 
 import { DocumentNavLink } from './DocumentNavLink'
 import NewArticleForm from './NewArticleForm'
@@ -14,7 +13,8 @@ const DocumentNav = async ({ document, workspaceName }: Props) => {
     const { data: articles, error } = await getDocumentArticlesAction(
         document.id,
     )
-    if (error || !articles) throw new Error()
+
+    if (error) throw new Error()
     return (
         <nav className="w-full transition-all md:w-80">
             <ScrollArea>
@@ -23,28 +23,21 @@ const DocumentNav = async ({ document, workspaceName }: Props) => {
                         return (
                             <li key={article.id}>
                                 <DocumentNavLink
-                                    title={article.title}
-                                    href={ROUTES.DOCUMENT_ARTICLE(
-                                        workspaceName,
-                                        document.urlName,
-                                        [article.urlName],
-                                    )}
+                                    article={article}
+                                    document={document}
+                                    workspaceName={workspaceName}
                                 />
                                 <ul>
                                     {article.childs?.map((child) => {
                                         return (
                                             <li key={child.title}>
                                                 <DocumentNavLink
-                                                    href={ROUTES.DOCUMENT_ARTICLE(
-                                                        workspaceName,
-                                                        document.urlName,
-                                                        [
-                                                            article.urlName,
-                                                            child.urlName,
-                                                        ],
-                                                    )}
-                                                    isChild
-                                                    title={child.title}
+                                                    article={child}
+                                                    document={document}
+                                                    workspaceName={
+                                                        workspaceName
+                                                    }
+                                                    parent={article}
                                                 />
                                             </li>
                                         )

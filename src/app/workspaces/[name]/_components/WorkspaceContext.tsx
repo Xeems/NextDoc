@@ -4,19 +4,19 @@ import React, { createContext, ReactNode, useState } from 'react'
 
 interface IWorkspaceContext {
     userRole: 'OWNER' | 'ADMIN' | 'BASE' | 'NONE'
-    workspaceId: string
+    workspace: WorkspaceType
 }
 
 export const WorkspaceContext = createContext<IWorkspaceContext>({
     userRole: 'NONE',
-    workspaceId: '',
+    workspace: {} as WorkspaceType,
 })
 
 type WorkspaceContextProviderProps = {
     children: ReactNode
     initial: {
-        workspaceRole?: WorkspaceRoleType
-        workspaceId: string
+        userRole?: WorkspaceRoleType
+        workspace: WorkspaceType
     }
 }
 
@@ -24,12 +24,10 @@ export const WorkspaceContextProvider = ({
     children,
     initial,
 }: WorkspaceContextProviderProps) => {
-    const [userRole] = useState<WorkspaceRoleType>(
-        initial.workspaceRole || 'NONE',
-    )
-    const [workspaceId] = useState<string>(initial.workspaceId)
+    const [userRole] = useState<WorkspaceRoleType>(initial.userRole || 'NONE')
+    const [workspace] = useState<WorkspaceType>(initial.workspace)
     return (
-        <WorkspaceContext.Provider value={{ userRole, workspaceId }}>
+        <WorkspaceContext.Provider value={{ userRole, workspace: workspace }}>
             {children}
         </WorkspaceContext.Provider>
     )

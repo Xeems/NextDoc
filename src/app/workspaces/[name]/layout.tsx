@@ -39,8 +39,8 @@ export default async function WorkspaceLayout({
         <HydrationBoundary state={dehydrate(queryClient)}>
             <WorkspaceContextProvider
                 initial={{
-                    workspaceRole: data.userRole,
-                    workspaceId: data.workspace.id,
+                    userRole: data.userRole,
+                    workspace: data.workspace,
                 }}>
                 <div className="flex w-full flex-col">
                     {data.userRole !== 'NONE' &&
