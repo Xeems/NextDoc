@@ -9,7 +9,12 @@ export const ROUTES = {
     WORKSPACE_USERS: (workspace: string) => `/workspaces/${workspace}/users`,
     DOCUMENT: (workspace: string, document: string) =>`/workspaces/${workspace}/document/${document}`,
     DOCUMENT_ARTICLE: (workspace: string, document: string, articles:string[]) =>
-       `/workspaces/${workspace}/document/${document}/${mapLinks(articles)}`,
+       `/workspaces/${workspace}/document/${document}/${mapSegments(articles)}`,
 } as const
 
-const mapLinks = (arr: string[]) => {}
+const mapSegments = (arr: string[]) => {
+    const clearArray = arr.filter(
+        (urlName): urlName is string => urlName !== undefined,
+    )
+    return clearArray.join('/')
+}

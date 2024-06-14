@@ -40,11 +40,9 @@ export const DocumentNavLink = ({
     const path = useActivePath()
     const isActive = path(href)
 
-    const pa = usePathname()
-    console.log(pa, href, pa === href)
-
     return (
         <Link
+            draggable
             href={href}
             className={cn(
                 'group flex flex-row items-center justify-between gap-x-2 overflow-hidden py-2 text-sm font-light ',
