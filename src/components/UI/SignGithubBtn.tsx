@@ -1,15 +1,20 @@
 'use client'
 
+import { GithubIcon } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
-import { GithubIcon } from 'lucide-react'
+
 import { Button } from '../shadCn/ui/button'
 
-export default function SignGithubBtn() {
+type Props = {
+    children?: React.ReactNode
+}
+export default function SignGithubBtn({ children }: Props) {
     const { data: session } = useSession()
 
     return (
         <Button
+            className="bg-black text-white  hover:bg-zinc-800"
             size={'lg'}
             onClick={() => {
                 signIn('github', {

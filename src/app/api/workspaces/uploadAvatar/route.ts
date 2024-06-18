@@ -1,12 +1,14 @@
-import { getUserBySessionAction } from '@/src/server/actions/user/getUserBySession'
-import { getWorkspaceMemberAction } from '@/src/server/actions/workspace/getWorkspaceMember'
-import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
 import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
+import { getUserBySessionAction } from '@/src/server/actions/user/getUserBySession'
+import { getWorkspaceMemberAction } from '@/src/server/actions/workspace/getWorkspaceMember'
+import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
+
 export async function POST(request: Request): Promise<NextResponse> {
     const body = (await request.json()) as HandleUploadBody
+    console.log(body.payload)
 
     try {
         const jsonResponse = await handleUpload({
@@ -21,8 +23,14 @@ export async function POST(request: Request): Promise<NextResponse> {
 
                 if (!workspaceId) throw Error('Workspace not found')
 
-                const member = await getWorkspaceMemberAction(workspaceId)
-                if (member?.data?.role !== 'OWNER')
+                const member = await getWorkspaceMemberAction(
+                    workspaceId.toString(),
+                )
+
+                if (
+                    member?.data?.role !== 'OWNER' &&
+                    member?.data?.role !== 'ADMIN'
+                )
                     throw Error('No permission to upload avatar')
                 return {
                     allowedContentTypes: ['image/jpeg', 'image/png'],

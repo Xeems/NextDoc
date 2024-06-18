@@ -1,6 +1,7 @@
 'use server'
 
 import { getWorkspaceMember } from '@/src/server/db/workspace.data'
+
 import { getUserBySessionAction } from '../user/getUserBySession'
 
 export const getWorkspaceMemberAction = async (
@@ -10,8 +11,10 @@ export const getWorkspaceMemberAction = async (
     try {
         if (!userId) {
             const user = await getUserBySessionAction()
-            if (!user) return null
-            const res = await getWorkspaceMember(user?.id, workspaceId)
+
+            if (!user?.id) return null
+            const res = await getWorkspaceMember(user.id, workspaceId)
+
             return { data: res }
         }
         const res = await getWorkspaceMember(userId, workspaceId)
