@@ -2,11 +2,21 @@
 
 import React, { useState } from 'react'
 import {
-    DragDropContext,
-    Draggable,
-    Droppable,
-    DropResult,
-} from 'react-beautiful-dnd'
+    closestCorners,
+    DndContext,
+    DragEndEvent,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core'
+import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    useSortable,
+    verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
 
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
@@ -22,18 +32,27 @@ type Props = {
 
 const EditNav = ({ articleList }: Props) => {
     const [articles, setArticles] = useState(articleList)
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        }),
+    )
 
-    const handleDragEnd = (result: DropResult) => {
-        if (!result.destination) return
+    const onDragEnd = (event: DragEndEvent) => {
+        if (!event.active?.id || !event.over?.id) return
 
-        const sourceIndex = result.source.index
-        const destinationIndex = result.destination.index
-
-        const updatedArticles = [...articles]
-        const [movedArticle] = updatedArticles.splice(sourceIndex, 1)
-        updatedArticles.splice(destinationIndex, 0, movedArticle)
-
-        setArticles(updatedArticles)
+        if (event.active.id !== event.over.id) {
+            setArticles((currentArticles) => {
+                const oldIndex = currentArticles.findIndex(
+                    (article) => article.id === event.active.id,
+                )
+                const newIndex = currentArticles.findIndex(
+                    (article) => article.id === event.over?.id,
+                )
+                return arrayMove(currentArticles, oldIndex, newIndex)
+            })
+        }
     }
 
     return (
@@ -43,74 +62,46 @@ const EditNav = ({ articleList }: Props) => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>Edit articles</DialogHeader>
-                <DragDropContext onDragEnd={handleDragEnd}>
-                    <Droppable droppableId="articles">
-                        {(provided) => (
-                            <ul
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}>
-                                {articles.map((article, index) => (
-                                    <Draggable
-                                        key={article.id}
-                                        draggableId={article.id}
-                                        index={index}>
-                                        {(provided) => (
-                                            <li
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                className="cursor-grab rounded p-2 hover:bg-zinc-900 active:cursor-grabbing">
-                                                {article.title}
-                                                {article.childs &&
-                                                    article.childs.length >
-                                                        0 && (
-                                                        <ul className="pl-5">
-                                                            {article.childs.map(
-                                                                (
-                                                                    child,
-                                                                    childIndex,
-                                                                ) => (
-                                                                    <Draggable
-                                                                        key={
-                                                                            child.id
-                                                                        }
-                                                                        draggableId={
-                                                                            child.id
-                                                                        }
-                                                                        index={
-                                                                            childIndex
-                                                                        }>
-                                                                        {(
-                                                                            provided,
-                                                                        ) => (
-                                                                            <li
-                                                                                ref={
-                                                                                    provided.innerRef
-                                                                                }
-                                                                                {...provided.draggableProps}
-                                                                                {...provided.dragHandleProps}
-                                                                                className="cursor-grab rounded p-2 hover:bg-zinc-900 active:cursor-grabbing">
-                                                                                {
-                                                                                    child.title
-                                                                                }
-                                                                            </li>
-                                                                        )}
-                                                                    </Draggable>
-                                                                ),
-                                                            )}
-                                                        </ul>
-                                                    )}
-                                            </li>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
-                            </ul>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                <DndContext
+                    sensors={sensors}
+                    collisionDetection={closestCorners}
+                    onDragEnd={onDragEnd}>
+                    <SortableContext
+                        items={articles.map((article) => article.id!)}
+                        strategy={verticalListSortingStrategy}>
+                        {articles.map((article) => (
+                            <ArticleCard key={article.id} article={article} />
+                        ))}
+                    </SortableContext>
+                </DndContext>
             </DialogContent>
         </Dialog>
+    )
+}
+
+const ArticleCard = ({ article }: { article: ArticleType }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } =
+        useSortable({
+            id: article.id!,
+        })
+
+    const style = {
+        cursor: 'grab',
+        transform: transform
+            ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+            : undefined,
+        transition: transition || undefined,
+    }
+
+    return (
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...listeners}
+            {...attributes}
+            className="flex h-20 w-full items-center justify-between rounded-md border bg-slate-100 px-4">
+            <p>{article.title}</p>
+        </div>
     )
 }
 
