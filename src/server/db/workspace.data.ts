@@ -69,7 +69,7 @@ export const getWorkspaceMember = async (
     userId: string,
     workspaceId: string,
 ) => {
-    const res = await prisma.userWorkspace.findFirst({
+    return await prisma.userWorkspace.findFirst({
         where: {
             userId,
             workspace: {
@@ -77,7 +77,6 @@ export const getWorkspaceMember = async (
             },
         },
     })
-    return res
 }
 
 export const getWorkspace = async (workspaceName: string) => {

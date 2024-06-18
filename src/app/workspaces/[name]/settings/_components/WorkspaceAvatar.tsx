@@ -42,7 +42,7 @@ const WorkspaceAvatar = ({ avatarUrl }: Props) => {
             const newBlob = await upload(file.name, file, {
                 access: 'public',
                 handleUploadUrl: '/api/workspaces/uploadAvatar',
-                clientPayload: `${workspaceContext.workspace}`,
+                clientPayload: `${workspaceContext.workspace.id}`,
             })
 
             if (newBlob) {

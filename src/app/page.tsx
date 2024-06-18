@@ -46,6 +46,7 @@ function MainPage() {
                             </Link>
                         </div>
                     </div>
+                    <div className="flex w-1/2 flex-col items-center justify-center gap-y-5"></div>
                 </section>
             </div>
         </div>
