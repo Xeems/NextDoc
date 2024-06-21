@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 
 import { Card } from '@/src/components/shadCn/ui/card'
@@ -16,7 +15,6 @@ const SortableItem = ({
         useSortable({
             id: article.id,
         })
-    const [nested, setNested] = useState(!!parent)
 
     const style = {
         cursor: 'grab',
@@ -34,7 +32,7 @@ const SortableItem = ({
             {...attributes}
             className="flex h-fit min-h-10 w-full cursor-auto flex-col items-center justify-between rounded-md border bg-slate-100 px-4">
             <p>{article.title}</p>
-            {!nested && (
+            {!!!parent && (
                 <div className="h-fit w-full">
                     <SortableList parent={article} articles={article.childs} />
                 </div>

@@ -7,19 +7,20 @@ type Props = {
     parent?: ArticleType
 }
 const SortableList = ({ articles, parent }: Props) => {
-    if (!articles) return null
     return (
         <SortableContext
             items={articles.map((article) => article.id)}
             strategy={verticalListSortingStrategy}>
-            {articles &&
-                articles.map((article) => (
-                    <SortableItem
-                        key={article.id}
-                        parent={parent}
-                        article={article}
-                    />
-                ))}
+            <ul className="h-[fit-content + 20px] flex flex-col gap-y-2 py-2">
+                {articles &&
+                    articles.map((article) => (
+                        <SortableItem
+                            key={article.id}
+                            parent={parent}
+                            article={article}
+                        />
+                    ))}
+            </ul>
         </SortableContext>
     )
 }
