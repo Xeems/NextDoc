@@ -1,9 +1,11 @@
-import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
 import React from 'react'
-import NameForm from './_components/NameFrom'
 import { notFound } from 'next/navigation'
-import WorkspaceAvatar from './_components/WorkspaceAvatar'
+
+import { workspaceQuery } from '@/src/hooks/querys/useWorkspace'
+
 import DeleteWorkspace from './_components/DeleteWorkspace'
+import NameForm from './_components/NameFrom'
+import WorkspaceAvatar from './_components/WorkspaceAvatar'
 
 type Props = {
     params: {
