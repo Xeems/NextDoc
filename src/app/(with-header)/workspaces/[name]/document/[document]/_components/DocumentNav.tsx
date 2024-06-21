@@ -1,8 +1,8 @@
 import { ScrollArea } from '@/src/components/shadCn/ui/scroll-area'
 import { getDocumentArticlesAction } from '@/src/server/data-layer/article'
 
-import { DocumentNavLink } from './DocumentNavLink'
 import EditNav from './EditNav/EditNav'
+import { DocumentNavLink } from './DocumentNavLink'
 import NewArticleForm from './NewArticleForm'
 
 type Props = {
@@ -18,7 +18,7 @@ const DocumentNav = async ({ document, workspaceName }: Props) => {
     if (error) throw new Error()
     return (
         <nav className="w-full transition-all md:w-80">
-            <EditNav articleList={articles} />
+            {/* <EditNav articleList={articles} /> */}
             <ScrollArea>
                 <ul>
                     {articles?.map((article) => {

@@ -1,5 +1,6 @@
 // prettier-ignore
 export const ROUTES = {
+    HOME: '/',
     AUTH: '/auth',
     NEW: '/new',
     SEARCH: '/search',

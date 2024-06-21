@@ -85,8 +85,6 @@ const EditNav = ({ articleList }: Props) => {
                     overList.splice(overIndex, 0, activeArticle)
                 }
             }
-            console.log(newArticles)
-
             return newArticles
         })
     }
@@ -96,7 +94,7 @@ const EditNav = ({ articleList }: Props) => {
             <DialogTrigger asChild>
                 <Button>Edit</Button>
             </DialogTrigger>
-            <DialogContent className="h-[fit + 20px]">
+            <DialogContent>
                 <DialogHeader>Edit articles</DialogHeader>
                 <DndContext
                     sensors={sensors}

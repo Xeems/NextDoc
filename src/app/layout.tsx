@@ -1,15 +1,15 @@
-import './globals.scss'
-
-import Header from '@/src/app/Header'
-import QueryProvider from '@/src/components/Providers/QueryProvider'
-import UserSessionProvider from '@/src/components/Providers/SessionProvider'
-import { ThemeProvider } from '@/src/components/Providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { Toaster } from 'sonner'
+
+import QueryProvider from '@/src/components/Providers/QueryProvider'
+import UserSessionProvider from '@/src/components/Providers/SessionProvider'
+import { ThemeProvider } from '@/src/components/Providers/ThemeProvider'
+
+import './globals.scss'
 
 export const metadata: Metadata = {
     title: 'NextDocs',
@@ -27,7 +27,7 @@ export default async function RootLayout({
             className={`${GeistSans.variable} ${GeistMono.variable}`}>
             <UserSessionProvider>
                 <QueryProvider>
-                    <body className="bg-background">
+                    <body className="h-dvh w-full bg-background">
                         <ThemeProvider
                             attribute="class"
                             defaultTheme="system"
@@ -38,10 +38,7 @@ export default async function RootLayout({
                                 richColors
                                 visibleToasts={5}
                             />
-                            <Header />
-                            <main className="flex h-[calc(100vh-50px)] w-full justify-center">
-                                {children}
-                            </main>
+                            {children}
 
                             {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                             <SpeedInsights />
