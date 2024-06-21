@@ -1,7 +1,11 @@
 'use client'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2Icon } from 'lucide-react'
+
 import {
-    WorkspaceNameType,
     workspaceNameSchema,
+    WorkspaceNameType,
 } from '@/@types/validators/workspace'
 import { Button } from '@/src/components/shadCn/ui/button'
 import {
@@ -20,11 +24,7 @@ import {
     FormMessage,
 } from '@/src/components/shadCn/ui/form'
 import { Input } from '@/src/components/shadCn/ui/input'
-
 import updateNameAction from '@/src/server/actions/workspace/updateName'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2Icon } from 'lucide-react'
-import { useForm } from 'react-hook-form'
 
 type Props = {
     workspaceName: string

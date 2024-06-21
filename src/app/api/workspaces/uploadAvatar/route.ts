@@ -8,8 +8,6 @@ import { updateWorkspaceAvatar } from '@/src/server/db/workspace.data'
 
 export async function POST(request: Request): Promise<NextResponse> {
     const body = (await request.json()) as HandleUploadBody
-    console.log(body.payload)
-
     try {
         const jsonResponse = await handleUpload({
             body,
