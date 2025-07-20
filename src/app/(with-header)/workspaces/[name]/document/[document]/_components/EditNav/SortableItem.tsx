@@ -1,8 +1,7 @@
+import { UniqueIdentifier } from '@dnd-kit/core'
 import { useSortable } from '@dnd-kit/sortable'
 
 import { Card } from '@/src/components/shadCn/ui/card'
-
-import SortableList from './SortableList'
 
 const SortableItem = ({
     article,
@@ -11,13 +10,19 @@ const SortableItem = ({
     article: ArticleType
     parent?: ArticleType
 }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } =
-        useSortable({
-            id: article.id,
-        })
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        isDragging,
+        transform,
+        transition,
+    } = useSortable({
+        id: article.id as UniqueIdentifier,
+    })
 
     const style = {
-        cursor: 'grab',
+        cursor: isDragging ? 'grabbing' : 'grab',
         transform: transform
             ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
             : undefined,
@@ -26,16 +31,24 @@ const SortableItem = ({
 
     return (
         <Card
-            ref={setNodeRef}
-            style={style}
             {...listeners}
             {...attributes}
+            ref={setNodeRef}
+            style={style}
+            data-dnd-id={article.id}
+            data-dnd-type="item"
             className="flex h-fit min-h-10 w-full cursor-auto flex-col items-center justify-between rounded-md border bg-slate-100 px-4">
             <p>{article.title}</p>
-            {!!!parent && (
-                <div className="h-fit w-full">
-                    <SortableList parent={article} articles={article.childs} />
-                </div>
+            {article.children && !!!parent && (
+                <ul>
+                    {article.children.map((child) => (
+                        <SortableItem
+                            article={child}
+                            key={child.id}
+                            parent={article}
+                        />
+                    ))}
+                </ul>
             )}
         </Card>
     )

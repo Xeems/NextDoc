@@ -4,17 +4,11 @@ import Link from 'next/link'
 import { ROUTES } from '../lib/routes'
 
 function MainPage() {
-    const style = {
-        //background:
-        //  'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), radial-gradient(circle at center top, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0))',
-    }
     return (
-        <div
-            className="h-full w-full bg-gradient-to-r from-indigo-200 to-yellow-100 "
-            style={style}>
+        <div className="h-full w-full bg-gradient-to-r from-indigo-200 to-yellow-100 ">
             <div className="flex w-full flex-col items-center bg-transparent transition delay-1000 duration-1000 ease-in-out">
                 <section className="my-28 flex w-full max-w-screen-xl flex-row ">
-                    <div className="flex w-1/2 flex-col items-start gap-y-7  p-4">
+                    <div className="flex w-full flex-col items-start gap-y-7  p-4">
                         <h1 className=" text-5xl font-bold text-black">
                             Next generation API documentation tool
                         </h1>
@@ -46,7 +40,6 @@ function MainPage() {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex w-1/2 flex-col items-center justify-center gap-y-5"></div>
                 </section>
             </div>
         </div>

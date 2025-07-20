@@ -1,5 +1,5 @@
 import { ScrollArea } from '@/src/components/shadCn/ui/scroll-area'
-import { getDocumentArticlesAction } from '@/src/server/data-layer/article'
+import { getDocumentArticlesQuery } from '@/src/server/data-layer/article'
 
 import EditNav from './EditNav/EditNav'
 import { DocumentNavLink } from './DocumentNavLink'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 const DocumentNav = async ({ document, workspaceName }: Props) => {
-    const { data: articles, error } = await getDocumentArticlesAction(
+    const { data: articles, error } = await getDocumentArticlesQuery(
         document.id,
     )
 
