@@ -1,5 +1,6 @@
-import { getWorkspaceMembersAction } from '@/src/server/actions/workspace/getWorkspaceMembers'
 import { QueryClient } from '@tanstack/react-query'
+
+import { getWorkspaceMembersAction } from '@/src/server/actions/workspace/getWorkspaceMembers'
 
 import UsersTable from './UsersTable'
 import { UserTableColumns } from './UserTableColumns'

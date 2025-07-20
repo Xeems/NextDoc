@@ -1,7 +1,6 @@
 import { ScrollArea } from '@/src/components/shadCn/ui/scroll-area'
 import { getDocumentArticlesQuery } from '@/src/server/data-layer/article'
 
-import EditNav from './EditNav/EditNav'
 import { DocumentNavLink } from './DocumentNavLink'
 import NewArticleForm from './NewArticleForm'
 

@@ -25,8 +25,9 @@ import {
 } from '@/src/components/shadCn/ui/radio-group'
 import { Separator } from '@/src/components/shadCn/ui/separator'
 import { createDocumentAction } from '@/src/server/actions/document/createDocument'
-import useCheckDocumentName from './useCheckDocumentName'
+
 import RHFSelect from './RHFSelect'
+import useCheckDocumentName from './useCheckDocumentName'
 
 type Props = {
     workspaces: WorkspaceType[]

@@ -1,5 +1,6 @@
-import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 import { useQuery } from '@tanstack/react-query'
+
+import { getDocumentAction } from '@/src/server/actions/document/getDocument'
 
 export const useDocumentQuery = (ownerName: string, documentName: string) => {
     return useQuery({

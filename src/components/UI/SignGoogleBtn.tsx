@@ -8,7 +8,7 @@ import { Button } from '../shadCn/ui/button'
 export default function SignGoogleBtn() {
     return (
         <Button
-            className="bg-white border-border border text-black flex flex-row justify-items-stretch"
+            className="flex flex-row justify-items-stretch border border-border bg-white text-black"
             size={'lg'}
             onClick={() => {
                 signIn('google', {

@@ -1,6 +1,7 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
+
 import { Button } from '../shadCn/ui/button'
 
 export const ThemeSwitcher = () => {

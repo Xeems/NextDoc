@@ -43,8 +43,8 @@ const SortableItem = ({
                 <ul>
                     {article.children.map((child) => (
                         <SortableItem
-                            article={child}
-                            key={child.id}
+                            article={child!}
+                            key={child!.id}
                             parent={article}
                         />
                     ))}

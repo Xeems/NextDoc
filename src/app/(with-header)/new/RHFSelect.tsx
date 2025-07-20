@@ -1,6 +1,8 @@
 'use client'
 
 import { useFormContext } from 'react-hook-form'
+import { Loader2Icon } from 'lucide-react'
+
 import {
     FormControl,
     FormField,
@@ -16,7 +18,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/src/components/shadCn/ui/select'
-import { Loader2Icon } from 'lucide-react'
 
 type OptionType = {
     id: string

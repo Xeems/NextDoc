@@ -1,5 +1,8 @@
 'use client'
 
+import { createColumnHelper } from '@tanstack/react-table'
+import { ArrowUpDownIcon } from 'lucide-react'
+
 import {
     Avatar,
     AvatarFallback,
@@ -7,8 +10,6 @@ import {
 } from '@/src/components/shadCn/ui/avatar'
 import { Button } from '@/src/components/shadCn/ui/button'
 import { Checkbox } from '@/src/components/shadCn/ui/checkbox'
-import { createColumnHelper } from '@tanstack/react-table'
-import { ArrowUpDownIcon } from 'lucide-react'
 
 import TableRowActions from './TableRowActions'
 

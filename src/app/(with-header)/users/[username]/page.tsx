@@ -1,16 +1,16 @@
 import { PlusSquareIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
-import { CreateWorkspaceModal } from '@/src/components/UI/CreateWorkspaceModal'
 import { Button } from '@/src/components/shadCn/ui/button'
+import { CreateWorkspaceModal } from '@/src/components/UI/CreateWorkspaceModal'
 import DocumentList from '@/src/components/UI/DocumentList'
 import WorkspacesList from '@/src/components/UI/WorkspacesList'
 import { userQuery } from '@/src/hooks/querys/useUser'
 import { userWorkspacesQuery } from '@/src/hooks/querys/useUserWorkspaces'
 import { workspaceDocumentsQuery } from '@/src/hooks/querys/useWorkspaceDocuments'
+import { ROUTES } from '@/src/lib/routes'
 
 import ProfileCard from './ProfileCard'
-import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
     params: {

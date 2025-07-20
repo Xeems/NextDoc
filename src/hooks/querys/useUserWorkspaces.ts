@@ -1,7 +1,8 @@
+import { useQuery } from '@tanstack/react-query'
+
 import { UserWorkspacesQueryType } from '@/@types/validators/workspace'
 import getQueryClient from '@/src/lib/getQueryClient'
 import { getUserWorkspacesAction } from '@/src/server/actions/workspace/getUserWorkspaces'
-import { useQuery } from '@tanstack/react-query'
 
 export const useUserWorkspacesQuery = (data: UserWorkspacesQueryType) => {
     return useQuery({

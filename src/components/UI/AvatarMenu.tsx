@@ -1,6 +1,11 @@
 'use client'
 
+import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
+import { LogOut, Settings } from 'lucide-react'
+import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
+import { useTheme } from 'next-themes'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import {
     DropdownMenu,
@@ -11,10 +16,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '../shadCn/ui/dropdown-menu'
-import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
-import { LogOut, Settings } from 'lucide-react'
-import Link from 'next/link'
-import { useTheme } from 'next-themes'
 
 export default function AvatarMenu() {
     const { theme, setTheme } = useTheme()

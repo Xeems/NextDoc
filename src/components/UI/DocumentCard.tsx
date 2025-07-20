@@ -1,5 +1,8 @@
 'use client'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+
+import { ROUTES } from '@/src/lib/routes'
 
 import {
     Card,
@@ -9,8 +12,6 @@ import {
     CardHeader,
     CardTitle,
 } from '../shadCn/ui/card'
-import { useEffect, useState } from 'react'
-import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
     document: DocType

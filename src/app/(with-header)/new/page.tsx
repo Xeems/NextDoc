@@ -1,7 +1,7 @@
 import { getUserBySessionAction } from '@/src/server/actions/user/getUserBySession'
-import NewDocumentForm from './NewDocumentForm'
-
 import { getUserWorkspacesAction } from '@/src/server/actions/workspace/getUserWorkspaces'
+
+import NewDocumentForm from './NewDocumentForm'
 
 const CreateDocumentPage = async () => {
     const user = await getUserBySessionAction()
