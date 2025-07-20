@@ -25,7 +25,7 @@ export const getArticleByTitle = async (
     }
 }
 
-export const getDocumentArticlesAction = async (documentId: string) => {
+export const getDocumentArticlesQuery = async (documentId: string) => {
     try {
         const res = await getDocumentArticles(documentId)
         return { data: res }

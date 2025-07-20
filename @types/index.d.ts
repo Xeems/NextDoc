@@ -72,5 +72,5 @@ type ArticleType = {
     documentId?: string
     document?: DocType
     parent?: Partial<ArticleType>
-    childs?: Partial<ArticleType[]>
+    children?: Partial<ArticleType[]>
 }
