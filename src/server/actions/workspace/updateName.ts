@@ -1,7 +1,9 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+
 import { updateWorkspaceName } from '../../db/workspace.data'
+
 import { getWorkspaceMemberAction } from './getWorkspaceMember'
 
 const updateNameAction = async (workspaceId: string, name: string) => {

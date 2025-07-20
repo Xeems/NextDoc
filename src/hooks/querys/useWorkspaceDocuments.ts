@@ -1,6 +1,7 @@
+import { useQuery } from '@tanstack/react-query'
+
 import getQueryClient from '@/src/lib/getQueryClient'
 import { getWorkspaceDocumentsAction } from '@/src/server/actions/document/getWorksapceDocuments'
-import { useQuery } from '@tanstack/react-query'
 
 export const useWorkspaceDocumentsQuery = (username: string) => {
     return useQuery({

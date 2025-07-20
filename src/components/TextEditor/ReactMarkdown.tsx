@@ -2,8 +2,9 @@ import React from 'react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-import styles from './MarkdownPreview.module.scss'
 import ReactSyntax from './ReactSyntax'
+
+import styles from './MarkdownPreview.module.scss'
 
 type Props = {
     markdown?: string | null

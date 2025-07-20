@@ -1,5 +1,3 @@
-import { notFound } from 'next/navigation'
-
 import { Separator } from '@/src/components/shadCn/ui/separator'
 import ReactMarkdown from '@/src/components/TextEditor/ReactMarkdown'
 import { articleQuery } from '@/src/hooks/querys/useArticle'

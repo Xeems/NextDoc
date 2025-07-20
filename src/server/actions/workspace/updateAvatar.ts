@@ -1,8 +1,10 @@
 'use server'
 
 import { put } from '@vercel/blob/client'
-import { getWorkspaceMemberAction } from './getWorkspaceMember'
+
 import { updateWorkspaceAvatar } from '../../db/workspace.data'
+
+import { getWorkspaceMemberAction } from './getWorkspaceMember'
 
 export const updateAvatarAction = async (workspaceId: string, image: File) => {
     console.log(123)

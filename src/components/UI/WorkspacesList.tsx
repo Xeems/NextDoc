@@ -1,9 +1,10 @@
 import { CircleDashedIcon } from 'lucide-react'
 import Link from 'next/link'
 
+import { ROUTES } from '@/src/lib/routes'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../shadCn/ui/avatar'
 import { Card, CardContent, CardHeader } from '../shadCn/ui/card'
-import { ROUTES } from '@/src/lib/routes'
 
 type Props = {
     workspaces: WorkspaceType[] | undefined

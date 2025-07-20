@@ -1,10 +1,11 @@
+import Link from 'next/link'
+
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader,
 } from '@/src/components/shadCn/ui/card'
-import Link from 'next/link'
 
 export default function UserSearchCard({ team }: { team: WorkspaceType }) {
     return (

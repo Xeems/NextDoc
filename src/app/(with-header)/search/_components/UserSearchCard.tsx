@@ -1,11 +1,12 @@
+import Link from 'next/link'
+
 import { Avatar, AvatarImage } from '@/src/components/shadCn/ui/avatar'
 import { Card, CardFooter, CardHeader } from '@/src/components/shadCn/ui/card'
-import Link from 'next/link'
 
 export default function UserSearchCard({ user }: { user: UserType }) {
     return (
         <Card className="w-full space-y-1 py-2">
-            <CardHeader className="font-bold text-lg text-foreground-link items-center gap-x-2 flex pt-1 pb-0  flex-row ">
+            <CardHeader className="flex flex-row items-center gap-x-2 pb-0 pt-1 text-lg font-bold  text-foreground-link ">
                 <Avatar className="size-5">
                     <AvatarImage src={user.image as string} />
                 </Avatar>
@@ -14,7 +15,7 @@ export default function UserSearchCard({ user }: { user: UserType }) {
                 </Link>
             </CardHeader>
             {/* <CardContent className=" py-1">{doc.description}</CardContent> */}
-            <CardFooter className="text-muted-foreground text-xs  py-1">
+            <CardFooter className="py-1 text-xs  text-muted-foreground">
                 Created at {user.createdAt!.toLocaleDateString()}
             </CardFooter>
         </Card>

@@ -1,6 +1,7 @@
 import React from 'react'
-import { Skeleton } from '../shadCn/ui/skeleton'
+
 import { Label } from '../shadCn/ui/label'
+import { Skeleton } from '../shadCn/ui/skeleton'
 
 const InputSkeleton = ({ label }: { label?: string }) => {
     return (

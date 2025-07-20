@@ -7,7 +7,6 @@ import {
     Trash2Icon,
 } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import {
     DropdownMenu,
